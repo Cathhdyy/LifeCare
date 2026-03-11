@@ -184,11 +184,15 @@ export default function Home() {
       {/* Custom Styles for animations */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes fade-in-up {
-          0% { opacity: 0; transform: translateY(10px); }
+          0% { opacity: 0; transform: translateY(20px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in-up { animation: fade-in-up 0.4s ease-out forwards; }
+        .animate-fade-in-up { animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+
         @keyframes gradient {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
@@ -299,63 +303,55 @@ export default function Home() {
       {/* Main Content Wrapper */}
       <main className="flex-grow w-full">
         
-        {/* Hero Section */}
-        <section id="home" className="relative pt-8 pb-16 sm:pt-16 md:pt-20 md:pb-32 overflow-hidden bg-white">
-          <div className="absolute top-[-10%] right-[-5%] w-[250px] h-[250px] sm:w-[500px] sm:h-[500px] rounded-full bg-blue-100/50 blur-[50px] sm:blur-[80px] pointer-events-none"></div>
-          <div className="absolute bottom-[-10%] left-[-5%] w-[200px] h-[200px] sm:w-[400px] sm:h-[400px] rounded-full bg-cyan-100/40 blur-[50px] sm:blur-[80px] pointer-events-none"></div>
+        {/* Cinematic Hero Section */}
+        <section id="home" className="relative pt-24 pb-20 md:pt-32 md:pb-40 overflow-hidden bg-white flex items-center min-h-[70vh] md:min-h-[80vh]">
+          {/* Image Background spanning right side with Fade */}
+          <div className="absolute top-0 right-0 w-full md:w-[65%] h-full z-0 animate-fade-in-up delay-300 opacity-0">
+            <img
+              src="https://i.postimg.cc/K8ZBmckq/Whats-App-Image-2026-03-11-at-8-23-58-PM.jpg"
+              alt="Modern Dental Clinic"
+              className="w-full h-full object-cover object-center"
+            />
+            {/* The precise fade where text starts (Left side of the image fading into transparency to the right) */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent sm:via-white/40 hidden md:block"></div>
+            {/* Fade bottom to blend into the next section */}
+            <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-white to-transparent"></div>
+            {/* Mobile specific fade so text remains easily readable */}
+            <div className="absolute inset-0 bg-white/85 md:hidden"></div>
+          </div>
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="flex flex-col lg:flex-row items-center gap-10 sm:gap-12 lg:gap-16">
-              
-              <div className="w-full lg:w-1/2 text-center lg:text-left flex flex-col items-center lg:items-start pt-4 sm:pt-8 lg:pt-0">
-                <div className="inline-flex items-center bg-blue-50 border border-blue-200 text-blue-700 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-sm font-bold mb-4 sm:mb-6 shadow-sm">
-                  <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-1.5 sm:mr-2.5" />
-                  Your Family Dental Care Partner
-                </div>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold text-slate-900 leading-[1.15] sm:leading-[1.1] mb-5 sm:mb-6 tracking-tight px-2 sm:px-0">
-                  Modern Care for your <br className="hidden sm:block" />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Perfect Smile</span>
-                </h2>
-                <p className="text-sm sm:text-lg lg:text-xl text-slate-600 mb-8 sm:mb-10 max-w-[280px] sm:max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
-                  Expert dental treatments with advanced technology in a comfortable, friendly environment. Don't wait till pain starts—visit us today!
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
-                  <button 
-                    onClick={(e) => scrollToSection(e, 'contact')} 
-                    className="w-full sm:w-auto bg-blue-600 text-white px-5 sm:px-8 py-3.5 sm:py-4.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 hover:-translate-y-1 flex items-center justify-center text-sm sm:text-lg min-h-[48px] md:min-h-[52px]"
-                  >
-                    <CalendarCheck className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-2.5" />
-                    Book a Visit
-                  </button>
-                  <button 
-                    onClick={handleCallClick} 
-                    className="w-full sm:w-auto bg-white border-2 border-slate-200 text-slate-700 px-5 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all flex items-center justify-center text-sm sm:text-lg shadow-sm min-h-[48px] md:min-h-[52px]"
-                  >
-                    <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-2.5" />
-                    Call Us Now
-                  </button>
-                </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div className="max-w-2xl lg:max-w-3xl text-left">
+
+              <div className="animate-fade-in-up opacity-0">
+                <span className="inline-flex items-center justify-center bg-white/80 backdrop-blur-md text-blue-600 font-extrabold px-3 py-1.5 sm:px-4 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.2em] mb-4 sm:mb-6 border border-blue-100 shadow-sm">
+                  <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1.5 sm:mr-2" /> Your Family Dental Care Partner
+                </span>
               </div>
-              
-              <div className="w-full lg:w-1/2 relative max-w-sm sm:max-w-lg lg:max-w-none mx-auto mt-6 sm:mt-0">
-                <div className="relative rounded-[2rem] sm:rounded-3xl overflow-hidden shadow-2xl shadow-slate-300/50 aspect-[4/3] group border-4 border-white">
-                  <img 
-                    src="https://i.postimg.cc/K8ZBmckq/Whats-App-Image-2026-03-11-at-8-23-58-PM.jpg" 
-                    alt="Modern Dental Clinic" 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
-                  
-                  <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 md:bottom-8 md:left-8 md:right-auto bg-white/95 backdrop-blur-md p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-xl flex items-center space-x-3 sm:space-x-4 border border-white/50">
-                    <div className="bg-emerald-100 text-emerald-600 p-2.5 sm:p-3 rounded-lg sm:rounded-xl flex-shrink-0">
-                      <Activity className="w-4 h-4 sm:w-6 sm:h-6" />
-                    </div>
-                    <div>
-                      <p className="text-sm sm:text-base font-extrabold text-slate-900 leading-tight">Advanced Tech</p>
-                      <p className="text-[11px] sm:text-sm font-medium text-slate-500">Painless treatments</p>
-                    </div>
-                  </div>
-                </div>
+
+              <h2 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-slate-900 mb-4 sm:mb-6 tracking-tight leading-[1.1] animate-fade-in-up delay-100 opacity-0">
+                Modern Care for your <br className="hidden md:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Perfect Smile</span>
+              </h2>
+
+              <p className="text-slate-700 text-sm sm:text-lg lg:text-xl font-medium mb-8 sm:mb-10 animate-fade-in-up delay-200 opacity-0 leading-relaxed max-w-xl md:bg-transparent backdrop-blur-sm md:backdrop-blur-none rounded-lg">
+                Expert dental treatments with advanced technology in a comfortable, friendly environment. Don't wait till pain starts—visit us today!
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 animate-fade-in-up delay-300 opacity-0 w-full sm:w-auto">
+                <button 
+                  onClick={(e) => scrollToSection(e, 'contact')} 
+                  className="w-full sm:w-auto bg-blue-600 text-white px-5 sm:px-8 py-3.5 sm:py-4.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/30 hover:shadow-xl hover:-translate-y-1 flex items-center justify-center text-sm sm:text-lg min-h-[48px] md:min-h-[52px]"
+                >
+                  <CalendarCheck className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-2.5" />
+                  Book a Visit
+                </button>
+                <button 
+                  onClick={handleCallClick} 
+                  className="w-full sm:w-auto bg-white/90 backdrop-blur-md border border-slate-200 text-slate-700 px-5 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all flex items-center justify-center text-sm sm:text-lg shadow-sm min-h-[48px] md:min-h-[52px]"
+                >
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-2.5" />
+                  Call Us Now
+                </button>
               </div>
 
             </div>
@@ -424,11 +420,11 @@ export default function Home() {
               <div className="h-1 sm:h-1.5 w-12 sm:w-16 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto mt-5 sm:mt-8 rounded-full opacity-40 group-hover:w-20 sm:group-hover:w-40 group-hover:opacity-100 transition-all duration-700 ease-out"></div>
             </div>
 
-            {/* UPGRADED 2-Column Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 lg:gap-10">
+            {/* UPGRADED 2x2 Grid Layout */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-8 lg:gap-10">
 
               {/* Box 1: Main Intro */}
-              <div className="col-span-1 md:col-span-2 bg-white p-6 sm:p-8 md:p-14 rounded-3xl sm:rounded-[2.5rem] border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center text-center sm:text-left">
+              <div className="col-span-2 bg-white p-5 sm:p-8 md:p-14 rounded-2xl sm:rounded-[2.5rem] border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center text-center sm:text-left">
                  <div className="bg-slate-50 w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm mb-5 sm:mb-8 border border-slate-100 mx-auto sm:mx-0">
                     <CustomLogo className="w-8 h-8 sm:w-10 sm:h-10" />
                  </div>
@@ -448,7 +444,7 @@ export default function Home() {
               </div>
 
               {/* Box 2: Interactive Accordion */}
-              <div className="col-span-1 md:col-span-2 bg-white border border-slate-200 p-6 sm:p-8 md:p-14 rounded-3xl sm:rounded-[2.5rem] shadow-sm flex flex-col justify-center">
+              <div className="col-span-2 bg-white border border-slate-200 p-5 sm:p-8 md:p-14 rounded-2xl sm:rounded-[2.5rem] shadow-sm flex flex-col justify-center">
                  <h4 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-5 sm:mb-8 flex items-center justify-center sm:justify-start">
                     <ShieldCheck className="text-blue-600 mr-2.5 sm:mr-4 w-6 h-6 sm:w-7 sm:h-7" /> Why Choose Us?
                  </h4>
@@ -493,84 +489,84 @@ export default function Home() {
                  </div>
               </div>
 
-              {/* Bottom Relaxed Cards - Upgraded Premium SaaS Grid */}
+              {/* Bottom Relaxed Cards - 2x2 Grid on Mobile and Desktop */}
               
               {/* Box 3: Rating Stat */}
-              <div className="col-span-1 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 p-6 sm:p-10 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-blue-900/40 hover:-translate-y-1 transition-all duration-500 flex flex-col items-start text-left relative overflow-hidden group min-h-[200px] sm:min-h-[340px] w-full">
+              <div className="col-span-1 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 p-4 sm:p-10 rounded-2xl sm:rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-blue-900/40 hover:-translate-y-1 transition-all duration-500 flex flex-col items-start text-left relative overflow-hidden group min-h-[160px] sm:min-h-[340px] w-full">
                  <div className="absolute -right-6 -top-6 sm:-right-12 sm:-top-12 text-blue-500/20 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-700">
-                    <Star className="w-32 h-32 sm:w-64 sm:h-64 fill-current" />
+                    <Star className="w-24 h-24 sm:w-64 sm:h-64 fill-current" />
                  </div>
                  <div className="relative z-10 flex flex-col h-full w-full justify-between">
                      <div>
-                       <div className="flex gap-1 sm:gap-1.5 text-yellow-400 mb-3 sm:mb-6 drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] transform group-hover:scale-105 origin-left transition-transform duration-500">
-                          <Star className="w-4 h-4 sm:w-8 sm:h-8 fill-current" />
-                          <Star className="w-4 h-4 sm:w-8 sm:h-8 fill-current" />
-                          <Star className="w-4 h-4 sm:w-8 sm:h-8 fill-current" />
-                          <Star className="w-4 h-4 sm:w-8 sm:h-8 fill-current" />
+                       <div className="flex gap-0.5 sm:gap-1.5 text-yellow-400 mb-2 sm:mb-6 drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] transform group-hover:scale-105 origin-left transition-transform duration-500">
+                          <Star className="w-3.5 h-3.5 sm:w-8 sm:h-8 fill-current" />
+                          <Star className="w-3.5 h-3.5 sm:w-8 sm:h-8 fill-current" />
+                          <Star className="w-3.5 h-3.5 sm:w-8 sm:h-8 fill-current" />
+                          <Star className="w-3.5 h-3.5 sm:w-8 sm:h-8 fill-current" />
                           <div className="relative">
-                            <Star className="w-4 h-4 sm:w-8 sm:h-8 text-yellow-400" />
+                            <Star className="w-3.5 h-3.5 sm:w-8 sm:h-8 text-yellow-400" />
                             <div className="absolute top-0 left-0 w-[50%] overflow-hidden">
-                              <Star className="w-4 h-4 sm:w-8 sm:h-8 fill-current text-yellow-400" />
+                              <Star className="w-3.5 h-3.5 sm:w-8 sm:h-8 fill-current text-yellow-400" />
                             </div>
                           </div>
                        </div>
-                       <div className="text-5xl sm:text-7xl lg:text-8xl font-black mb-1 sm:mb-2 tracking-tight text-white drop-shadow-sm group-hover:text-blue-50 transition-colors">4.5<span className="text-2xl sm:text-4xl lg:text-5xl text-blue-300 font-bold ml-1 group-hover:text-blue-200">/5</span></div>
+                       <div className="text-3xl sm:text-7xl lg:text-8xl font-black mb-0.5 sm:mb-2 tracking-tight text-white drop-shadow-sm group-hover:text-blue-50 transition-colors">4.5<span className="text-sm sm:text-4xl lg:text-5xl text-blue-300 font-bold ml-1 group-hover:text-blue-200">/5</span></div>
                      </div>
-                     <div className="text-blue-100 font-semibold text-sm sm:text-2xl mt-2 sm:mt-4 tracking-wide group-hover:text-white transition-colors leading-tight">Patient Rating</div>
+                     <div className="text-blue-100 font-semibold text-xs sm:text-2xl mt-1 sm:mt-4 tracking-wide group-hover:text-white transition-colors leading-tight">Patient Rating</div>
                  </div>
               </div>
 
               {/* Box 4: Open Days Stat */}
-              <div className="col-span-1 bg-gradient-to-br from-slate-900 to-slate-800 p-6 sm:p-10 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-slate-900/50 hover:-translate-y-1 transition-all duration-500 flex flex-col items-start text-left relative overflow-hidden group min-h-[200px] sm:min-h-[340px] border border-slate-700/50 w-full">
+              <div className="col-span-1 bg-gradient-to-br from-slate-900 to-slate-800 p-4 sm:p-10 rounded-2xl sm:rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-slate-900/50 hover:-translate-y-1 transition-all duration-500 flex flex-col items-start text-left relative overflow-hidden group min-h-[160px] sm:min-h-[340px] border border-slate-700/50 w-full">
                  <div className="absolute -right-6 -bottom-6 sm:-right-12 sm:-bottom-12 text-slate-700/30 pointer-events-none transform group-hover:-rotate-12 group-hover:scale-110 transition-all duration-700">
-                    <Clock className="w-32 h-32 sm:w-64 sm:h-64" />
+                    <Clock className="w-24 h-24 sm:w-64 sm:h-64" />
                  </div>
                  <div className="relative z-10 flex flex-col h-full w-full justify-between">
                      <div>
-                       <div className="w-10 h-10 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-slate-800/80 backdrop-blur-md flex items-center justify-center mb-4 sm:mb-8 text-emerald-400 border border-slate-600 shadow-lg group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-400 transition-all duration-500">
-                          <Clock className="w-5 h-5 sm:w-10 sm:h-10 transform group-hover:rotate-180 transition-transform duration-[1.5s] ease-in-out group-hover:animate-pulse" />
+                       <div className="w-8 h-8 sm:w-20 sm:h-20 rounded-lg sm:rounded-2xl bg-slate-800/80 backdrop-blur-md flex items-center justify-center mb-3 sm:mb-8 text-emerald-400 border border-slate-600 shadow-lg group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-400 transition-all duration-500">
+                          <Clock className="w-4 h-4 sm:w-10 sm:h-10 transform group-hover:rotate-180 transition-transform duration-[1.5s] ease-in-out group-hover:animate-pulse" />
                        </div>
-                       <div className="text-3xl sm:text-5xl lg:text-6xl font-black mb-1 sm:mb-3 leading-tight text-white drop-shadow-sm">Open <br/>6 Days</div>
+                       <div className="text-xl sm:text-5xl lg:text-6xl font-black mb-0.5 sm:mb-3 leading-tight text-white drop-shadow-sm">Open <br/>6 Days</div>
                      </div>
-                     <div className="text-slate-400 font-medium text-xs sm:text-xl group-hover:text-emerald-300 transition-colors mt-2 sm:mt-4">
-                       8:00 AM – 6:00 PM <span className="block text-[10px] sm:text-sm text-red-400/80 group-hover:text-red-300 mt-1">Closed on Wednesdays</span>
+                     <div className="text-slate-400 font-medium text-[9px] sm:text-xl group-hover:text-emerald-300 transition-colors mt-1 sm:mt-4">
+                       8:00 AM – 6:00 PM <span className="block text-[7px] sm:text-sm text-red-400/80 group-hover:text-red-300 mt-0.5 sm:mt-1">Closed on Wed</span>
                      </div>
                  </div>
               </div>
 
               {/* Box 5: Vertical Image (Modern Equipment) */}
-              <div className="col-span-1 relative rounded-3xl overflow-hidden group shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 p-6 sm:p-10 flex flex-col justify-end text-left min-h-[220px] sm:min-h-[340px] w-full">
+              <div className="col-span-1 relative rounded-2xl sm:rounded-3xl overflow-hidden group shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 p-4 sm:p-10 flex flex-col justify-end text-left min-h-[160px] sm:min-h-[340px] w-full">
                  <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80" alt="Modern Dental Clinic" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-slate-900/10 transition-opacity duration-500 group-hover:opacity-90"></div>
                  <div className="relative z-10 flex flex-col items-start w-full">
-                    <div className="w-10 h-10 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-emerald-500/20 backdrop-blur-md flex items-center justify-center mb-3 sm:mb-6 border border-emerald-400/30 shadow-lg group-hover:bg-emerald-500/40 group-hover:scale-110 transition-all duration-500">
-                       <Activity className="w-5 h-5 sm:w-10 sm:h-10 text-emerald-400 group-hover:text-emerald-300 animate-pulse" />
+                    <div className="w-8 h-8 sm:w-20 sm:h-20 rounded-lg sm:rounded-2xl bg-emerald-500/20 backdrop-blur-md flex items-center justify-center mb-2 sm:mb-6 border border-emerald-400/30 shadow-lg group-hover:bg-emerald-500/40 group-hover:scale-110 transition-all duration-500">
+                       <Activity className="w-4 h-4 sm:w-10 sm:h-10 text-emerald-400 group-hover:text-emerald-300 animate-pulse" />
                     </div>
-                    <span className="text-white font-extrabold text-2xl sm:text-4xl lg:text-5xl leading-tight drop-shadow-md transform group-hover:translate-x-2 transition-transform duration-500">Modern <br/>Equipment</span>
+                    <span className="text-white font-extrabold text-lg sm:text-4xl lg:text-5xl leading-tight drop-shadow-md transform group-hover:translate-x-2 transition-transform duration-500">Modern <br/>Equipment</span>
                  </div>
               </div>
 
               {/* Box 6: Instagram Banner */}
-              <div className="col-span-1 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 animate-gradient bg-[length:200%_200%] p-6 sm:p-10 rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-purple-500/40 hover:-translate-y-1 transition-all duration-500 flex flex-col items-start text-left relative overflow-hidden group min-h-[220px] sm:min-h-[340px] w-full">
-                 <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 bg-white/10 rounded-full blur-2xl sm:blur-3xl transform translate-x-1/4 -translate-y-1/4 pointer-events-none group-hover:scale-125 transition-transform duration-1000"></div>
+              <div className="col-span-1 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 animate-gradient bg-[length:200%_200%] p-4 sm:p-10 rounded-2xl sm:rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-purple-500/40 hover:-translate-y-1 transition-all duration-500 flex flex-col items-start text-left relative overflow-hidden group min-h-[160px] sm:min-h-[340px] w-full">
+                 <div className="absolute top-0 right-0 w-24 h-24 sm:w-64 sm:h-64 bg-white/10 rounded-full blur-xl sm:blur-3xl transform translate-x-1/4 -translate-y-1/4 pointer-events-none group-hover:scale-125 transition-transform duration-1000"></div>
                  
                  <div className="relative z-10 flex flex-col h-full w-full justify-between">
                     <div>
-                      <div className="w-10 h-10 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-3 sm:mb-8 border border-white/30 group-hover:scale-110 group-hover:bg-white/30 transition-all duration-500 shadow-lg">
-                         <Instagram className="w-5 h-5 sm:w-10 sm:h-10 text-white group-hover:animate-bounce" />
+                      <div className="w-8 h-8 sm:w-20 sm:h-20 rounded-lg sm:rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-2 sm:mb-8 border border-white/30 group-hover:scale-110 group-hover:bg-white/30 transition-all duration-500 shadow-lg">
+                         <Instagram className="w-4 h-4 sm:w-10 sm:h-10 text-white group-hover:animate-bounce" />
                       </div>
-                      <h4 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold mb-1.5 sm:mb-3 leading-tight text-white drop-shadow-sm">Follow Our <br className="hidden sm:block"/>Journey</h4>
-                      <p className="text-white/90 font-medium text-xs sm:text-lg mb-3 sm:mb-6 leading-tight">See real patient smiles & updates!</p>
+                      <h4 className="text-lg sm:text-4xl lg:text-5xl font-extrabold mb-1 sm:mb-3 leading-tight text-white drop-shadow-sm">Follow Our <br className="hidden sm:block"/>Journey</h4>
+                      <p className="text-white/90 font-medium text-[9px] sm:text-lg mb-2 sm:mb-6 leading-tight">See real patient smiles & updates!</p>
                     </div>
                     
                     <a 
                        href="https://www.instagram.com/lifecaresingtam?igsh=MXd4dDZnYW9wMXNhdw==" 
                        target="_blank" 
                        rel="noreferrer" 
-                       className="relative z-10 bg-white text-purple-600 font-bold py-2.5 sm:py-4 px-4 sm:px-6 rounded-xl sm:rounded-2xl flex items-center justify-center hover:bg-slate-50 transition-all duration-300 w-full shadow-lg hover:shadow-xl text-xs sm:text-lg mt-auto transform group-hover:-translate-y-1 group/btn min-h-[40px] sm:min-h-[44px]"
+                       className="relative z-10 bg-white text-purple-600 font-bold py-1.5 sm:py-4 px-2 sm:px-6 rounded-lg sm:rounded-2xl flex items-center justify-center hover:bg-slate-50 transition-all duration-300 w-full shadow-lg hover:shadow-xl text-[9px] sm:text-lg mt-auto transform group-hover:-translate-y-1 group/btn min-h-[28px] sm:min-h-[44px]"
                     >
                        <span className="truncate">@lifecaresingtam</span>
-                       <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2 transform group-hover/btn:translate-x-2 transition-transform duration-300 flex-shrink-0" />
+                       <ArrowRight className="w-3 h-3 sm:w-5 sm:h-5 ml-1 sm:ml-2 transform group-hover/btn:translate-x-2 transition-transform duration-300 flex-shrink-0" />
                     </a>
                  </div>
               </div>
