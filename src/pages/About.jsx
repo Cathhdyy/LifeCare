@@ -17,7 +17,10 @@ import {
   Users,
   Target,
   Smile,
-  CheckCircle2
+  CheckCircle2,
+  Quote,
+  Star,
+  ClipboardList
 } from 'lucide-react';
 
 // Custom Scalable Vector Logo
@@ -47,6 +50,24 @@ const CustomLogo = ({ className = "w-12 h-12" }) => (
   </svg>
 );
 
+const googleReviewsData = [
+  {
+    name: "jaya gurung",
+    rating: 5,
+    text: "Clinic is well set .....Staffs have a good customer services , easy access to blood test ,results are provided on time , Doctors are well versed with their speciality and have a patience to listen to their patients... Thank you life care for a good service 🙏1"
+  },
+  {
+    name: "Sheema Limboo",
+    rating: 5,
+    text: "Best ever Doctor available with Excellent service. The environment is extremely clean and welcoming."
+  },
+  {
+    name: "Orchid Chettri",
+    rating: 5,
+    text: "Very much pleased with the behaviour of the staff and the Doctor also examines the patient very well..Worth every penny✌️ Highly recommended in Singtam."
+  }
+];
+
 export default function AboutUs() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -69,21 +90,18 @@ export default function AboutUs() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-blue-200 selection:text-blue-900 overflow-x-hidden flex flex-col w-full">
+    <div className="min-h-screen bg-white font-sans text-slate-800 selection:bg-blue-200 selection:text-blue-900 overflow-x-hidden flex flex-col w-full">
       {/* Custom Styles for animations */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes fade-in-up {
           0% { opacity: 0; transform: translateY(20px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+        .animate-fade-in-up { animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient { animation: gradient 4s ease infinite; background-size: 200% 200%; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
       `}} />
 
       {/* Floating WhatsApp Button */}
@@ -141,56 +159,48 @@ export default function AboutUs() {
       {/* Main Content */}
       <main className="flex-grow w-full">
         
-        {/* Hero Section */}
-        <section className="relative pt-12 pb-16 md:pt-24 md:pb-32 overflow-hidden bg-slate-50">
-          <div className="absolute top-0 right-0 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-blue-100/50 rounded-full blur-[80px] pointer-events-none -translate-y-1/3 translate-x-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-cyan-100/40 rounded-full blur-[80px] pointer-events-none translate-y-1/3 -translate-x-1/3"></div>
+        {/* Cinematic Hero Section */}
+        <section className="relative pt-20 pb-20 md:pt-32 md:pb-40 overflow-hidden bg-white flex items-center min-h-[80vh]">
+          {/* Image Background spanning right side with Fade */}
+          <div className="absolute top-0 right-0 w-full md:w-[65%] h-full z-0 animate-fade-in-up delay-300 opacity-0">
+            <img
+              src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=2000&q=80"
+              alt="Clinic Environment"
+              className="w-full h-full object-cover object-center"
+            />
+            {/* The precise fade where text starts (Left side of the image fading into transparency to the right) */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent sm:via-white/40"></div>
+            {/* Fade bottom to blend into the next section */}
+            <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-white to-transparent"></div>
+            {/* Mobile specific fade so text remains easily readable */}
+            <div className="absolute inset-0 bg-white/70 md:hidden"></div>
+          </div>
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-              
-              <div className="w-full lg:w-1/2 text-center lg:text-left animate-fade-in-up">
-                <div className="inline-flex items-center bg-white border border-slate-200 text-blue-600 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest mb-6 shadow-sm">
-                  <HeartHandshake className="w-3.5 h-3.5 mr-2" />
-                  Your Family Dental Care Partner
-                </div>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 mb-6 leading-tight tracking-tight">
-                  Redefining <br className="hidden lg:block"/>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 animate-gradient">Dental Care</span> in Singtam.
-                </h1>
-                <p className="text-slate-600 text-base sm:text-lg font-medium leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-                  Life Care Dental Clinic is your one-stop solution to all your dental problems. We believe that a trip to the dentist shouldn't be intimidating. Our mission is to provide world-class, painless treatments in a warm, welcoming environment.
-                </p>
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                  <div className="bg-white px-5 py-3 rounded-xl border border-slate-200 shadow-sm flex items-center">
-                     <Users className="w-5 h-5 text-blue-500 mr-3" />
-                     <span className="font-bold text-slate-800">5000+ Smiles Restored</span>
-                  </div>
-                  <div className="bg-white px-5 py-3 rounded-xl border border-slate-200 shadow-sm flex items-center">
-                     <Smile className="w-5 h-5 text-emerald-500 mr-3" />
-                     <span className="font-bold text-slate-800">100% Painless Care</span>
-                  </div>
-                </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div className="max-w-2xl lg:max-w-3xl text-left">
+
+              <div className="animate-fade-in-up opacity-0">
+                <span className="inline-flex items-center justify-center bg-white/80 backdrop-blur-md text-blue-600 font-extrabold px-4 py-1.5 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.2em] mb-6 border border-blue-100 shadow-sm">
+                  <HeartHandshake className="w-3.5 h-3.5 mr-2" /> Your Family Dental Care Partner
+                </span>
               </div>
 
-              <div className="w-full lg:w-1/2 relative">
-                <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] group">
-                  <img 
-                    src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80" 
-                    alt="Clinic Environment" 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                  
-                  <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center gap-4">
-                    <div className="bg-blue-100 text-blue-600 p-3 rounded-xl flex-shrink-0">
-                      <Target className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <p className="text-base font-extrabold text-slate-900 leading-tight">One Stop Solution</p>
-                      <p className="text-sm font-medium text-slate-500">For all your dental problems</p>
-                    </div>
-                  </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 mb-6 tracking-tight leading-[1.1] animate-fade-in-up delay-100 opacity-0">
+                We are building a <br className="hidden md:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">pain-free future</span> <br className="hidden md:block" /> for dentistry.
+              </h1>
+
+              <p className="text-slate-700 text-base sm:text-lg lg:text-xl font-medium mb-10 animate-fade-in-up delay-200 opacity-0 leading-relaxed max-w-xl bg-white/40 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none p-2 md:p-0 rounded-lg">
+                Located perfectly near Singtam Bridge, we are your one-stop solution to all dental problems. We blend advanced technology with a deeply compassionate approach to redefine what a visit to the dentist feels like.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-4 animate-fade-in-up delay-300 opacity-0">
+                <div className="bg-white/90 backdrop-blur-md px-5 py-3 rounded-xl border border-slate-200 shadow-sm flex items-center">
+                   <Users className="w-5 h-5 text-blue-500 mr-3" />
+                   <span className="font-bold text-slate-800 text-sm sm:text-base">5000+ Smiles Restored</span>
+                </div>
+                <div className="bg-white/90 backdrop-blur-md px-5 py-3 rounded-xl border border-slate-200 shadow-sm flex items-center">
+                   <Smile className="w-5 h-5 text-emerald-500 mr-3" />
+                   <span className="font-bold text-slate-800 text-sm sm:text-base">100% Painless Care</span>
                 </div>
               </div>
 
@@ -198,133 +208,365 @@ export default function AboutUs() {
           </div>
         </section>
 
-        {/* Doctor Profile Section */}
-        <section className="py-16 md:py-32 bg-white relative border-t border-slate-100">
+        {/* Floating Stats Bar */}
+        <section className="relative z-20 -mt-10 sm:-mt-16 mb-20 max-w-5xl mx-auto px-4 sm:px-6">
+           <div className="bg-slate-900 text-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-10 grid grid-cols-2 md:grid-cols-4 gap-6 divide-x divide-slate-800">
+              <div className="flex flex-col items-center text-center px-2">
+                 <h3 className="text-3xl sm:text-4xl font-black text-blue-400 mb-1">5k+</h3>
+                 <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400">Happy Patients</p>
+              </div>
+              <div className="flex flex-col items-center text-center px-2">
+                 <h3 className="text-3xl sm:text-4xl font-black text-emerald-400 mb-1">100%</h3>
+                 <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400">Painless Care</p>
+              </div>
+              <div className="flex flex-col items-center text-center px-2 border-t md:border-t-0 border-slate-800 pt-6 md:pt-0">
+                 <h3 className="text-3xl sm:text-4xl font-black text-cyan-400 mb-1">9+</h3>
+                 <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400">Years Experience</p>
+              </div>
+              <div className="flex flex-col items-center text-center px-2 border-t md:border-t-0 border-slate-800 pt-6 md:pt-0">
+                 <h3 className="text-3xl sm:text-4xl font-black text-purple-400 mb-1">Top</h3>
+                 <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400">Rated in Singtam</p>
+              </div>
+           </div>
+        </section>
+
+        {/* Magazine-Style Doctor Profile */}
+        <section className="py-16 md:py-24 bg-slate-50 relative border-t border-slate-200">
+          {/* Background Decor */}
+          <div className="absolute inset-y-0 right-0 w-1/3 bg-blue-50/50 hidden lg:block"></div>
+          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
-            <div className="bg-slate-900 rounded-[2rem] sm:rounded-[3rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row relative">
-              {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+            <div className="flex flex-col lg:flex-row items-center gap-0 lg:gap-10">
               
-              <div className="w-full lg:w-2/5 relative min-h-[300px] sm:min-h-[500px]">
-                <img 
-                  src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=80" 
-                  alt="Dr. Sheema Sapkota" 
-                  className="absolute inset-0 w-full h-full object-cover object-top"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-slate-900"></div>
+              {/* Left Column: Details (Overlapping the image on Desktop) */}
+              <div className="w-full lg:w-1/2 order-2 lg:order-1 flex justify-end lg:pr-10">
+                <div className="bg-white p-8 sm:p-12 rounded-[2rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] lg:-mr-20 z-20 relative w-full max-w-xl border border-slate-100 mt-8 lg:mt-0">
+                   <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6 border border-blue-100">
+                     <Award className="w-6 h-6 text-blue-600" />
+                   </div>
+                   
+                   <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-2">Dr. Sheema Sapkota</h2>
+                   <p className="text-blue-600 font-extrabold text-sm sm:text-base uppercase tracking-widest mb-6 flex items-center">
+                     Dental Surgeon <span className="mx-2 text-slate-300">•</span> BDS, FAD
+                   </p>
+
+                   <div className="relative mb-8">
+                     <Quote className="absolute -top-4 -left-4 w-10 h-10 text-slate-100 -z-10 transform -scale-x-100" />
+                     <p className="text-slate-600 font-medium leading-relaxed sm:text-lg italic relative z-10">
+                       "Dentistry should never be a source of anxiety. My passion lies in smile designing—combining art and medical science to craft perfect, confident smiles while ensuring every single procedure is as gentle and painless as possible."
+                     </p>
+                   </div>
+
+                   <ul className="space-y-3 mb-8">
+                     <li className="flex items-center text-sm sm:text-base font-bold text-slate-700">
+                       <CheckCircle2 className="w-5 h-5 text-emerald-500 mr-3" /> Specializes in Smile Designing
+                     </li>
+                     <li className="flex items-center text-sm sm:text-base font-bold text-slate-700">
+                       <CheckCircle2 className="w-5 h-5 text-emerald-500 mr-3" /> Over 9 Years of Clinical Expertise
+                     </li>
+                     <li className="flex items-center text-sm sm:text-base font-bold text-slate-700">
+                       <CheckCircle2 className="w-5 h-5 text-emerald-500 mr-3" /> Certified & Govt. Registered
+                     </li>
+                   </ul>
+
+                   <button 
+                      onClick={handleBookService}
+                      className="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center group"
+                   >
+                     Book a consultation with Dr. Sheema
+                     <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
+                   </button>
+                </div>
               </div>
 
-              <div className="w-full lg:w-3/5 p-8 sm:p-12 md:p-16 flex flex-col justify-center relative z-10 text-white">
-                <div className="inline-flex items-center bg-blue-500/20 border border-blue-400/30 text-blue-300 px-3 py-1.5 rounded-lg text-xs font-bold mb-6 w-fit backdrop-blur-sm">
-                  <Award className="w-4 h-4 mr-2" />
-                  Chief Dental Surgeon
-                </div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-2">Dr. Sheema Sapkota</h2>
-                <p className="text-blue-400 font-bold text-lg mb-6 flex items-center">
-                  BDS, FAD <span className="mx-3 text-slate-600">|</span> Smile Designing Specialist
-                </p>
-                
-                <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-8 font-medium">
-                  "With over 9 years of dedicated clinical experience, my philosophy is simple: dentistry should be painless, personalized, and perfect. Whether you are coming in for a routine checkup or a complete smile makeover, our team ensures you leave with confidence."
-                </p>
-
-                <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-8">
-                  <div className="bg-slate-800/50 border border-slate-700 p-4 rounded-2xl backdrop-blur-sm">
-                    <span className="block text-2xl sm:text-3xl font-black text-white mb-1">9+</span>
-                    <span className="text-xs sm:text-sm text-slate-400 font-medium uppercase tracking-wider">Years Experience</span>
-                  </div>
-                  <div className="bg-slate-800/50 border border-slate-700 p-4 rounded-2xl backdrop-blur-sm">
-                    <span className="block text-2xl sm:text-3xl font-black text-white mb-1">100%</span>
-                    <span className="text-xs sm:text-sm text-slate-400 font-medium uppercase tracking-wider">Patient Satisfaction</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center text-sm font-bold text-slate-300">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400 mr-2" />
-                  Government Verified & Certified Expert
+              {/* Right Column: Image */}
+              <div className="w-full lg:w-1/2 order-1 lg:order-2">
+                <div className="rounded-[2.5rem] overflow-hidden shadow-xl aspect-[4/5] sm:aspect-square lg:aspect-[4/5] relative group">
+                  <img 
+                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=1000&q=80" 
+                    alt="Dr. Sheema Sapkota" 
+                    className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-[1.5s]"
+                  />
+                  {/* Subtle Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent mix-blend-multiply"></div>
                 </div>
               </div>
+
             </div>
-
           </div>
         </section>
 
-        {/* Our Values / Bento Grid */}
-        <section className="py-16 md:py-32 bg-slate-50 relative border-t border-slate-200 overflow-hidden">
+        {/* Sticky Core Values Section */}
+        <section className="py-16 md:py-32 bg-white relative border-t border-slate-100">
+           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+                 
+                 {/* Left Sticky Sidebar */}
+                 <div className="lg:w-1/3 relative">
+                    <div className="lg:sticky lg:top-32">
+                       <div className="inline-flex items-center justify-center bg-emerald-50 text-emerald-600 font-extrabold px-3 py-1 rounded-md text-[10px] uppercase tracking-widest mb-4">
+                         <ShieldCheck className="w-3 h-3 mr-1.5" /> Our Philosophy
+                       </div>
+                       <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
+                         What Makes Us <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-500">Different?</span>
+                       </h2>
+                       <p className="text-slate-500 font-medium text-base sm:text-lg leading-relaxed mb-8">
+                         We don't just treat teeth; we build lifelong relationships with our patients. Here are the core pillars that uphold the quality of care at Life Care Dental Clinic.
+                       </p>
+                    </div>
+                 </div>
+
+                 {/* Right Scrolling Grid */}
+                 <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+                    
+                    {/* Card 1 */}
+                    <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-500 flex flex-col h-full group">
+                       <div className="w-14 h-14 bg-white shadow-sm border border-slate-100 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                         <Target className="w-6 h-6" />
+                       </div>
+                       <h3 className="text-xl font-black text-slate-900 mb-3">One Stop Solution</h3>
+                       <p className="text-slate-600 font-medium leading-relaxed text-sm">
+                         From a simple filling to a complex smile redesign or root canal, we have the expertise to handle all your family's dental needs under one roof.
+                       </p>
+                    </div>
+
+                    {/* Card 2 */}
+                    <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:border-emerald-200 hover:bg-white hover:shadow-xl hover:shadow-emerald-900/5 transition-all duration-500 flex flex-col h-full group sm:translate-y-8">
+                       <div className="w-14 h-14 bg-white shadow-sm border border-slate-100 rounded-2xl flex items-center justify-center mb-6 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                         <ShieldCheck className="w-6 h-6" />
+                       </div>
+                       <h3 className="text-xl font-black text-slate-900 mb-3">Uncompromised Hygiene</h3>
+                       <p className="text-slate-600 font-medium leading-relaxed text-sm">
+                         Your safety is non-negotiable. We follow strict, international sterilization protocols for every single instrument to ensure a 100% safe environment.
+                       </p>
+                    </div>
+
+                    {/* Card 3 */}
+                    <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:border-purple-200 hover:bg-white hover:shadow-xl hover:shadow-purple-900/5 transition-all duration-500 flex flex-col h-full group">
+                       <div className="w-14 h-14 bg-white shadow-sm border border-slate-100 rounded-2xl flex items-center justify-center mb-6 text-purple-600 group-hover:bg-purple-500 group-hover:text-white transition-colors duration-300">
+                         <Activity className="w-6 h-6" />
+                       </div>
+                       <h3 className="text-xl font-black text-slate-900 mb-3">Advanced Technology</h3>
+                       <p className="text-slate-600 font-medium leading-relaxed text-sm">
+                         We utilize state-of-the-art diagnostic tools and modern equipment to ensure treatments are swift, incredibly precise, and virtually painless.
+                       </p>
+                    </div>
+
+                    {/* Card 4 */}
+                    <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:border-pink-200 hover:bg-white hover:shadow-xl hover:shadow-pink-900/5 transition-all duration-500 flex flex-col h-full group sm:translate-y-8">
+                       <div className="w-14 h-14 bg-white shadow-sm border border-slate-100 rounded-2xl flex items-center justify-center mb-6 text-pink-600 group-hover:bg-pink-500 group-hover:text-white transition-colors duration-300">
+                         <HeartHandshake className="w-6 h-6" />
+                       </div>
+                       <h3 className="text-xl font-black text-slate-900 mb-3">Patient-First Care</h3>
+                       <p className="text-slate-600 font-medium leading-relaxed text-sm">
+                         We listen to your concerns, explain all options transparently, and make sure you are completely comfortable before we begin any procedure.
+                       </p>
+                    </div>
+
+                 </div>
+              </div>
+           </div>
+        </section>
+
+        {/* NEW: Clinic Tour Gallery Section */}
+        <section className="py-16 md:py-32 bg-slate-900 text-white relative overflow-hidden">
            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              
               <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-20">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
-                  The Pillars of <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Our Clinic</span>
+                <div className="inline-flex items-center bg-white/10 border border-white/20 text-cyan-300 px-4 py-1.5 rounded-full text-xs font-bold mb-6 backdrop-blur-md">
+                  <Sparkles className="w-3.5 h-3.5 mr-2" /> Take a Look Inside
+                </div>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-6">
+                  Tour <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Our Clinic</span>
                 </h2>
-                <p className="text-slate-600 text-base sm:text-lg font-medium leading-relaxed">
-                  We don't just treat teeth; we treat people. Here is what makes Life Care Dental Clinic the most trusted choice in East Sikkim.
+                <p className="text-slate-400 text-base sm:text-lg font-medium leading-relaxed">
+                  We have designed Life Care Dental Clinic to be a calming, hygienic, and welcoming space. Say goodbye to clinical, intimidating waiting rooms.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {/* Bento Grid Gallery */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 h-auto md:h-[500px]">
                 
-                {/* Value 1 */}
-                <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-700"></div>
-                  <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500 relative z-10">
-                    <ShieldCheck className="w-7 h-7" />
-                  </div>
-                  <h3 className="text-xl font-extrabold text-slate-900 mb-3 relative z-10">Uncompromised Hygiene</h3>
-                  <p className="text-slate-600 font-medium leading-relaxed relative z-10 text-sm">
-                    Your safety is our top priority. We follow strict, international standards of sterilization and sanitization for every single instrument and procedure.
-                  </p>
+                {/* Large Main Image */}
+                <div className="md:col-span-2 rounded-2xl sm:rounded-[2rem] overflow-hidden relative group h-64 md:h-full border border-slate-700">
+                   <img 
+                    src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80" 
+                    alt="Modern Operatory" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                   />
+                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent flex items-end p-6 sm:p-8">
+                     <div>
+                       <span className="text-lg sm:text-2xl font-bold block mb-1">State-of-the-Art Operatory</span>
+                       <span className="text-xs sm:text-sm text-slate-300">Equipped with the latest painless technology.</span>
+                     </div>
+                   </div>
                 </div>
 
-                {/* Value 2 */}
-                <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-700"></div>
-                  <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-500 relative z-10">
-                    <Activity className="w-7 h-7" />
+                {/* Side Smaller Images */}
+                <div className="flex flex-col gap-4 sm:gap-6 h-full">
+                  <div className="rounded-2xl sm:rounded-[2rem] overflow-hidden relative group h-48 md:h-1/2 border border-slate-700">
+                     <img 
+                      src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" 
+                      alt="Waiting Area" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                     />
+                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent flex items-end p-5 sm:p-6">
+                       <span className="text-sm sm:text-base font-bold">Comfortable Waiting Area</span>
+                     </div>
                   </div>
-                  <h3 className="text-xl font-extrabold text-slate-900 mb-3 relative z-10">Advanced Technology</h3>
-                  <p className="text-slate-600 font-medium leading-relaxed relative z-10 text-sm">
-                    We use state-of-the-art diagnostic and treatment equipment, including digital X-rays and apex locators, to ensure precise, swift, and painless treatments.
-                  </p>
-                </div>
-
-                {/* Value 3 */}
-                <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-pink-50 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-700"></div>
-                  <div className="w-14 h-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-pink-500 group-hover:text-white transition-colors duration-500 relative z-10">
-                    <HeartHandshake className="w-7 h-7" />
+                  <div className="rounded-2xl sm:rounded-[2rem] overflow-hidden relative group h-48 md:h-1/2 border border-slate-700">
+                     <img 
+                      src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" 
+                      alt="Sterilization Area" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                     />
+                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent flex items-end p-5 sm:p-6">
+                       <span className="text-sm sm:text-base font-bold">Strict Sterilization Protocol</span>
+                     </div>
                   </div>
-                  <h3 className="text-xl font-extrabold text-slate-900 mb-3 relative z-10">Patient-First Care</h3>
-                  <p className="text-slate-600 font-medium leading-relaxed relative z-10 text-sm">
-                    We take the time to listen to your concerns, explain all treatment options transparently, and ensure you are comfortable before we begin any procedure.
-                  </p>
                 </div>
 
               </div>
            </div>
         </section>
 
-        {/* Final CTA */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 to-cyan-500 text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <h2 className="text-3xl sm:text-5xl font-extrabold mb-6 leading-tight">Join our dental family today.</h2>
-            <p className="text-blue-50 text-sm sm:text-lg mb-8 font-medium max-w-2xl mx-auto">
-              Take the first step towards a healthier, more beautiful smile. Our doors are open and our experts are ready to welcome you.
+        {/* NEW: Patient Success Stories / Testimonials */}
+        <section className="py-16 md:py-32 bg-slate-50 relative border-t border-slate-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-20">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-6">
+                Loved by patients in <span className="text-blue-600">Singtam.</span>
+              </h2>
+              <p className="text-slate-600 text-base sm:text-lg font-medium leading-relaxed">
+                Don't just take our word for it. Here is what our patients have to say about their experience with Dr. Sheema and our clinic.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {googleReviewsData.map((review, idx) => (
+                <div key={idx} className="bg-white border border-slate-100 p-6 sm:p-8 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 flex flex-col relative overflow-hidden group">
+                  <Quote className="absolute top-6 right-6 w-12 h-12 text-slate-50 group-hover:text-blue-50 transition-colors duration-500 z-0" />
+                  
+                  <div className="flex text-yellow-400 mb-4 relative z-10">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-current" />
+                    ))}
+                  </div>
+                  
+                  <p className="text-slate-600 font-medium leading-relaxed mb-8 relative z-10 flex-grow text-sm sm:text-base italic">
+                    "{review.text}"
+                  </p>
+                  
+                  <div className="flex items-center gap-4 relative z-10 border-t border-slate-100 pt-4">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-extrabold text-sm shadow-inner flex-shrink-0">
+                      {review.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-sm leading-tight capitalize">{review.name}</h4>
+                      <p className="text-xs text-slate-500 font-medium mt-0.5">Verified Patient</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-12 text-center">
+              <a 
+                href="https://www.google.com/search?q=Life+Care+Dental+Clinic+Singtam" 
+                target="_blank" 
+                rel="noreferrer"
+                className="inline-flex items-center text-blue-600 font-bold hover:text-blue-800 transition-colors group"
+              >
+                Read more reviews on Google
+                <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW: The Patient Journey Section */}
+        <section className="py-16 md:py-32 bg-white relative border-t border-slate-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+              <div className="inline-flex items-center justify-center bg-blue-50 text-blue-600 font-extrabold px-3 py-1 rounded-md text-[10px] uppercase tracking-widest mb-4 border border-blue-100">
+                <Target className="w-3 h-3 mr-1.5" /> Simple & Transparent
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-6">
+                Your Journey to a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Better Smile</span>
+              </h2>
+              <p className="text-slate-600 text-base sm:text-lg font-medium leading-relaxed">
+                We've streamlined our process to ensure your visit is as comfortable, efficient, and transparent as possible.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+               {/* Connecting Line for Desktop */}
+               <div className="hidden md:block absolute top-1/2 left-8 right-8 h-1 bg-slate-100 -z-10 -translate-y-1/2 rounded-full"></div>
+               
+               {/* Step 1 */}
+               <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm relative z-10 flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300">
+                  <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-6 border-4 border-white shadow-md group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                    <CalendarCheck className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 mb-2">1. Easy Booking</h3>
+                  <p className="text-slate-500 text-sm font-medium">Schedule your visit quickly via WhatsApp or a simple phone call.</p>
+               </div>
+
+               {/* Step 2 */}
+               <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm relative z-10 flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300">
+                  <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mb-6 border-4 border-white shadow-md group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                    <ClipboardList className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 mb-2">2. Consultation</h3>
+                  <p className="text-slate-500 text-sm font-medium">Thorough diagnosis, digital X-rays, and a transparent discussion of options.</p>
+               </div>
+
+               {/* Step 3 */}
+               <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm relative z-10 flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300">
+                  <div className="w-16 h-16 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mb-6 border-4 border-white shadow-md group-hover:bg-purple-500 group-hover:text-white transition-colors duration-300">
+                    <Activity className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 mb-2">3. Treatment</h3>
+                  <p className="text-slate-500 text-sm font-medium">Experience painless, precision care using our state-of-the-art equipment.</p>
+               </div>
+
+               {/* Step 4 */}
+               <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm relative z-10 flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-300">
+                  <div className="w-16 h-16 bg-pink-50 text-pink-600 rounded-full flex items-center justify-center mb-6 border-4 border-white shadow-md group-hover:bg-pink-500 group-hover:text-white transition-colors duration-300">
+                    <Smile className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 mb-2">4. Aftercare</h3>
+                  <p className="text-slate-500 text-sm font-medium">We provide detailed post-treatment guidance and follow-ups to ensure lasting results.</p>
+               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* NEW: Community Commitment Section */}
+        <section className="py-16 md:py-24 bg-gradient-to-br from-slate-900 to-slate-800 text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-600/20 rounded-full blur-[100px] pointer-events-none translate-y-1/2 -translate-x-1/3"></div>
+          
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div className="w-16 h-16 bg-blue-500/20 text-blue-400 rounded-2xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm border border-blue-400/30">
+              <MapPin className="w-8 h-8" />
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-extrabold mb-6 leading-tight">Proudly Serving <span className="text-blue-400">Singtam</span> & East Sikkim</h2>
+            <p className="text-slate-300 text-sm sm:text-lg mb-10 font-medium max-w-3xl mx-auto leading-relaxed">
+              We are deeply rooted in the local community. Our mission is to make premium, modern dental care accessible to everyone in Singtam and the surrounding regions, completely removing the need to travel far for world-class treatments.
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4">
+            <div className="flex flex-wrap justify-center items-center gap-4">
+              <a 
+                href="/#contact"
+                className="w-full sm:w-auto bg-white text-slate-900 px-8 py-4 rounded-xl font-bold shadow-xl hover:bg-blue-50 transition-all flex items-center justify-center"
+              >
+                Find Our Clinic
+              </a>
               <button 
                 onClick={handleBookService}
-                className="w-full sm:w-auto bg-white text-blue-600 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold shadow-xl hover:bg-slate-50 hover:-translate-y-1 transition-all flex items-center justify-center"
+                className="w-full sm:w-auto bg-blue-600 border border-blue-500 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all flex items-center justify-center"
               >
-                <CalendarCheck className="w-5 h-5 mr-2" /> Book a Consultation
-              </button>
-              <button 
-                onClick={() => window.open('tel:+917478851252')}
-                className="w-full sm:w-auto bg-transparent border-2 border-white text-white px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl font-bold hover:bg-white/10 transition-all flex items-center justify-center text-sm sm:text-base"
-              >
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" /> +91 74788 51252
+                <MessageCircle className="w-5 h-5 mr-2" /> Message Us
               </button>
             </div>
           </div>
@@ -333,7 +575,7 @@ export default function AboutUs() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-8 sm:py-12 border-t border-slate-800">
+      <footer className="bg-slate-900 text-slate-300 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-5 sm:gap-6">
             
