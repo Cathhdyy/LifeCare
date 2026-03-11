@@ -385,45 +385,45 @@ export default function AboutUs() {
               </div>
 
               {/* Bento Grid Gallery */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-6 h-auto md:h-[500px]">
+              <div className="grid grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-3 sm:gap-6 h-auto md:h-[500px]">
                 
-                {/* Large Main Image */}
-                <div className="md:col-span-2 rounded-2xl sm:rounded-[2rem] overflow-hidden relative group h-56 sm:h-64 md:h-full border border-slate-700">
+                {/* Large Main Image (Operatory) */}
+                <div className="col-span-1 md:col-span-2 md:row-span-2 rounded-2xl sm:rounded-[2rem] overflow-hidden relative group h-48 sm:h-64 md:h-full border border-slate-700">
                    <img 
                     src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80" 
                     alt="Modern Operatory" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                    />
-                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent flex items-end p-5 sm:p-8">
+                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent flex items-end p-4 sm:p-8">
                      <div>
-                       <span className="text-base sm:text-2xl font-bold block mb-1">State-of-the-Art Operatory</span>
-                       <span className="text-[10px] sm:text-sm text-slate-300">Equipped with the latest painless technology.</span>
+                       <span className="text-sm sm:text-2xl font-bold block mb-1 leading-tight">State-of-the-Art Operatory</span>
+                       <span className="text-[9px] sm:text-sm text-slate-300 line-clamp-2 sm:line-clamp-none">Equipped with the latest painless technology.</span>
                      </div>
                    </div>
                 </div>
 
-                {/* Side Smaller Images */}
-                <div className="flex flex-col gap-3 sm:gap-6 h-full">
-                  <div className="rounded-2xl sm:rounded-[2rem] overflow-hidden relative group h-40 sm:h-48 md:h-1/2 border border-slate-700">
-                     <img 
-                      src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" 
-                      alt="Waiting Area" 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                     />
-                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent flex items-end p-4 sm:p-6">
-                       <span className="text-xs sm:text-base font-bold">Comfortable Waiting Area</span>
-                     </div>
-                  </div>
-                  <div className="rounded-2xl sm:rounded-[2rem] overflow-hidden relative group h-40 sm:h-48 md:h-1/2 border border-slate-700">
-                     <img 
-                      src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" 
-                      alt="Sterilization Area" 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                     />
-                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent flex items-end p-4 sm:p-6">
-                       <span className="text-xs sm:text-base font-bold">Strict Sterilization Protocol</span>
-                     </div>
-                  </div>
+                {/* Waiting Area */}
+                <div className="col-span-1 md:col-span-1 md:row-span-1 rounded-2xl sm:rounded-[2rem] overflow-hidden relative group h-48 sm:h-64 md:h-full border border-slate-700">
+                   <img 
+                    src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" 
+                    alt="Waiting Area" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                   />
+                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent flex items-end p-4 sm:p-6">
+                     <span className="text-sm sm:text-base font-bold leading-tight">Comfortable Waiting Area</span>
+                   </div>
+                </div>
+
+                {/* Sterilization Area */}
+                <div className="col-span-2 md:col-span-1 md:row-span-1 rounded-2xl sm:rounded-[2rem] overflow-hidden relative group h-40 sm:h-48 md:h-full border border-slate-700">
+                   <img 
+                    src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" 
+                    alt="Sterilization Area" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                   />
+                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent flex items-end p-5 sm:p-6">
+                     <span className="text-sm sm:text-base font-bold">Strict Sterilization Protocol</span>
+                   </div>
                 </div>
 
               </div>
