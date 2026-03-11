@@ -68,7 +68,7 @@ const googleReviewsData = [
   }
 ];
 
-export default function AboutUs() {
+export default function About() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Prevent body scroll when mobile menu is open
