@@ -11,7 +11,7 @@ export default function App() {
         {/* This routes the base URL to your Home component */}
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/about" element={<AboutUs />} />
       </Routes>
     </BrowserRouter>
   );
