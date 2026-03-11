@@ -165,17 +165,17 @@ export default function Home() {
     {
       name: "jaya gurung",
       rating: 5,
-      text: "Clinic is well set .....Staffs have a good customer services , easy access to blood test ,results are provided on time , Doctors are well versed with their speciality and have a patience to listen to their patients I feel for Diabetes and general ailments Dr.Sabin is best to consult with the ample of time he shares with patient,his generosity and patience to listen makes patient more comfortable as he is the treating physician of my Father who is diabetic and we can feel the difference healthwise.Thank you life care for a good service 🙏1"
+      text: "Clinic is well set .....Staffs have a good customer services , easy access to blood test ,results are provided on time , Doctors are well versed with their speciality and have a patience to listen to their patients... Thank you life care for a good service 🙏1"
     },
     {
       name: "Sheema Limboo",
       rating: 5,
-      text: "Best ever Doctor available with Excellent service"
+      text: "Best ever Doctor available with Excellent service. The environment is extremely clean and welcoming."
     },
     {
       name: "Orchid Chettri",
       rating: 5,
-      text: "Very much pleased with the behaviour of the staff and the Doctor also examines the patient very well..Worth every penny✌️"
+      text: "Very much pleased with the behaviour of the staff and the Doctor also examines the patient very well..Worth every penny✌️ Highly recommended in Singtam."
     }
   ];
 
@@ -258,7 +258,7 @@ export default function Home() {
 
           <div className="hidden lg:flex items-center space-x-8">
             <button onClick={(e) => scrollToSection(e, 'home')} className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Home</button>
-            <button onClick={(e) => scrollToSection(e, 'about')} className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">About</button>
+            <a href="/about" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">About Us</a>
             <button onClick={(e) => scrollToSection(e, 'dentist')} className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Dentist</button>
             <a href="/services" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Services</a>
             <button onClick={(e) => scrollToSection(e, 'contact')} className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Contact</button>
@@ -283,7 +283,7 @@ export default function Home() {
         <div className={`lg:hidden fixed top-14 sm:top-20 left-0 w-full h-[calc(100vh-56px)] sm:h-[calc(100vh-80px)] bg-white/95 backdrop-blur-xl shadow-2xl overflow-y-auto transition-all duration-300 origin-top ${isMenuOpen ? 'scale-y-100 opacity-100 visible' : 'scale-y-0 opacity-0 invisible'}`}>
           <div className="flex flex-col px-5 sm:px-6 py-6 sm:py-8 space-y-1 sm:space-y-2 pb-32">
             <button onClick={(e) => scrollToSection(e, 'home')} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Home</button>
-            <button onClick={(e) => scrollToSection(e, 'about')} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">About Us</button>
+            <a href="/about" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">About Us</a>
             <button onClick={(e) => scrollToSection(e, 'dentist')} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Our Dentist</button>
             <a href="/services" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">Services & Pricing</a>
             <button onClick={(e) => scrollToSection(e, 'contact')} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Book Appointment</button>
@@ -310,7 +310,7 @@ export default function Home() {
               <div className="w-full lg:w-1/2 text-center lg:text-left pt-2 sm:pt-8 lg:pt-0">
                 <div className="inline-flex items-center bg-blue-50 border border-blue-200 text-blue-700 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-sm font-bold mb-4 sm:mb-6 shadow-sm">
                   <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-1.5 sm:mr-2.5" />
-                  Top Rated Dental Clinic in Singtam
+                  Your Family Dental Care Partner
                 </div>
                 <h2 className="text-3xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold text-slate-900 leading-[1.2] sm:leading-[1.1] mb-4 sm:mb-6 tracking-tight">
                   Modern Care for your <br className="hidden sm:block" />
@@ -993,27 +993,6 @@ export default function Home() {
 
             </div>
 
-            {/* CTA Banner to fill the gap */}
-            <div className="mt-10 sm:mt-16 md:mt-24 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-16 text-center text-white relative overflow-hidden shadow-xl sm:shadow-2xl shadow-blue-900/20 group mx-2 sm:mx-0">
-              {/* Decorative shapes */}
-              <div className="absolute top-0 right-0 w-32 h-32 sm:w-64 sm:h-64 bg-white/10 rounded-full blur-xl sm:blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none transition-transform duration-1000 group-hover:scale-150"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 sm:w-64 sm:h-64 bg-black/10 rounded-full blur-xl sm:blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none transition-transform duration-1000 group-hover:scale-150"></div>
-
-              <div className="relative z-10">
-                <h3 className="text-xl sm:text-3xl md:text-5xl font-extrabold mb-2 sm:mb-5 leading-tight tracking-tight">Ready to transform your smile?</h3>
-                <p className="text-blue-50 text-sm sm:text-lg md:text-xl font-medium mb-6 sm:mb-10 max-w-2xl mx-auto leading-relaxed">
-                  Book your consultation today and experience painless, modern dental care tailored just for you.
-                </p>
-                <button 
-                  onClick={(e) => scrollToSection(e, 'contact')} 
-                  className="w-full sm:w-auto inline-flex items-center justify-center bg-white text-blue-600 px-5 sm:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-extrabold hover:bg-slate-50 transition-all duration-300 shadow-[0_8px_15px_rgba(0,0,0,0.1)] sm:shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.2)] hover:-translate-y-1 text-sm sm:text-lg group/btn focus:outline-none focus:ring-4 focus:ring-white/30 min-h-[44px] sm:min-h-[52px]"
-                >
-                  <CalendarCheck className="w-4 h-4 sm:w-[22px] sm:h-[22px] mr-2 sm:mr-3 transform group-hover/btn:scale-110 transition-transform" />
-                  Schedule Your Visit
-                </button>
-              </div>
-            </div>
-
           </div>
         </section>
 
@@ -1125,7 +1104,7 @@ export default function Home() {
                       </div>
                       <div>
                         <h4 className="font-bold text-white mb-0.5 sm:mb-1 text-xs sm:text-base">Working Hours</h4>
-                        <p className="text-slate-400 font-medium text-[11px] sm:text-sm">8:00 AM – 6:00 PM<br/>(Closed on Wednesdays)</p>
+                        <p className="text-slate-400 font-medium text-[11px] sm:text-sm">Everyday: 8:00 AM – 6:00 PM<br/>(Closed on Wednesdays)</p>
                       </div>
                     </div>
                   </div>
