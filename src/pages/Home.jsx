@@ -439,6 +439,12 @@ export default function Home() {
                  <p className="text-blue-700 font-bold italic border-l-4 border-blue-600 pl-3 sm:pl-5 py-1.5 sm:py-2 bg-blue-50/50 rounded-r-lg sm:rounded-r-xl text-sm sm:text-lg max-w-3xl">
                     "Don't wait till pain starts. Preventive care is the key to a lasting smile."
                  </p>
+                 <div className="mt-6 sm:mt-8">
+                   <a href="/about" className="inline-flex items-center justify-center bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-600 transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base group w-full sm:w-auto">
+                     View More About Us
+                     <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
+                   </a>
+                 </div>
               </div>
 
               {/* Box 2: Interactive Accordion */}
