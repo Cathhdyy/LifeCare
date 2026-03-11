@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // Ensure the path below matches where your Home.jsx file is saved
 import Home from './pages/Home'; 
-import Services from './pages/Services'; 
+import Services from './pages/Services';
+import AboutUs from './pages/About'; 
 export default function App() {
   return (
     <BrowserRouter>
@@ -10,6 +11,7 @@ export default function App() {
         {/* This routes the base URL to your Home component */}
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/aboutus" element={<AboutUs />} />
       </Routes>
     </BrowserRouter>
   );
