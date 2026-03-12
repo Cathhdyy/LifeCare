@@ -224,6 +224,13 @@ export default function Home() {
           100% { background-position: 0% 50%; }
         }
         .animate-gradient { animation: gradient 4s ease infinite; background-size: 200% 200%; }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-float-delayed { animation: float 3s ease-in-out 1.5s infinite; }
       `}} />
 
       {/* Floating WhatsApp Button */}
@@ -350,7 +357,7 @@ export default function Home() {
 
               <div className="animate-fade-in-up opacity-0">
                 <span className="inline-flex items-center justify-center bg-white/80 backdrop-blur-md text-blue-600 font-extrabold px-3 py-1.5 sm:px-4 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.2em] mb-4 sm:mb-6 border border-blue-100 shadow-sm">
-                  <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1.5 sm:mr-2" /> Your Family Dental Care Partner
+                  <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1.5 sm:mr-2 animate-pulse" /> Your Family Dental Care Partner
                 </span>
               </div>
 
@@ -391,7 +398,7 @@ export default function Home() {
             <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="flex-1 flex items-center p-4 sm:p-5 md:p-6 bg-slate-50/80 hover:bg-white border border-transparent hover:border-blue-100 hover:shadow-lg hover:shadow-blue-900/5 transition-all duration-300 group rounded-xl sm:rounded-2xl md:justify-center text-left transform hover:-translate-y-1 cursor-pointer relative overflow-hidden min-h-[72px]">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="bg-white p-3 sm:p-3.5 rounded-xl shadow-sm border border-slate-100 mr-4 text-blue-600 flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 relative z-10">
-                <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
+                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
               </div>
               <div className="relative z-10">
                 <h4 className="font-extrabold text-sm sm:text-lg text-slate-900 leading-tight group-hover:text-blue-700 transition-colors">Location</h4>
@@ -403,7 +410,7 @@ export default function Home() {
             <div className="flex-1 flex items-center p-4 sm:p-5 md:p-6 bg-slate-50/80 hover:bg-white border border-transparent hover:border-emerald-100 hover:shadow-lg hover:shadow-emerald-900/5 transition-all duration-300 group rounded-xl sm:rounded-2xl md:justify-center text-left transform hover:-translate-y-1 cursor-default relative overflow-hidden min-h-[72px]">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="bg-white p-3 sm:p-3.5 rounded-xl shadow-sm border border-slate-100 mr-4 text-emerald-600 flex-shrink-0 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 group-hover:scale-110 relative z-10">
-                <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
+                <Clock className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
               </div>
               <div className="relative z-10">
                 <h4 className="font-extrabold text-sm sm:text-lg text-slate-900 leading-tight group-hover:text-emerald-700 transition-colors">Working Hours</h4>
@@ -415,7 +422,7 @@ export default function Home() {
             <button onClick={handleCallClick} className="flex-1 flex items-center p-4 sm:p-5 md:p-6 bg-blue-600 hover:bg-blue-700 border border-transparent transition-all duration-300 group rounded-xl sm:rounded-2xl md:justify-center text-left transform hover:-translate-y-1 shadow-md hover:shadow-xl hover:shadow-blue-600/30 relative overflow-hidden min-h-[72px]">
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="bg-white/10 backdrop-blur-sm p-3 sm:p-3.5 rounded-xl border border-white/20 mr-4 text-white flex-shrink-0 group-hover:bg-white group-hover:text-blue-600 transition-all duration-300 group-hover:scale-110 relative z-10">
-                <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
+                <Phone className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
               </div>
               <div className="relative z-10">
                 <h4 className="font-extrabold text-sm sm:text-lg text-white leading-tight">Call Us Now</h4>
@@ -488,7 +495,7 @@ export default function Home() {
                           className="w-full flex justify-between items-center p-4 sm:p-5 md:p-6 text-left focus:outline-none min-h-[56px] sm:min-h-[60px]"
                         >
                           <div className="flex items-center space-x-3 sm:space-x-5 pr-2">
-                            <div className={`p-2.5 sm:p-3 rounded-xl transition-colors flex-shrink-0 ${activeAccordion === index ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-blue-600 shadow-sm border border-slate-100'}`}>
+                            <div className={`p-2.5 sm:p-3 rounded-xl transition-colors flex-shrink-0 ${activeAccordion === index ? 'bg-blue-600 text-white shadow-md animate-pulse' : 'bg-white text-blue-600 shadow-sm border border-slate-100'}`}>
                               <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                             </div>
                             <span className={`font-bold text-sm sm:text-lg md:text-xl leading-tight ${activeAccordion === index ? 'text-blue-900' : 'text-slate-800'}`}>
@@ -501,12 +508,14 @@ export default function Home() {
                         </button>
                         
                         <div 
-                          className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                            activeAccordion === index ? 'max-h-40 opacity-100 pb-4 sm:pb-6 px-4 sm:px-6 md:px-8' : 'max-h-0 opacity-0'
+                          className={`grid transition-all duration-300 ease-in-out ${
+                            activeAccordion === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                           }`}
                         >
-                          <div className="pl-0 sm:pl-[4.5rem] text-slate-600 font-medium text-xs sm:text-lg leading-relaxed mt-1 sm:mt-0">
-                            {item.content}
+                          <div className="overflow-hidden">
+                            <div className="pl-4 sm:pl-[4.5rem] pr-4 sm:pr-8 pb-4 sm:pb-6 text-slate-600 font-medium text-xs sm:text-lg leading-relaxed mt-1 sm:mt-0">
+                              {item.content}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -623,7 +632,7 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
               
               {/* Left Column: Image */}
-              <div className="w-full lg:w-1/2 relative max-w-xs sm:max-w-lg lg:max-w-none mx-auto">
+              <div className="w-full lg:w-1/2 relative max-w-xs sm:max-w-lg lg:max-w-none mx-auto animate-float-delayed">
                 <div className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-xl sm:shadow-2xl shadow-blue-900/10 border border-slate-100 group aspect-[4/5]">
                   <img 
                     src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80" 
@@ -679,7 +688,7 @@ export default function Home() {
                   {/* Patients Card */}
                   <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-100 flex items-center hover:bg-white hover:shadow-lg hover:shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1 group">
                     <div className="bg-emerald-100 text-emerald-600 p-3 sm:p-3.5 rounded-xl mr-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
-                      <Star className="w-5 h-5 sm:w-6 sm:h-6" />
+                      <Star className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
                     </div>
                     <div>
                       <h5 className="font-extrabold text-slate-900 text-base sm:text-lg leading-tight">5000+</h5>
@@ -690,7 +699,7 @@ export default function Home() {
                   {/* Certified Card */}
                   <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-100 flex items-center hover:bg-white hover:shadow-lg hover:shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1 group sm:col-span-2">
                     <div className="bg-purple-100 text-purple-600 p-3 sm:p-3.5 rounded-xl mr-4 group-hover:bg-purple-500 group-hover:text-white transition-colors duration-300">
-                      <Award className="w-5 h-5 sm:w-6 sm:h-6" />
+                      <Award className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
                     </div>
                     <div>
                       <h5 className="font-extrabold text-slate-900 text-base sm:text-lg leading-tight">Certified Dental Specialist</h5>
@@ -724,11 +733,11 @@ export default function Home() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 reveal opacity-0">
-              <div className="inline-flex items-center bg-white border border-slate-200 text-blue-600 px-3 sm:px-4 py-1.5 sm:py-1.5 rounded-full text-[10px] sm:text-sm font-extrabold uppercase tracking-widest mb-4 sm:mb-6 shadow-sm">
+              <div className="inline-flex items-center bg-white border border-slate-200 text-blue-600 px-3 sm:px-4 py-1.5 sm:py-1.5 rounded-full text-[10px] sm:text-sm font-extrabold uppercase tracking-widest mb-4 sm:mb-6 shadow-sm hover:shadow-md hover:border-blue-300 hover:-translate-y-1 transition-all duration-300">
                 <ShieldCheck className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
                 Our Services
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-4 sm:mb-8 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-4 sm:mb-8 leading-tight transition-transform duration-700 group-hover:scale-[1.02]">
                 Comprehensive <br className="sm:hidden"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 animate-gradient">Dental Care</span>
               </h2>
               <p className="text-sm sm:text-lg lg:text-xl text-slate-600 font-medium mb-8 sm:mb-12 px-2 sm:px-0">
@@ -767,10 +776,10 @@ export default function Home() {
             </div>
 
             {/* Mobile 2x2 Grid for Services */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 md:gap-8 mt-8 sm:mt-16">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 md:gap-8 mt-8 sm:mt-16 reveal opacity-0 delay-100">
               
               {/* Service Card 1 */}
-              <div className="col-span-1 bg-white p-4 sm:p-8 md:p-10 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm sm:shadow-md border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 sm:hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full relative overflow-hidden reveal opacity-0">
+              <div className="col-span-1 bg-white p-4 sm:p-8 md:p-10 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm sm:shadow-md border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 sm:hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 to-cyan-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out z-20"></div>
                 
                 {/* Animated Background Watermark */}
@@ -795,7 +804,7 @@ export default function Home() {
               </div>
               
               {/* Service Card 2 */}
-              <div className="col-span-1 bg-white p-4 sm:p-8 md:p-10 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm sm:shadow-md border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 sm:hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full relative overflow-hidden reveal opacity-0 delay-100">
+              <div className="col-span-1 bg-white p-4 sm:p-8 md:p-10 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm sm:shadow-md border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 sm:hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 to-cyan-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out z-20"></div>
                 
                 {/* Animated Background Watermark */}
@@ -817,8 +826,8 @@ export default function Home() {
                 </a>
               </div>
 
-              {/* Service Card 3 */}
-              <div className="col-span-2 lg:col-span-1 bg-white p-4 sm:p-8 md:p-10 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm sm:shadow-md border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 sm:hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full relative overflow-hidden reveal opacity-0 delay-200">
+              {/* Service Card 3 - Spans full width on mobile to maintain 2-column grid aesthetic on top */}
+              <div className="col-span-2 lg:col-span-1 bg-white p-4 sm:p-8 md:p-10 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm sm:shadow-md border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 sm:hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 to-cyan-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out z-20"></div>
                 
                 {/* Animated Background Watermark */}
@@ -843,7 +852,7 @@ export default function Home() {
             </div>
 
             {/* View All Services CTA */}
-            <div className="flex justify-center mt-10 sm:mt-14 px-4 sm:px-0 reveal opacity-0 delay-300">
+            <div className="flex justify-center mt-10 sm:mt-14 px-4 sm:px-0 reveal opacity-0 delay-200">
               <a 
                 href="/services" 
                 className="w-full sm:w-auto inline-flex items-center justify-center bg-white border-2 border-slate-200 text-slate-800 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 text-sm sm:text-lg group min-h-[48px] sm:min-h-[52px]"
@@ -874,10 +883,10 @@ export default function Home() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:gap-8">
+            <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:gap-8 reveal opacity-0 delay-100">
               
               {/* Badge 1 */}
-              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm border border-slate-200 hover:shadow-lg hover:shadow-blue-900/5 hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left group relative overflow-hidden reveal opacity-0">
+              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm border border-slate-200 hover:shadow-lg hover:shadow-blue-900/5 hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left group relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10 w-full flex flex-col sm:flex-row items-center sm:items-start">
                   <div className="w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 mb-3 sm:mb-0 sm:mr-4 md:mr-6 rounded-xl sm:rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500 shadow-sm group-hover:scale-110 transform">
@@ -891,7 +900,7 @@ export default function Home() {
               </div>
 
               {/* Badge 2 */}
-              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm border border-slate-200 hover:shadow-lg hover:shadow-blue-900/5 hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left group relative overflow-hidden reveal opacity-0 delay-100">
+              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm border border-slate-200 hover:shadow-lg hover:shadow-blue-900/5 hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left group relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10 w-full flex flex-col sm:flex-row items-center sm:items-start">
                   <div className="w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 mb-3 sm:mb-0 sm:mr-4 md:mr-6 rounded-xl sm:rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-500 shadow-sm group-hover:scale-110 transform">
@@ -905,7 +914,7 @@ export default function Home() {
               </div>
 
               {/* Badge 3 */}
-              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm border border-slate-200 hover:shadow-lg hover:shadow-blue-900/5 hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left group relative overflow-hidden reveal opacity-0 delay-200">
+              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm border border-slate-200 hover:shadow-lg hover:shadow-blue-900/5 hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left group relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10 w-full flex flex-col sm:flex-row items-center sm:items-start">
                   <div className="w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 mb-3 sm:mb-0 sm:mr-4 md:mr-6 rounded-xl sm:rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-colors duration-500 shadow-sm group-hover:scale-110 transform">
@@ -919,7 +928,7 @@ export default function Home() {
               </div>
 
               {/* Badge 4 */}
-              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm border border-slate-200 hover:shadow-lg hover:shadow-blue-900/5 hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left group relative overflow-hidden reveal opacity-0 delay-300">
+              <div className="bg-white p-4 sm:p-6 md:p-8 rounded-[1.25rem] sm:rounded-[2rem] shadow-sm border border-slate-200 hover:shadow-lg hover:shadow-blue-900/5 hover:-translate-y-1 transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left group relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-pink-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10 w-full flex flex-col sm:flex-row items-center sm:items-start">
                   <div className="w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 mb-3 sm:mb-0 sm:mr-4 md:mr-6 rounded-xl sm:rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center group-hover:bg-pink-500 group-hover:text-white transition-colors duration-500 shadow-sm group-hover:scale-110 transform">
@@ -988,12 +997,14 @@ export default function Home() {
                     </button>
                     
                     <div 
-                      className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                        activeFaq === index ? 'max-h-40 opacity-100 pb-5 sm:pb-6 px-4 sm:px-5 md:px-6' : 'max-h-0 opacity-0'
+                      className={`grid transition-all duration-300 ease-in-out ${
+                        activeFaq === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                       }`}
                     >
-                      <div className="text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-3 sm:pt-4 text-xs sm:text-base">
-                        {faq.a}
+                      <div className="overflow-hidden">
+                        <div className="pl-4 sm:pl-5 pr-4 sm:pr-6 pb-5 sm:pb-6 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-3 sm:pt-4 text-xs sm:text-base">
+                          {faq.a}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1020,7 +1031,7 @@ export default function Home() {
                   <div className="space-y-6 sm:space-y-8">
                     <div className="flex items-start group">
                       <div className="bg-slate-800/80 p-3 sm:p-3.5 rounded-xl mr-3 sm:mr-4 text-blue-400 border border-slate-700 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-500 transition-colors">
-                        <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
+                        <MapPin className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
                       </div>
                       <div>
                         <h4 className="font-bold text-white mb-1 sm:mb-1.5 text-sm sm:text-base">Visit Us</h4>
@@ -1030,7 +1041,7 @@ export default function Home() {
                     
                     <div className="flex items-start group">
                       <div className="bg-slate-800/80 p-3 sm:p-3.5 rounded-xl mr-3 sm:mr-4 text-blue-400 border border-slate-700 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-500 transition-colors">
-                        <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
+                        <Phone className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
                       </div>
                       <div>
                         <h4 className="font-bold text-white mb-1 sm:mb-1.5 text-sm sm:text-base">Call Us</h4>
@@ -1041,7 +1052,7 @@ export default function Home() {
 
                     <div className="flex items-start group">
                       <div className="bg-slate-800/80 p-3 sm:p-3.5 rounded-xl mr-3 sm:mr-4 text-blue-400 border border-slate-700 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-500 transition-colors">
-                        <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
+                        <Clock className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
                       </div>
                       <div>
                         <h4 className="font-bold text-white mb-1 sm:mb-1.5 text-sm sm:text-base">Working Hours</h4>
@@ -1058,7 +1069,7 @@ export default function Home() {
                 
                 {formStatus === 'submitted' ? (
                   <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-6 sm:p-8 rounded-2xl flex flex-col items-center justify-center text-center h-full min-h-[250px] sm:min-h-[300px]">
-                    <CheckCircle2 className="w-12 h-12 sm:w-16 sm:h-16 text-emerald-500 mb-3 sm:mb-4" />
+                    <CheckCircle2 className="w-12 h-12 sm:w-16 sm:h-16 text-emerald-500 mb-3 sm:mb-4 animate-pulse" />
                     <h4 className="text-lg sm:text-xl font-bold mb-2">Redirecting to WhatsApp...</h4>
                     <p className="text-emerald-700 font-medium text-xs sm:text-sm max-w-sm mx-auto">Please send the pre-filled message in WhatsApp to confirm your request!</p>
                   </div>
@@ -1069,7 +1080,7 @@ export default function Home() {
                         <label className="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5 sm:mb-2">Full Name</label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-600">
-                            <User className="w-4 h-4 sm:w-5 sm:h-5" />
+                            <User className="w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
                           </div>
                           <input 
                             required type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="John Doe" 
@@ -1082,7 +1093,7 @@ export default function Home() {
                         <label className="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5 sm:mb-2">Phone Number</label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-600">
-                            <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                            <Phone className="w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
                           </div>
                           <input 
                             required type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="+91 XXXXX XXXXX" 
@@ -1096,7 +1107,7 @@ export default function Home() {
                       <label className="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5 sm:mb-2">Preferred Date</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-blue-600 z-10">
-                          <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+                          <Calendar className="w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
                         </div>
                         <input 
                           required type="date" name="date" value={formData.date} onChange={handleInputChange}
@@ -1109,7 +1120,7 @@ export default function Home() {
                       <label className="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5 sm:mb-2">Reason for Visit <span className="text-slate-400 font-normal">(Optional)</span></label>
                       <div className="relative">
                         <div className="absolute top-3.5 left-0 pl-4 flex items-start pointer-events-none text-slate-400 group-focus-within:text-blue-600">
-                          <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
+                          <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 transition-colors" />
                         </div>
                         <textarea 
                           rows="3" name="reason" value={formData.reason} onChange={handleInputChange} placeholder="e.g. Toothache, Cleaning..." 
