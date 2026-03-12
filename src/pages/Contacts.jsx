@@ -309,7 +309,7 @@ export default function Contact() {
         </div>
 
         {/* Contact Info Cards */}
-        <section className="relative z-20 mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative z-20 mb-8 sm:mb-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
               
               {/* Address Card */}
@@ -364,7 +364,7 @@ export default function Contact() {
         </section>
 
         {/* Interactive Booking & Map Section */}
-        <section className="py-12 md:py-20 bg-slate-50 relative">
+        <section className="pb-12 md:pb-20 pt-4 md:pt-6 bg-slate-50 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div className="bg-white rounded-[2rem] sm:rounded-[3rem] shadow-xl overflow-hidden border border-slate-200 flex flex-col lg:flex-row reveal opacity-0">
