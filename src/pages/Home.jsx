@@ -1084,7 +1084,7 @@ export default function Home() {
                           </div>
                           <input 
                             required type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="John Doe" 
-                            className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium text-slate-800 text-sm" 
+                            className="w-full h-12 sm:h-14 pl-11 pr-4 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium text-slate-800 text-sm" 
                           />
                         </div>
                       </div>
@@ -1097,7 +1097,7 @@ export default function Home() {
                           </div>
                           <input 
                             required type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="+91 XXXXX XXXXX" 
-                            className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium text-slate-800 text-sm" 
+                            className="w-full h-12 sm:h-14 pl-11 pr-4 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium text-slate-800 text-sm" 
                           />
                         </div>
                       </div>
@@ -1111,7 +1111,7 @@ export default function Home() {
                         </div>
                         <input 
                           required type="date" name="date" value={formData.date} onChange={handleInputChange}
-                          className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium text-slate-700 relative text-sm" 
+                          className="w-full h-12 sm:h-14 pl-11 pr-4 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium text-slate-800 text-sm block appearance-none" 
                         />
                       </div>
                     </div>
@@ -1124,7 +1124,7 @@ export default function Home() {
                         </div>
                         <textarea 
                           rows="3" name="reason" value={formData.reason} onChange={handleInputChange} placeholder="e.g. Toothache, Cleaning..." 
-                          className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium resize-none text-slate-800 text-sm"
+                          className="w-full pl-11 pr-4 py-3.5 bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all font-medium resize-none text-slate-800 text-sm"
                         ></textarea>
                       </div>
                     </div>
