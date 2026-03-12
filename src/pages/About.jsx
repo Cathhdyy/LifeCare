@@ -20,7 +20,9 @@ import {
   CheckCircle2,
   Quote,
   Star,
-  ClipboardList
+  ClipboardList,
+  Clock,
+  Navigation
 } from 'lucide-react';
 
 // Custom Scalable Vector Logo
@@ -68,8 +70,9 @@ const googleReviewsData = [
   }
 ];
 
-export default function About() {
+export default function AboutUs() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -87,6 +90,35 @@ export default function About() {
     const message = `Hi, I would like to book an appointment for a consultation at Life Care Dental Clinic.`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/917478851252?text=${encodedMessage}`, '_blank');
+  };
+
+  const handleCallClick = (e) => {
+    if (e) e.preventDefault();
+    const phoneNumber = "+917478851252";
+    const successMessage = 'Phone number copied: +91 74788 51252';
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      window.location.href = `tel:${phoneNumber}`;
+    } else {
+      try {
+        const textArea = document.createElement("textarea");
+        textArea.value = phoneNumber;
+        textArea.style.position = "fixed";
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        setToastMessage(successMessage);
+        setTimeout(() => setToastMessage(''), 3000);
+      } catch (fallbackErr) {
+        console.error('Fallback copy failed', fallbackErr);
+      }
+    }
   };
 
   return (
@@ -114,11 +146,42 @@ export default function About() {
         <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 group-hover:animate-pulse" />
       </a>
 
+      {/* Toast Notification */}
+      <div className={`fixed top-16 sm:top-24 left-1/2 transform -translate-x-1/2 bg-slate-900/95 backdrop-blur-md text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-2xl z-[100] flex items-center transition-all duration-500 ease-in-out border border-slate-700 w-11/12 max-w-sm sm:max-w-md ${toastMessage ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10 pointer-events-none'}`}>
+        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 mr-2 sm:mr-2.5 flex-shrink-0" />
+        <span className="font-semibold tracking-wide text-xs sm:text-sm truncate">{toastMessage}</span>
+      </div>
+
+      {/* Top Bar - Contact Info (Hidden on Mobile) */}
+      <div className="bg-slate-900 text-slate-300 text-xs md:text-sm py-2.5 px-4 md:px-8 hidden md:flex justify-between items-center z-50 relative">
+        <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
+          <div className="flex space-x-8">
+            <button onClick={handleCallClick} className="flex items-center hover:text-white transition-colors cursor-pointer group min-h-[24px]">
+              <Phone size={14} className="mr-2 text-blue-400 group-hover:text-blue-300" />
+              <span className="font-medium tracking-wide">+91 74788 51252 / +91 62972 58968</span>
+            </button>
+            <div className="flex items-center">
+              <Clock size={14} className="mr-2 text-blue-400" />
+              <span>8:00 AM – 6:00 PM (Closed Wed)</span>
+            </div>
+          </div>
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">
+              <Star size={12} className="text-yellow-400 fill-current mr-1.5" />
+              <span className="font-semibold text-white text-xs">4.5/5 Rating</span>
+            </div>
+            <a href="https://www.instagram.com/lifecaresingtam?igsh=MXd4dDZnYW9wMXNhdw==" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-pink-400 transition-colors p-1" aria-label="Instagram">
+              <Instagram size={16} />
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* Navigation */}
       <nav className="bg-white/90 backdrop-blur-xl shadow-sm sticky top-0 z-50 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-20 flex justify-between items-center">
           
-          <div className="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer group" onClick={() => window.location.href='/'}>
+          <a href="/" className="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer group">
             <div className="rounded-full shadow-sm group-hover:shadow-md transition-shadow">
               <CustomLogo className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14" />
             </div>
@@ -126,19 +189,23 @@ export default function About() {
               <h1 className="text-base sm:text-xl md:text-2xl font-extrabold text-slate-900 leading-none tracking-tight">Life Care</h1>
               <span className="text-[8px] sm:text-[10px] md:text-xs font-bold text-blue-600 tracking-widest uppercase mt-0.5">Dental Clinic</span>
             </div>
-          </div>
+          </a>
 
           <div className="hidden lg:flex items-center space-x-8">
             <a href="/" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Home</a>
             <a href="/about" className="text-sm font-bold text-blue-600 border-b-2 border-blue-600 pb-1">About Us</a>
             <a href="/services" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Services</a>
-            <button onClick={() => window.location.href='/#contact'} className="bg-slate-900 text-white px-6 py-2.5 rounded-full font-bold hover:bg-slate-800 transition-all shadow-lg hover:-translate-y-0.5">
-              Contact Us
-            </button>
+            <a href="/contact" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Contact</a>
+            <a 
+              href="/contact"
+              className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-600/30 hover:-translate-y-0.5 min-h-[44px] flex items-center"
+            >
+              Book Appointment
+            </a>
           </div>
 
           <button 
-            className="lg:hidden text-slate-800 p-2 bg-slate-50 hover:bg-slate-100 rounded-xl" 
+            className="lg:hidden text-slate-800 p-2 bg-slate-50 hover:bg-slate-100 rounded-xl min-w-[44px] min-h-[44px] flex items-center justify-center" 
             onClick={toggleMenu}
           >
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -150,8 +217,13 @@ export default function About() {
           <div className="flex flex-col px-5 py-6 space-y-1">
             <a href="/" className="w-full text-left py-4 text-slate-800 font-extrabold text-xl border-b border-slate-100">Home</a>
             <a href="/about" className="w-full text-left py-4 text-blue-600 font-extrabold text-xl border-b border-slate-100">About Us</a>
-            <a href="/services" className="w-full text-left py-4 text-slate-800 font-extrabold text-xl border-b border-slate-100">Services</a>
-            <a href="/#contact" className="w-full text-left py-4 text-slate-800 font-extrabold text-xl border-b border-slate-100">Contact Us</a>
+            <a href="/services" className="w-full text-left py-4 text-slate-800 font-extrabold text-xl border-b border-slate-100">Services & Pricing</a>
+            <a href="/contact" className="w-full text-left py-4 text-slate-800 font-extrabold text-xl border-b border-slate-100">Contact Us</a>
+            
+            <button onClick={handleCallClick} className="w-full bg-blue-600 text-white px-4 py-3 sm:py-4 rounded-xl font-bold flex justify-center items-center shadow-lg shadow-blue-600/20 mt-6 active:scale-95 transition-transform min-h-[48px] text-base">
+              <Phone className="w-5 h-5 mr-2.5" />
+              Call +91 74788 51252
+            </button>
           </div>
         </div>
       </nav>
@@ -559,8 +631,8 @@ export default function About() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4">
               <a 
-                href="/#contact"
-                className="w-full sm:w-auto bg-white text-slate-900 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold shadow-xl hover:bg-blue-50 transition-all flex items-center justify-center text-sm sm:text-base"
+                href="/contact"
+                className="w-full sm:w-auto bg-white text-slate-900 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold shadow-xl hover:bg-slate-50 hover:-translate-y-1 transition-all flex items-center justify-center text-sm sm:text-base"
               >
                 Find Our Clinic
               </a>
@@ -576,37 +648,127 @@ export default function About() {
 
       </main>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-8 sm:py-12">
+      {/* Upgraded Multi-Column Footer */}
+      <footer className="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-800 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-5 sm:gap-6">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-12">
             
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-              <CustomLogo className="w-10 h-10 sm:w-14 sm:h-14" />
-              <div className="flex flex-col">
-                <h1 className="text-base sm:text-xl font-extrabold text-white leading-tight tracking-tight">Life Care Dental Clinic</h1>
-                <span className="text-[8px] sm:text-[10px] font-bold text-blue-400 tracking-widest uppercase mt-0.5">Singtam, East Sikkim</span>
+            {/* Column 1: Brand & Intro */}
+            <div className="flex flex-col">
+              <a href="/" className="flex items-center space-x-3 mb-6 group cursor-pointer inline-block w-fit">
+                <div className="bg-slate-900 rounded-full p-1 border border-slate-800 shadow-sm group-hover:border-slate-700 transition-colors">
+                  <CustomLogo className="w-10 h-10 sm:w-12 sm:h-12" />
+                </div>
+                <div className="flex flex-col justify-center">
+                  <h1 className="text-xl sm:text-2xl font-extrabold text-white leading-none tracking-tight group-hover:text-blue-400 transition-colors">Life Care</h1>
+                  <span className="text-[10px] font-bold text-blue-500 tracking-widest uppercase mt-1">Dental Clinic</span>
+                </div>
+              </a>
+              <p className="text-slate-400 text-sm leading-relaxed mb-6 font-medium">
+                Setting a new standard for painless, modern, and compassionate dental care in East Sikkim. Your smile is our priority.
+              </p>
+              <div className="flex space-x-4">
+                <a href="https://www.instagram.com/lifecaresingtam?igsh=MXd4dDZnYW9wMXNhdw==" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-pink-500 hover:to-purple-600 hover:text-white hover:border-transparent transition-all text-slate-400 border border-slate-800 shadow-sm">
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a href="https://wa.me/917478851252" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-[#25D366] hover:text-white hover:border-transparent transition-all text-slate-400 border border-slate-800 shadow-sm">
+                  <MessageCircle className="w-5 h-5" />
+                </a>
               </div>
             </div>
-            
-            <div className="flex space-x-4">
-              <a href="https://www.instagram.com/lifecaresingtam?igsh=MXd4dDZnYW9wMXNhdw==" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-pink-500 hover:text-white transition-all text-slate-400 border border-slate-700">
-                <Instagram className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+
+            {/* Column 2: Quick Links */}
+            <div>
+              <h3 className="text-white font-bold text-lg mb-6 flex items-center">
+                <span className="w-8 h-1 bg-blue-600 rounded-full mr-3"></span> Quick Links
+              </h3>
+              <ul className="grid grid-cols-2 gap-y-4 gap-x-2 md:block md:space-y-4">
+                <li>
+                  <a href="/" className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
+                    <ArrowRight className="w-3.5 h-3.5 mr-2 text-blue-500" /> Home
+                  </a>
+                </li>
+                <li>
+                  <a href="/about" className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
+                    <ArrowRight className="w-3.5 h-3.5 mr-2 text-blue-500" /> About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="/services" className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
+                    <ArrowRight className="w-3.5 h-3.5 mr-2 text-blue-500" /> All Services
+                  </a>
+                </li>
+                <li>
+                  <a href="/contact" className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
+                    <ArrowRight className="w-3.5 h-3.5 mr-2 text-blue-500" /> Contact & Map
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Contact Info */}
+            <div>
+              <h3 className="text-white font-bold text-lg mb-6 flex items-center">
+                <span className="w-8 h-1 bg-emerald-500 rounded-full mr-3"></span> Get in Touch
+              </h3>
+              <ul className="space-y-5">
+                <li className="flex items-start group">
+                  <div className="bg-slate-900 p-2 rounded-lg border border-slate-800 text-blue-400 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-500 transition-colors mr-4 mt-0.5">
+                    <MapPin className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="block text-white font-bold text-sm mb-1">Clinic Location</span>
+                    <a href="https://maps.google.com/?q=Dhamala+Colony,+Singtam,+Sikkim" target="_blank" rel="noreferrer" className="text-slate-400 text-sm leading-relaxed hover:text-blue-400 transition-colors inline-block">
+                      Dhamala Colony, Below Euphoria<br/>Singtam, East Sikkim - 737134
+                    </a>
+                  </div>
+                </li>
+                <li className="flex items-start group">
+                  <div className="bg-slate-900 p-2 rounded-lg border border-slate-800 text-blue-400 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-500 transition-colors mr-4 mt-0.5">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="block text-white font-bold text-sm mb-1">Phone & WhatsApp</span>
+                    <button onClick={handleCallClick} className="text-slate-400 text-sm hover:text-blue-400 transition-colors block mb-0.5">+91 74788 51252</button>
+                    <button onClick={(e) => { e.preventDefault(); window.location.href='tel:+916297258968'; }} className="text-slate-400 text-sm hover:text-blue-400 transition-colors block">+91 62972 58968</button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 4: Hours & Action */}
+            <div>
+              <h3 className="text-white font-bold text-lg mb-6 flex items-center">
+                <span className="w-8 h-1 bg-purple-500 rounded-full mr-3"></span> Working Hours
+              </h3>
+              <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-5 mb-6">
+                <div className="flex justify-between items-center mb-3 pb-3 border-b border-slate-800">
+                  <span className="text-slate-300 text-sm font-medium">Thursday - Tuesday</span>
+                  <span className="text-white font-bold text-sm bg-slate-800 px-2 py-1 rounded">8 AM - 6 PM</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-300 text-sm font-medium">Wednesday</span>
+                  <span className="text-red-400 font-bold text-sm bg-red-400/10 px-2 py-1 rounded">Closed</span>
+                </div>
+              </div>
+              <a href="/contact" className="w-full bg-white text-slate-900 font-bold py-3 rounded-xl hover:bg-blue-600 hover:text-white transition-colors shadow-lg flex items-center justify-center text-sm group">
+                <CalendarCheck className="w-4 h-4 mr-2 text-blue-600 group-hover:text-white transition-colors" /> Book Appointment
               </a>
             </div>
+
           </div>
           
-          <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-2.5 sm:gap-4 text-[10px] sm:text-xs font-medium text-slate-500">
-            <p>&copy; {new Date().getFullYear()} Life Care Dental Clinic. All rights reserved.</p>
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-              <p className="flex items-center text-slate-400">
-                <Phone className="w-3 h-3 sm:w-3 sm:h-3 mr-1 sm:mr-1.5 text-blue-500" /> +91 74788 51252 / +91 62972 58968
-              </p>
-              <p className="flex items-center text-slate-400">
-                <MapPin className="w-3 h-3 sm:w-3 sm:h-3 mr-1 sm:mr-1.5 text-blue-500" /> Near Singtam Bridge, Dhamala Colony
-              </p>
-            </div>
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t border-slate-800/80 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <p className="text-slate-500 text-xs font-medium">
+              &copy; {new Date().getFullYear()} Life Care Dental Clinic. All rights reserved.
+            </p>
+            <p className="text-slate-600 text-xs font-medium flex items-center justify-center md:justify-end">
+              Designed with <HeartHandshake className="w-3.5 h-3.5 mx-1.5 text-rose-500" /> for Singtam
+            </p>
           </div>
+
         </div>
       </footer>
     </div>
