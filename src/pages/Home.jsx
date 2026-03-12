@@ -305,7 +305,7 @@ export default function App() {
             <a href="/about" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">About Us</a>
             <button onClick={(e) => scrollToSection(e, 'dentist')} className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Dentist</button>
             <a href="/services" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Services</a>
-            <button onClick={(e) => scrollToSection(e, 'contact')} className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Contact</button>
+            <a href="/contact" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Contact</a>
             <button 
               onClick={(e) => scrollToSection(e, 'contact')} 
               className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-600/30 hover:-translate-y-0.5 min-h-[44px]"
@@ -330,7 +330,7 @@ export default function App() {
             <a href="/about" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">About Us</a>
             <button onClick={(e) => {scrollToSection(e, 'dentist'); setIsMenuOpen(false);}} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Our Dentist</button>
             <a href="/services" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">Services & Pricing</a>
-            <button onClick={(e) => {scrollToSection(e, 'contact'); setIsMenuOpen(false);}} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Book Appointment</button>
+            <a href="/contact" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Contact Us</a>
             
             <button onClick={(e) => { handleCallClick(e); setIsMenuOpen(false); }} className="w-full bg-blue-600 text-white px-4 py-3 sm:py-4 rounded-xl font-bold flex justify-center items-center shadow-lg shadow-blue-600/20 mt-4 sm:mt-6 active:scale-95 transition-transform min-h-[48px] sm:min-h-[56px] text-sm sm:text-base">
               <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-2.5" />
@@ -377,7 +377,7 @@ export default function App() {
                 Expert dental treatments with advanced technology in a comfortable, friendly environment. Don't wait till pain starts—visit us today!
               </p>
 
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 animate-fade-in-up delay-300 opacity-0 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 sm:gap-4 animate-fade-in-up delay-300 opacity-0 w-full sm:w-auto">
                 <button 
                   onClick={(e) => scrollToSection(e, 'contact')} 
                   className="w-full sm:w-auto bg-blue-600 text-white px-5 sm:px-8 py-3.5 sm:py-4.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/30 hover:shadow-xl hover:-translate-y-1 flex items-center justify-center text-sm sm:text-lg min-h-[48px] md:min-h-[52px]"
@@ -385,6 +385,13 @@ export default function App() {
                   <CalendarCheck className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-2.5" />
                   Book a Visit
                 </button>
+                <a 
+                  href="/contact" 
+                  className="w-full sm:w-auto bg-slate-900 text-white px-5 sm:px-8 py-3.5 sm:py-4.5 rounded-xl font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/30 hover:shadow-xl hover:-translate-y-1 flex items-center justify-center text-sm sm:text-lg min-h-[48px] md:min-h-[52px]"
+                >
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-2.5" />
+                  Contact Page
+                </a>
                 <button 
                   onClick={handleCallClick} 
                   className="w-full sm:w-auto bg-white/90 backdrop-blur-md border border-slate-200 text-slate-700 px-5 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all flex items-center justify-center text-sm sm:text-lg shadow-sm min-h-[48px] md:min-h-[52px]"
@@ -1238,7 +1245,7 @@ export default function App() {
               <h3 className="text-white font-bold text-lg mb-6 flex items-center">
                 <span className="w-8 h-1 bg-blue-600 rounded-full mr-3"></span> Quick Links
               </h3>
-              <ul className="space-y-4">
+              <ul className="grid grid-cols-2 gap-y-4 gap-x-2 md:block md:space-y-4">
                 <li>
                   <button onClick={(e) => scrollToSection(e, 'home')} className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
                     <ArrowRight className="w-3.5 h-3.5 mr-2 text-blue-500" /> Home
@@ -1260,9 +1267,9 @@ export default function App() {
                   </button>
                 </li>
                 <li>
-                  <button onClick={(e) => scrollToSection(e, 'contact')} className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
+                  <a href="/contact" className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
                     <ArrowRight className="w-3.5 h-3.5 mr-2 text-blue-500" /> Contact & Map
-                  </button>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -1312,9 +1319,9 @@ export default function App() {
                   <span className="text-red-400 font-bold text-sm bg-red-400/10 px-2 py-1 rounded">Closed</span>
                 </div>
               </div>
-              <button onClick={(e) => scrollToSection(e, 'contact')} className="w-full bg-white text-slate-900 font-bold py-3 rounded-xl hover:bg-blue-600 hover:text-white transition-colors shadow-lg flex items-center justify-center text-sm group">
+              <a href="/contact" className="w-full bg-white text-slate-900 font-bold py-3 rounded-xl hover:bg-blue-600 hover:text-white transition-colors shadow-lg flex items-center justify-center text-sm group">
                 <CalendarCheck className="w-4 h-4 mr-2 text-blue-600 group-hover:text-white transition-colors" /> Book Appointment
-              </button>
+              </a>
             </div>
 
           </div>
