@@ -141,23 +141,36 @@ export default function Home() {
 
   const handleCallClick = (e) => {
     if (e) e.preventDefault();
-    const textArea = document.createElement("textarea");
-    textArea.value = "+917478851252";
-    textArea.style.position = "fixed";
-    textArea.style.top = "0";
-    textArea.style.left = "0";
-    textArea.style.opacity = "0";
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    try {
-      document.execCommand('copy');
-      setToastMessage('Phone number copied: +91 74788 51252');
-      setTimeout(() => setToastMessage(''), 3000);
-    } catch (err) {
-      console.error('Failed to copy', err);
+    
+    const phoneNumber = "+917478851252";
+    const successMessage = 'Phone number copied: +91 74788 51252';
+    
+    // Check if the user is on a mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // Directly open the phone dialer on mobile
+      window.location.href = `tel:${phoneNumber}`;
+    } else {
+      // Use fallback execCommand for desktop due to iframe clipboard API restrictions
+      const textArea = document.createElement("textarea");
+      textArea.value = phoneNumber;
+      textArea.style.position = "fixed";
+      textArea.style.top = "0";
+      textArea.style.left = "0";
+      textArea.style.opacity = "0";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        setToastMessage(successMessage);
+        setTimeout(() => setToastMessage(''), 3000);
+      } catch (fallbackErr) {
+        console.error('Fallback copy failed', fallbackErr);
+      }
+      document.body.removeChild(textArea);
     }
-    document.body.removeChild(textArea);
   };
 
   const accordionData = [
