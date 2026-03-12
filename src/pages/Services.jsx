@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { 
   Phone, 
   MapPin, 
+  Clock, 
+  Star, 
   Instagram, 
   Menu, 
   X, 
@@ -10,11 +12,18 @@ import {
   CalendarCheck,
   Activity,
   CheckCircle2,
-  Sparkles,
-  MessageCircle,
   ChevronDown,
-  Search,
-  HeartHandshake
+  HeartHandshake,
+  Sparkles,
+  Navigation,
+  ArrowRight,
+  MessageCircle,
+  Plus,
+  Minus,
+  User,
+  Calendar,
+  MessageSquare,
+  Award
 } from 'lucide-react';
 
 // Custom Scalable Vector Logo
