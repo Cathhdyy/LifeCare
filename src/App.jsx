@@ -7,6 +7,8 @@ import Services from './pages/Services';
 import AboutUs from './pages/About';
 import Contacts from './pages/Contacts'; 
 import NotFound from './pages/NotFound'; // 1. Import the new 404 page
+import Privacy from './pages/Privacy'; // <-- Import Privacy
+import Terms from './pages/Terms';     // <-- Import Terms
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
           {/* If the URL doesn't match any of the above, it will render this */}
           <Route element={<Layout />}>
             <Route path="*" element={<NotFound />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
           </Route>
       </Routes>
     </BrowserRouter>
