@@ -310,35 +310,35 @@ export default function Contact() {
 
         {/* Contact Info Cards */}
         <section className="relative z-20 mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
               
               {/* Address Card */}
-              <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:shadow-blue-900/10 border border-slate-200 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 reveal opacity-0 relative overflow-hidden">
+              <div className="col-span-1 bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-sm hover:shadow-2xl hover:shadow-blue-900/10 border border-slate-200 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 reveal opacity-0 relative overflow-hidden">
                  <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                  <div className="relative z-10 flex flex-col items-center">
-                   <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500 shadow-sm group-hover:scale-110 transform">
-                     <MapPin className="w-6 h-6" />
+                   <div className="w-10 h-10 sm:w-14 sm:h-14 bg-blue-50 text-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-5 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500 shadow-sm group-hover:scale-110 transform">
+                     <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                    </div>
-                   <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">Visit Our Clinic</h3>
-                   <p className="text-slate-600 font-medium text-sm leading-relaxed">
-                     Dhamala Colony, Below Euphoria<br/>Singtam, East Sikkim - 737134
+                   <h3 className="text-[13px] sm:text-xl font-extrabold text-slate-900 mb-1.5 sm:mb-2 leading-tight">Visit Our Clinic</h3>
+                   <p className="text-slate-600 font-medium text-[10px] sm:text-sm leading-relaxed">
+                     Dhamala Colony, Below Euphoria<br className="hidden sm:block"/>Singtam, East Sikkim - 737134
                    </p>
                  </div>
               </div>
 
               {/* Phone Card */}
-              <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:shadow-emerald-900/10 border border-slate-200 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 reveal opacity-0 delay-100 relative overflow-hidden">
+              <div className="col-span-1 bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-sm hover:shadow-2xl hover:shadow-emerald-900/10 border border-slate-200 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 reveal opacity-0 delay-100 relative overflow-hidden">
                  <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                  <div className="relative z-10 flex flex-col items-center w-full">
-                   <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-500 shadow-sm group-hover:scale-110 transform">
-                     <Phone className="w-6 h-6" />
+                   <div className="w-10 h-10 sm:w-14 sm:h-14 bg-emerald-50 text-emerald-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-5 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-500 shadow-sm group-hover:scale-110 transform">
+                     <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
                    </div>
-                   <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">Call or WhatsApp</h3>
-                   <div className="flex flex-col space-y-2 mt-1 w-full">
-                     <button onClick={(e) => handleCallClick(e, '+91 74788 51252')} className="text-slate-600 font-bold text-sm hover:text-emerald-600 transition-colors inline-flex items-center justify-center bg-slate-50 hover:bg-emerald-50 py-2 rounded-lg border border-slate-100">
+                   <h3 className="text-[13px] sm:text-xl font-extrabold text-slate-900 mb-1.5 sm:mb-2 leading-tight">Call / WhatsApp</h3>
+                   <div className="flex flex-col space-y-1.5 sm:space-y-2 mt-0.5 sm:mt-1 w-full">
+                     <button onClick={(e) => handleCallClick(e, '+91 74788 51252')} className="text-slate-600 font-bold text-[10px] sm:text-sm hover:text-emerald-600 transition-colors inline-flex items-center justify-center bg-slate-50 hover:bg-emerald-50 py-1.5 sm:py-2 rounded-lg border border-slate-100 w-full px-1">
                        +91 74788 51252
                      </button>
-                     <button onClick={(e) => handleCallClick(e, '+91 62972 58968')} className="text-slate-600 font-bold text-sm hover:text-emerald-600 transition-colors inline-flex items-center justify-center bg-slate-50 hover:bg-emerald-50 py-2 rounded-lg border border-slate-100">
+                     <button onClick={(e) => handleCallClick(e, '+91 62972 58968')} className="text-slate-600 font-bold text-[10px] sm:text-sm hover:text-emerald-600 transition-colors inline-flex items-center justify-center bg-slate-50 hover:bg-emerald-50 py-1.5 sm:py-2 rounded-lg border border-slate-100 w-full px-1">
                        +91 62972 58968
                      </button>
                    </div>
@@ -346,16 +346,16 @@ export default function Contact() {
               </div>
 
               {/* Hours Card */}
-              <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:shadow-purple-900/10 border border-slate-200 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 reveal opacity-0 delay-200 relative overflow-hidden">
+              <div className="col-span-2 md:col-span-1 bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-sm hover:shadow-2xl hover:shadow-purple-900/10 border border-slate-200 flex flex-col items-center text-center group hover:-translate-y-1.5 transition-all duration-300 reveal opacity-0 delay-200 relative overflow-hidden">
                  <div className="absolute inset-0 bg-gradient-to-b from-purple-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                  <div className="relative z-10 flex flex-col items-center">
-                   <div className="w-14 h-14 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-purple-500 group-hover:text-white transition-colors duration-500 shadow-sm group-hover:scale-110 transform">
-                     <Clock className="w-6 h-6" />
+                   <div className="w-10 h-10 sm:w-14 sm:h-14 bg-purple-50 text-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-5 group-hover:bg-purple-500 group-hover:text-white transition-colors duration-500 shadow-sm group-hover:scale-110 transform">
+                     <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
                    </div>
-                   <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">Working Hours</h3>
-                   <div className="text-slate-600 font-medium text-sm flex flex-col space-y-1 mt-1">
-                     <span className="bg-slate-50 px-3 py-1 rounded-md border border-slate-100">Thurs - Tue: 8 AM - 6 PM</span>
-                     <span className="bg-red-50 text-red-600 font-bold px-3 py-1 rounded-md border border-red-100">Wednesdays: Closed</span>
+                   <h3 className="text-[13px] sm:text-xl font-extrabold text-slate-900 mb-2 sm:mb-2 leading-tight">Working Hours</h3>
+                   <div className="flex flex-row md:flex-col gap-2 sm:gap-0 space-y-0 sm:space-y-1 mt-0.5 sm:mt-1 justify-center flex-wrap">
+                     <span className="bg-slate-50 px-2.5 sm:px-3 py-1.5 sm:py-1 rounded-md border border-slate-100 text-[10px] sm:text-sm font-medium text-slate-600">Thurs - Tue: 8 AM - 6 PM</span>
+                     <span className="bg-red-50 text-red-600 font-bold px-2.5 sm:px-3 py-1.5 sm:py-1 rounded-md border border-red-100 text-[10px] sm:text-sm">Wednesdays: Closed</span>
                    </div>
                  </div>
               </div>
