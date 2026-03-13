@@ -17,7 +17,6 @@ export default function App() {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Home />} />
             
           <Route element={<Layout />}>
             <Route path="/about" element={<AboutUs />} />
@@ -26,6 +25,7 @@ export default function App() {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Home />} />
           </Route>
         </Routes>
       </BrowserRouter>
