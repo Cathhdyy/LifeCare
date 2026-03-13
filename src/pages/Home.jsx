@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SEO from '../components/SEO';
 import { 
   Phone, 
   MapPin, 
@@ -53,7 +54,7 @@ const CustomLogo = ({ className = "w-12 h-12" }) => (
   </svg>
 );
 
-export default function App() {
+export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState('idle');
   const [toastMessage, setToastMessage] = useState('');
@@ -213,6 +214,14 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-blue-200 selection:text-blue-900 overflow-x-hidden flex flex-col w-full">
+      
+      {/* 🚀 SEO Tag Added Here 🚀 */}
+      <SEO 
+        title="Best Dentist in Singtam" 
+        description="Life Care Dental Clinic is the premier dental care center in Singtam, East Sikkim. Dr. Sheema Sapkota specializes in painless root canals, smile designing, and modern family dentistry."
+        keywords="Dentist in Singtam, Dental Clinic East Sikkim, Root Canal Singtam, Dr. Sheema Sapkota, Best Dentist Near Me"
+      />
+
       {/* Custom Styles for animations */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes fade-in-up {
@@ -814,7 +823,7 @@ export default function App() {
                   <p className="text-slate-600 font-medium leading-tight sm:leading-relaxed text-[10px] sm:text-sm md:text-base line-clamp-3 sm:line-clamp-none">Comprehensive oral care focusing on preventing dental issues before they start.</p>
                 </div>
                 <a href="/services" className="mt-4 sm:mt-8 md:mt-10 pt-3 sm:pt-5 md:pt-6 border-t border-slate-100 flex items-center text-blue-600 font-bold group-hover:text-blue-700 transition-colors text-[11px] sm:text-sm md:text-base relative z-10 w-full text-left min-h-[32px] sm:min-h-[44px]">
-                  Book <span className="hidden sm:inline">&nbsp;this service</span> <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-2 transform group-hover:translate-x-1.5 transition-transform duration-300" />
+                  Book <span className="hidden sm:inline"> this service</span> <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-2 transform group-hover:translate-x-1.5 transition-transform duration-300" />
                 </a>
               </div>
               
@@ -837,7 +846,7 @@ export default function App() {
                   <p className="text-slate-600 font-medium leading-tight sm:leading-relaxed text-[10px] sm:text-sm md:text-base line-clamp-3 sm:line-clamp-none">Save heavily infected or damaged teeth with advanced, painless root canal therapy.</p>
                 </div>
                 <a href="/services" className="mt-4 sm:mt-8 md:mt-10 pt-3 sm:pt-5 md:pt-6 border-t border-slate-100 flex items-center text-blue-600 font-bold group-hover:text-blue-700 transition-colors text-[11px] sm:text-sm md:text-base relative z-10 w-full text-left min-h-[32px] sm:min-h-[44px]">
-                  Book <span className="hidden sm:inline">&nbsp;this service</span> <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-2 transform group-hover:translate-x-1.5 transition-transform duration-300" />
+                  Book <span className="hidden sm:inline"> this service</span> <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-2 transform group-hover:translate-x-1.5 transition-transform duration-300" />
                 </a>
               </div>
 
@@ -860,7 +869,7 @@ export default function App() {
                   <p className="text-slate-600 font-medium leading-tight sm:leading-relaxed text-[10px] sm:text-sm md:text-base line-clamp-3 sm:line-clamp-none">Gentle, fear-free dental treatments tailored specifically for growing children.</p>
                 </div>
                 <a href="/services" className="mt-4 sm:mt-8 md:mt-10 pt-3 sm:pt-5 md:pt-6 border-t border-slate-100 flex items-center text-blue-600 font-bold group-hover:text-blue-700 transition-colors text-[11px] sm:text-sm md:text-base relative z-10 w-full text-left min-h-[32px] sm:min-h-[44px]">
-                  Book <span className="hidden sm:inline">&nbsp;this service</span> <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-2 transform group-hover:translate-x-1.5 transition-transform duration-300" />
+                  Book <span className="hidden sm:inline"> this service</span> <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-2 transform group-hover:translate-x-1.5 transition-transform duration-300" />
                 </a>
               </div>
 
@@ -1329,7 +1338,7 @@ export default function App() {
           {/* Bottom Bar */}
           <div className="pt-8 border-t border-slate-800/80 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
             <p className="text-slate-500 text-xs font-medium">
-              &copy; {new Date().getFullYear()} Life Care Dental Clinic. All rights reserved.
+              © {new Date().getFullYear()} Life Care Dental Clinic. All rights reserved.
             </p>
             <p className="text-slate-600 text-xs font-medium flex items-center">
               Designed with <HeartHandshake className="w-3.5 h-3.5 mx-1.5 text-rose-500" /> for Singtam

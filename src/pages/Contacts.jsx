@@ -67,7 +67,6 @@ const contactFaqs = [
 ];
 
 export default function Contact() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState('idle');
   const [toastMessage, setToastMessage] = useState('');
   const [activeFaq, setActiveFaq] = useState(null);
@@ -100,18 +99,6 @@ export default function Contact() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isMenuOpen]);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -207,52 +194,6 @@ export default function Contact() {
         <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 mr-2 sm:mr-2.5 flex-shrink-0" />
         <span className="font-semibold tracking-wide text-xs sm:text-sm truncate">{toastMessage}</span>
       </div>
-
-      {/* Navigation */}
-      <nav className="bg-white/90 backdrop-blur-xl shadow-sm sticky top-0 z-50 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-20 flex justify-between items-center">
-          
-          <a href="/" className="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer group">
-            <div className="rounded-full shadow-sm group-hover:shadow-md transition-shadow">
-              <CustomLogo className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14" />
-            </div>
-            <div className="flex flex-col justify-center">
-              <h1 className="text-base sm:text-xl md:text-2xl font-extrabold text-slate-900 leading-none tracking-tight">Life Care</h1>
-              <span className="text-[8px] sm:text-[10px] md:text-xs font-bold text-blue-600 tracking-widest uppercase mt-0.5">Dental Clinic</span>
-            </div>
-          </a>
-
-          <div className="hidden lg:flex items-center space-x-8">
-            <a href="/" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Home</a>
-            <a href="/about" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">About Us</a>
-            <a href="/services" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Services</a>
-            <a href="/contact" className="text-sm font-bold text-blue-600 border-b-2 border-blue-600 pb-1">Contact Us</a>
-          </div>
-
-          <button 
-            className="lg:hidden text-slate-800 p-2 bg-slate-50 hover:bg-slate-100 active:bg-slate-200 transition-colors rounded-xl flex items-center justify-center min-w-[44px] min-h-[44px]" 
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Nav */}
-        <div className={`lg:hidden fixed top-14 sm:top-20 left-0 w-full h-[calc(100vh-56px)] sm:h-[calc(100vh-80px)] bg-white/95 backdrop-blur-xl shadow-2xl overflow-y-auto transition-all duration-300 origin-top ${isMenuOpen ? 'scale-y-100 opacity-100 visible' : 'scale-y-0 opacity-0 invisible'}`}>
-          <div className="flex flex-col px-5 sm:px-6 py-6 sm:py-8 space-y-1 sm:space-y-2 pb-32">
-            <a href="/" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Home</a>
-            <a href="/about" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">About Us</a>
-            <a href="/services" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">Services & Pricing</a>
-            <a href="/contact" className="w-full text-left py-3 sm:py-4 text-blue-600 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Contact Us</a>
-            
-            <button onClick={(e) => { handleCallClick(e, '+917478851252'); setIsMenuOpen(false); }} className="w-full bg-blue-600 text-white px-4 py-3 sm:py-4 rounded-xl font-bold flex justify-center items-center shadow-lg shadow-blue-600/20 mt-4 sm:mt-6 active:scale-95 transition-transform min-h-[48px] sm:min-h-[56px] text-sm sm:text-base">
-              <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-2.5" />
-              Call +91 74788 51252
-            </button>
-          </div>
-        </div>
-      </nav>
 
       {/* Main Content Wrapper */}
       <main className="flex-grow w-full relative">
@@ -568,40 +509,6 @@ export default function Contact() {
         </section>
 
       </main>
-
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-10 sm:py-12 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-6 sm:gap-6">
-            
-            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
-              <CustomLogo className="w-12 h-12 sm:w-14 sm:h-14" />
-              <div className="flex flex-col">
-                <h1 className="text-lg sm:text-xl font-extrabold text-white leading-tight tracking-tight">Life Care Dental Clinic</h1>
-                <span className="text-[9px] sm:text-[10px] font-bold text-blue-400 tracking-widest uppercase mt-0.5">Singtam, East Sikkim</span>
-              </div>
-            </div>
-            
-            <div className="flex space-x-4">
-              <a href="https://www.instagram.com/lifecaresingtam?igsh=MXd4dDZnYW9wMXNhdw==" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-pink-500 hover:text-white transition-all text-slate-400 border border-slate-700" aria-label="Follow us on Instagram">
-                <Instagram className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
-              </a>
-            </div>
-          </div>
-          
-          <div className="mt-8 sm:mt-8 pt-6 sm:pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-4 text-[11px] sm:text-xs font-medium text-slate-500">
-            <p>&copy; {new Date().getFullYear()} Life Care Dental Clinic. All rights reserved.</p>
-            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
-              <p className="flex items-center text-slate-400">
-                <Phone className="w-3.5 h-3.5 sm:w-3 sm:h-3 mr-1.5 sm:mr-1.5 text-blue-500" /> +91 74788 51252 / +91 62972 58968
-              </p>
-              <p className="flex items-center text-slate-400">
-                <MapPin className="w-3.5 h-3.5 sm:w-3 sm:h-3 mr-1.5 sm:mr-1.5 text-blue-500" /> Dhamala Colony, Below Euphoria
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
