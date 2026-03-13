@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { 
   Phone, 
@@ -229,7 +229,7 @@ export default function Services() {
     return matchesCategory && matchesSearch;
   });
 
-  // Dynamic Color Helper using named groups (group/card instead of group)
+  // Dynamic Color Helper
   const getColorClasses = (color) => {
     const map = {
       blue: "bg-blue-50 text-blue-600 border-blue-200 group-hover/card:bg-blue-600",
@@ -241,6 +241,89 @@ export default function Services() {
     };
     return map[color] || map.blue;
   };
+
+  // Helper function to render a vertical column of cards (Inline JSX preserves animations)
+  const renderColumn = (items) => (
+    <div className="flex-1 flex flex-col gap-4 sm:gap-6 lg:gap-8">
+      {items.map((service, index) => {
+        const isExpanded = expandedCard === service.title;
+        return (
+          <div 
+            key={service.id || index}
+            className={`w-full bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col group/card ${isExpanded ? 'ring-2 ring-blue-500 shadow-lg' : 'hover:border-blue-200'}`}
+          >
+            {/* Top Portion (Always Visible) */}
+            <div 
+              className="p-5 sm:p-6 cursor-pointer relative"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (e.nativeEvent) e.nativeEvent.stopImmediatePropagation();
+                setExpandedCard(isExpanded ? null : service.title);
+              }}
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center border transition-all duration-500 ${getColorClasses(service.color)}`}>
+                  <service.icon className="w-6 h-6 group-hover/card:text-white" />
+                </div>
+                <span className="bg-slate-100 text-slate-600 text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
+                  {service.category}
+                </span>
+              </div>
+              
+              <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2 leading-tight group-hover/card:text-blue-600 transition-colors">
+                {service.title}
+              </h3>
+              <p className="text-slate-500 text-xs sm:text-sm font-medium line-clamp-2 mb-4 h-10">
+                {service.shortDesc}
+              </p>
+
+              <div className="flex items-center justify-end border-t border-slate-100 pt-4">
+                <button type="button" className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isExpanded ? 'bg-blue-100 text-blue-600' : 'bg-slate-50 text-slate-400 group-hover/card:bg-blue-600 group-hover/card:text-white'}`}>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
+            </div>
+
+            {/* Expandable Detail Portion */}
+            <div className={`bg-slate-50 overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[500px] border-t border-slate-200 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div className="p-5 sm:p-6">
+                <p className="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed mb-4">
+                  {service.details}
+                </p>
+                
+                <div className="mb-5">
+                  <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center">
+                    <CheckCircle2 className="w-3.5 h-3.5 mr-1.5 text-emerald-500" /> What's Included
+                  </h4>
+                  <ul className="space-y-1.5">
+                    {service.features.map((feat, idx) => (
+                      <li key={idx} className="text-xs sm:text-sm text-slate-600 flex items-start">
+                        <span className="text-blue-500 mr-2 font-bold">•</span> {feat}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <button 
+                  type="button"
+                  onClick={(e) => { 
+                    e.preventDefault();
+                    e.stopPropagation(); 
+                    if (e.nativeEvent) e.nativeEvent.stopImmediatePropagation();
+                    handleBookService(service.title); 
+                  }}
+                  className="w-full bg-slate-900 text-white font-bold py-3 rounded-xl flex items-center justify-center text-sm hover:bg-blue-600 transition-colors shadow-md active:scale-[0.98]"
+                >
+                  <MessageCircle className="w-4 h-4 mr-2" /> Book via WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-blue-200 selection:text-blue-900 overflow-x-hidden flex flex-col w-full">
@@ -262,7 +345,7 @@ export default function Services() {
         .delay-200 { animation-delay: 200ms; }
       `}} />
 
-      {/* Floating WhatsApp Button (Using named group: group/fab) */}
+      {/* Floating WhatsApp Button */}
       <a 
         href="https://wa.me/917478851252" 
         target="_blank" 
@@ -336,7 +419,7 @@ export default function Services() {
                 </div>
               </div>
 
-              {/* Search Bar (Using named group: group/search) */}
+              {/* Search Bar */}
               <div className="w-full md:w-72 relative group/search">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Search className="h-4 w-4 text-slate-400 group-focus-within/search:text-blue-600 transition-colors" />
@@ -358,7 +441,7 @@ export default function Services() {
           </div>
         </section>
 
-        {/* Services Interactive Grid */}
+        {/* INDEPENDENT FLEX COLUMNS LAYOUT */}
         <section className="py-12 md:py-20 bg-slate-50 relative min-h-[50vh]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -372,87 +455,30 @@ export default function Services() {
                  <button onClick={() => setSearchQuery("")} type="button" className="mt-4 text-blue-600 font-bold hover:underline">Clear Search</button>
                </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-                {filteredServices.map((service, index) => {
-                  const isExpanded = expandedCard === service.title;
+              <>
+                {/* Mobile View: 1 Column */}
+                <div className="flex sm:hidden flex-col gap-4">
+                  {renderColumn(filteredServices)}
+                </div>
 
-                  return (
-                  // CHANGED: group -> group/card to prevent layout CSS conflicts
-                  <div 
-                    key={service.id || index} 
-                    className={`bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col group/card ${isExpanded ? 'ring-2 ring-blue-500 shadow-lg' : 'hover:border-blue-200'}`}
-                  >
-                    {/* Top Portion (Always Visible) */}
-                    <div 
-                      className="p-5 sm:p-6 cursor-pointer relative"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        if (e.nativeEvent) e.nativeEvent.stopImmediatePropagation();
-                        setExpandedCard(isExpanded ? null : service.title);
-                      }}
-                    >
-                      <div className="flex justify-between items-start mb-4">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center border transition-all duration-500 ${getColorClasses(service.color)}`}>
-                          <service.icon className="w-6 h-6 group-hover/card:text-white" />
-                        </div>
-                        <span className="bg-slate-100 text-slate-600 text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
-                          {service.category}
-                        </span>
-                      </div>
-                      
-                      <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2 leading-tight group-hover/card:text-blue-600 transition-colors">
-                        {service.title}
-                      </h3>
-                      <p className="text-slate-500 text-xs sm:text-sm font-medium line-clamp-2 mb-4 h-10">
-                        {service.shortDesc}
-                      </p>
+                {/* Tablet View: 2 Columns */}
+                <div className="hidden sm:flex lg:hidden gap-6">
+                  {/* Left Column */}
+                  {renderColumn(filteredServices.filter((_, i) => i % 2 === 0))}
+                  {/* Right Column */}
+                  {renderColumn(filteredServices.filter((_, i) => i % 2 === 1))}
+                </div>
 
-                      <div className="flex items-center justify-end border-t border-slate-100 pt-4">
-                        <button type="button" className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isExpanded ? 'bg-blue-100 text-blue-600' : 'bg-slate-50 text-slate-400 group-hover/card:bg-blue-600 group-hover/card:text-white'}`}>
-                          <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Expandable Detail Portion */}
-                    <div className={`bg-slate-50 overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[500px] border-t border-slate-200 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <div className="p-5 sm:p-6">
-                        <p className="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed mb-4">
-                          {service.details}
-                        </p>
-                        
-                        <div className="mb-5">
-                          <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center">
-                            <CheckCircle2 className="w-3.5 h-3.5 mr-1.5 text-emerald-500" /> What's Included
-                          </h4>
-                          <ul className="space-y-1.5">
-                            {service.features.map((feat, idx) => (
-                              <li key={idx} className="text-xs sm:text-sm text-slate-600 flex items-start">
-                                <span className="text-blue-500 mr-2 font-bold">•</span> {feat}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <button 
-                          type="button"
-                          onClick={(e) => { 
-                            e.preventDefault();
-                            e.stopPropagation(); 
-                            if (e.nativeEvent) e.nativeEvent.stopImmediatePropagation();
-                            handleBookService(service.title); 
-                          }}
-                          className="w-full bg-slate-900 text-white font-bold py-3 rounded-xl flex items-center justify-center text-sm hover:bg-blue-600 transition-colors shadow-md active:scale-[0.98]"
-                        >
-                          <MessageCircle className="w-4 h-4 mr-2" /> Book via WhatsApp
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  );
-                })}
-              </div>
+                {/* Desktop View: 3 Columns */}
+                <div className="hidden lg:flex gap-8">
+                  {/* Left Column */}
+                  {renderColumn(filteredServices.filter((_, i) => i % 3 === 0))}
+                  {/* Middle Column */}
+                  {renderColumn(filteredServices.filter((_, i) => i % 3 === 1))}
+                  {/* Right Column */}
+                  {renderColumn(filteredServices.filter((_, i) => i % 3 === 2))}
+                </div>
+              </>
             )}
           </div>
         </section>
