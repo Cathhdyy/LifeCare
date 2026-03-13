@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SEO from '../components/SEO';
 import { 
   Phone, 
   MapPin, 
@@ -123,6 +124,10 @@ export default function AboutUs() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800 selection:bg-blue-200 selection:text-blue-900 overflow-x-hidden flex flex-col w-full">
+      <SEO 
+        title="About Us & Our Doctor" 
+        description="Meet Dr. Sheema Sapkota and the team at Life Care Dental Clinic. We are committed to safe, highly hygienic, and patient-focused dental care in Dhamala Colony, Singtam."
+      />
       {/* Custom Styles for animations */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes fade-in-up {
@@ -637,7 +642,7 @@ export default function AboutUs() {
                 Find Our Clinic
               </a>
               <button 
-                onClick={handleBookService}
+                onClick={(e) => { e.preventDefault(); scrollToSection(e, 'contact'); }}
                 className="w-full sm:w-auto bg-blue-600 border border-blue-500 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold hover:bg-blue-700 transition-all flex items-center justify-center text-sm sm:text-base"
               >
                 <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" /> Message Us
@@ -685,9 +690,9 @@ export default function AboutUs() {
               </h3>
               <ul className="grid grid-cols-2 gap-y-4 gap-x-2 md:block md:space-y-4">
                 <li>
-                  <a href="/" className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
+                  <button onClick={(e) => scrollToSection(e, 'home')} className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
                     <ArrowRight className="w-3.5 h-3.5 mr-2 text-blue-500" /> Home
-                  </a>
+                  </button>
                 </li>
                 <li>
                   <a href="/about" className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
@@ -698,6 +703,11 @@ export default function AboutUs() {
                   <a href="/services" className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
                     <ArrowRight className="w-3.5 h-3.5 mr-2 text-blue-500" /> All Services
                   </a>
+                </li>
+                <li>
+                  <button onClick={(e) => scrollToSection(e, 'dentist')} className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
+                    <ArrowRight className="w-3.5 h-3.5 mr-2 text-blue-500" /> Meet The Dentist
+                  </button>
                 </li>
                 <li>
                   <a href="/contact" className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
@@ -730,7 +740,7 @@ export default function AboutUs() {
                   </div>
                   <div>
                     <span className="block text-white font-bold text-sm mb-1">Phone & WhatsApp</span>
-                    <button onClick={handleCallClick} className="text-slate-400 text-sm hover:text-blue-400 transition-colors block mb-0.5">+91 74788 51252</button>
+                    <button onClick={(e) => handleCallClick(e)} className="text-slate-400 text-sm hover:text-blue-400 transition-colors block mb-0.5">+91 74788 51252</button>
                     <button onClick={(e) => { e.preventDefault(); window.location.href='tel:+916297258968'; }} className="text-slate-400 text-sm hover:text-blue-400 transition-colors block">+91 62972 58968</button>
                   </div>
                 </li>
@@ -762,9 +772,9 @@ export default function AboutUs() {
           {/* Bottom Bar */}
           <div className="pt-8 border-t border-slate-800/80 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
             <p className="text-slate-500 text-xs font-medium">
-              &copy; {new Date().getFullYear()} Life Care Dental Clinic. All rights reserved.
+              © {new Date().getFullYear()} Life Care Dental Clinic. All rights reserved.
             </p>
-            <p className="text-slate-600 text-xs font-medium flex items-center justify-center md:justify-end">
+            <p className="text-slate-600 text-xs font-medium flex items-center">
               Designed with <HeartHandshake className="w-3.5 h-3.5 mx-1.5 text-rose-500" /> for Singtam
             </p>
           </div>
