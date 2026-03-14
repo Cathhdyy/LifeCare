@@ -23,7 +23,9 @@ import {
   Star,
   ClipboardList,
   Clock,
-  Navigation
+  Navigation,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
 // Custom Scalable Vector Logo
@@ -73,6 +75,38 @@ const googleReviewsData = [
 
 export default function AboutUs() {
   const [toastMessage, setToastMessage] = useState('');
+  const [activeDoctor, setActiveDoctor] = useState(0);
+
+  // Doctors Data Array
+  const doctorsData = [
+    {
+      name: "Dr. Sheema Sapkota",
+      role: "Dental Surgeon",
+      qualifications: "BDS, FAD",
+      quote: "Dentistry should never be a source of anxiety. My passion lies in smile designing—combining art and medical science to craft perfect, confident smiles while ensuring every single procedure is as gentle and painless as possible.",
+      image: "https://i.ibb.co/MDV0S68H/d1.png",
+      highlights: [
+        "Specializes in Smile Designing",
+        "Over 9 Years of Clinical Expertise",
+        "Certified & Govt. Registered"
+      ]
+    },
+    {
+      name: "Dr. Shekar Chettri",
+      role: "Consultant Orthodontist",
+      qualifications: "BDS, MDS",
+      quote: "A straight, well-aligned smile is the foundation of oral health and self-confidence. With advanced training in orthodontics, my goal is to provide precise, effective treatments like braces and aligners tailored to each patient.",
+      image: "https://i.ibb.co/7LZzRP1/d2.png",
+      highlights: [
+        "Specializes in Orthodontics",
+        "Expert in Braces & Clear Aligners",
+        "MDS Qualified Specialist"
+      ]
+    }
+  ];
+
+  const nextDoctor = () => setActiveDoctor((prev) => (prev + 1) % doctorsData.length);
+  const prevDoctor = () => setActiveDoctor((prev) => (prev === 0 ? doctorsData.length - 1 : prev - 1));
 
   const handleBookService = () => {
     const message = `Hi, I would like to book an appointment for a consultation at Life Care Dental Clinic.`;
@@ -113,7 +147,7 @@ export default function AboutUs() {
     <div className="min-h-screen bg-white font-sans text-slate-800 selection:bg-blue-200 selection:text-blue-900 overflow-x-hidden flex flex-col w-full">
       <SEO 
         title="About Us & Our Doctor" 
-        description="Meet Dr. Sheema Sapkota and the team at Life Care Dental Clinic. We are committed to safe, highly hygienic, and patient-focused dental care in Dhamala Colony, Singtam."
+        description="Meet Dr. Sheema Sapkota, Dr. Shekar Chettri, and the team at Life Care Dental Clinic. We are committed to safe, highly hygienic, and patient-focused dental care in Dhamala Colony, Singtam."
       />
       {/* Custom Styles for animations */}
       <style dangerouslySetInnerHTML={{__html: `
@@ -218,7 +252,7 @@ export default function AboutUs() {
            </div>
         </section>
 
-        {/* Magazine-Style Doctor Profile */}
+        {/* Magazine-Style Doctor Profile (Carousel) */}
         <section className="py-12 md:py-24 bg-slate-50 relative border-t border-slate-200 overflow-hidden">
           {/* Background Decor */}
           <div className="absolute inset-y-0 right-0 w-1/3 bg-blue-50/50 hidden lg:block"></div>
@@ -227,13 +261,14 @@ export default function AboutUs() {
             
             <div className="flex flex-col lg:flex-row items-center gap-0 lg:gap-10">
               
-              {/* Right Column: Image (Rendered first on mobile, visual right on desktop) */}
+              {/* Right Column: Image */}
               <div className="w-full lg:w-1/2 order-1 lg:order-2">
-                <div className="rounded-t-[2.5rem] lg:rounded-[2.5rem] overflow-hidden shadow-xl aspect-[4/5] sm:aspect-square lg:aspect-[4/5] relative group max-w-md mx-auto lg:max-w-none">
+                <div className="rounded-t-[2.5rem] lg:rounded-[2.5rem] overflow-hidden shadow-xl aspect-[4/5] sm:aspect-square lg:aspect-[4/5] relative group max-w-md mx-auto lg:max-w-none bg-white">
                   <img 
-                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=1000&q=80" 
-                    alt="Dr. Sheema Sapkota" 
-                    className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-[1.5s]"
+                    key={activeDoctor}
+                    src={doctorsData[activeDoctor].image} 
+                    alt={doctorsData[activeDoctor].name} 
+                    className="w-full h-full object-cover object-top animate-fade-in-up"
                   />
                   {/* Subtle Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent mix-blend-multiply"></div>
@@ -243,41 +278,58 @@ export default function AboutUs() {
               {/* Left Column: Details (Overlapping the image) */}
               <div className="w-full lg:w-1/2 order-2 lg:order-1 flex justify-center lg:justify-end lg:pr-10">
                 <div className="bg-white p-6 sm:p-12 rounded-[2rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] -mt-12 lg:mt-0 lg:-mr-20 z-20 relative w-full max-w-xl mx-auto border border-slate-100">
-                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4 sm:mb-6 border border-blue-100">
-                     <Award className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+                   
+                   {/* Top Header & Navigation */}
+                   <div className="flex justify-between items-start mb-4 sm:mb-6">
+                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 rounded-xl flex items-center justify-center border border-blue-100">
+                       <Award className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+                     </div>
+                     <div className="flex items-center space-x-2">
+                        <button onClick={prevDoctor} className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm">
+                          <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <button onClick={nextDoctor} className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm">
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+                     </div>
                    </div>
                    
-                   <h2 className="text-2xl sm:text-4xl font-black text-slate-900 mb-2">Dr. Sheema Sapkota</h2>
-                   <p className="text-blue-600 font-extrabold text-[11px] sm:text-sm uppercase tracking-widest mb-6 flex flex-wrap items-center">
-                     Dental Surgeon <span className="mx-2 text-slate-300">•</span> BDS, FAD
-                   </p>
-
-                   <div className="relative mb-6 sm:mb-8">
-                     <Quote className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-8 h-8 sm:w-10 sm:h-10 text-slate-100 -z-10 transform -scale-x-100" />
-                     <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-lg italic relative z-10">
-                       "Dentistry should never be a source of anxiety. My passion lies in smile designing—combining art and medical science to craft perfect, confident smiles while ensuring every single procedure is as gentle and painless as possible."
+                   <div key={`info-${activeDoctor}`} className="animate-fade-in-up">
+                     <h2 className="text-2xl sm:text-4xl font-black text-slate-900 mb-2">{doctorsData[activeDoctor].name}</h2>
+                     <p className="text-blue-600 font-extrabold text-[11px] sm:text-sm uppercase tracking-widest mb-6 flex flex-wrap items-center">
+                       {doctorsData[activeDoctor].role} <span className="mx-2 text-slate-300">•</span> {doctorsData[activeDoctor].qualifications}
                      </p>
+
+                     <div className="relative mb-6 sm:mb-8">
+                       <Quote className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-8 h-8 sm:w-10 sm:h-10 text-slate-100 -z-10 transform -scale-x-100" />
+                       <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-lg italic relative z-10 min-h-[140px] md:min-h-[120px]">
+                         {doctorsData[activeDoctor].quote}
+                       </p>
+                     </div>
+
+                     <ul className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8 min-h-[100px]">
+                       {doctorsData[activeDoctor].highlights.map((highlight, idx) => (
+                         <li key={idx} className="flex items-start sm:items-center text-xs sm:text-base font-bold text-slate-700">
+                           <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 mr-2 sm:mr-3 flex-shrink-0 mt-0.5 sm:mt-0" /> {highlight}
+                         </li>
+                       ))}
+                     </ul>
                    </div>
 
-                   <ul className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8">
-                     <li className="flex items-start sm:items-center text-xs sm:text-base font-bold text-slate-700">
-                       <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 mr-2 sm:mr-3 flex-shrink-0 mt-0.5 sm:mt-0" /> Specializes in Smile Designing
-                     </li>
-                     <li className="flex items-start sm:items-center text-xs sm:text-base font-bold text-slate-700">
-                       <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 mr-2 sm:mr-3 flex-shrink-0 mt-0.5 sm:mt-0" /> Over 9 Years of Clinical Expertise
-                     </li>
-                     <li className="flex items-start sm:items-center text-xs sm:text-base font-bold text-slate-700">
-                       <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 mr-2 sm:mr-3 flex-shrink-0 mt-0.5 sm:mt-0" /> Certified & Govt. Registered
-                     </li>
-                   </ul>
-
-                   <button 
-                      onClick={handleBookService}
-                      className="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center group text-sm sm:text-base"
-                   >
-                     Book a consultation with Dr. Sheema
-                     <ArrowRight className="w-4 h-4 ml-1.5 sm:ml-2 transform group-hover:translate-x-1 transition-transform" />
-                   </button>
+                   <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                     <div className="flex space-x-1.5 px-1 w-full sm:w-auto justify-center">
+                        {doctorsData.map((_, idx) => (
+                          <div key={idx} className={`h-1.5 rounded-full transition-all duration-300 ${activeDoctor === idx ? 'w-6 bg-blue-600' : 'w-2 bg-slate-300'}`} />
+                        ))}
+                     </div>
+                     <button 
+                        onClick={handleBookService}
+                        className="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center group text-sm sm:text-base justify-center w-full sm:w-auto"
+                     >
+                       Book consultation
+                       <ArrowRight className="w-4 h-4 ml-1.5 sm:ml-2 transform group-hover:translate-x-1 transition-transform" />
+                     </button>
+                   </div>
                 </div>
               </div>
 

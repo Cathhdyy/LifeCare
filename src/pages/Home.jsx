@@ -24,7 +24,9 @@ import {
   User,
   Calendar,
   MessageSquare,
-  Award
+  Award,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
 // Custom Scalable Vector Logo
@@ -59,6 +61,7 @@ export default function Home() {
   const [toastMessage, setToastMessage] = useState('');
   const [activeAccordion, setActiveAccordion] = useState(0); 
   const [activeFaq, setActiveFaq] = useState(null); 
+  const [activeDoctor, setActiveDoctor] = useState(0);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -67,9 +70,38 @@ export default function Home() {
     reason: ''
   });
 
+  // Doctors Data Array with Updated Images
+  const doctorsList = [
+    {
+      name: "Dr. Sheema Sapkota",
+      title: "BDS, FAD",
+      role: "Dental Surgeon",
+      specialty: "Smile Designing",
+      image: "https://i.ibb.co/MDV0S68H/d1.png",
+      description: "\"Life Care Dental Clinic is led by Dr. Sheema Sapkota, an experienced dental surgeon dedicated to providing modern, patient-focused care. Specializing in smile designing, she combines advanced techniques with a gentle approach to help patients achieve their perfect, confident smiles.\"",
+      stats: [
+        { icon: Clock, value: "9+ Years", label: "Experience", color: "blue" },
+        { icon: Star, value: "5000+", label: "Happy Patients", color: "emerald" },
+        { icon: Award, value: "Certified Dental Specialist", label: "Government verified expert", color: "purple", colSpan: true }
+      ]
+    },
+    {
+      name: "Dr. Shekar Chettri",
+      title: "BDS, MDS",
+      role: "Consultant Orthodontist",
+      specialty: "Orthodontics",
+      image: "https://i.ibb.co/7LZzRP1/d2.png",
+      description: "\"Dr. Shekar Chettri brings specialized orthodontic expertise to Life Care Dental Clinic. With advanced training in diagnosing and correcting misaligned teeth and jaws, he is committed to providing top-tier treatments like braces and aligners to help you achieve a perfectly straight, functional smile.\"",
+      stats: [
+        { icon: Activity, value: "Orthodontics", label: "Specialty Focus", color: "blue" },
+        { icon: ShieldCheck, value: "Braces & Aligners", label: "Expertise", color: "emerald" },
+        { icon: Award, value: "MDS Qualified", label: "Advanced Dental Degree", color: "purple", colSpan: true }
+      ]
+    }
+  ];
+
   // Intersection Observer for scroll animations
   useEffect(() => {
-    // Only attempt to use IntersectionObserver if it is properly supported in the environment
     if (typeof window !== 'undefined' && typeof window.IntersectionObserver === 'function') {
         try {
           const observer = new window.IntersectionObserver((entries) => {
@@ -87,7 +119,6 @@ export default function Home() {
 
           return () => elements.forEach(el => observer.unobserve(el));
         } catch(e) {
-          // Fallback if instantiation fails
           const elements = document.querySelectorAll('.reveal');
           elements.forEach(el => {
               el.classList.add('animate-fade-in-up');
@@ -95,7 +126,6 @@ export default function Home() {
           });
         }
     } else {
-        // Fallback: immediately show elements if IntersectionObserver is missing or restricted
         const elements = document.querySelectorAll('.reveal');
         elements.forEach(el => {
             el.classList.add('animate-fade-in-up');
@@ -141,18 +171,13 @@ export default function Home() {
 
   const handleCallClick = (e) => {
     if (e) e.preventDefault();
-    
     const phoneNumber = "+917478851252";
     const successMessage = 'Phone number copied: +91 74788 51252';
-    
-    // Check if the user is on a mobile device
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     if (isMobile) {
-      // Directly open the phone dialer on mobile
       window.location.href = `tel:${phoneNumber}`;
     } else {
-      // Use fallback execCommand for desktop due to iframe clipboard API restrictions
       try {
         const textArea = document.createElement("textarea");
         textArea.value = phoneNumber;
@@ -198,6 +223,9 @@ export default function Home() {
     { q: "Where exactly are you located in Singtam?", a: "We are located near Singtam Bridge in Dhamala Colony, Singtam, East Sikkim. You can check the map at the bottom of this page for precise directions!" }
   ];
 
+  const nextDoctor = () => setActiveDoctor((prev) => (prev + 1) % doctorsList.length);
+  const prevDoctor = () => setActiveDoctor((prev) => (prev === 0 ? doctorsList.length - 1 : prev - 1));
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-blue-200 selection:text-blue-900 overflow-x-hidden flex flex-col w-full">
       
@@ -234,6 +262,8 @@ export default function Home() {
         }
         .animate-float { animation: float 3s ease-in-out infinite; }
         .animate-float-delayed { animation: float 3s ease-in-out 1.5s infinite; }
+        
+        .fade-enter { animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
       `}} />
 
       {/* Floating WhatsApp Button */}
@@ -540,7 +570,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Meet Our Dentist Section */}
+        {/* Meet Our Dentist Section with Carousel */}
         <section id="dentist" className="py-12 md:py-32 bg-white relative overflow-hidden border-t border-slate-100">
           <div className="absolute top-0 right-0 w-[200px] h-[200px] sm:w-[600px] sm:h-[600px] bg-blue-50/50 rounded-full blur-[40px] sm:blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
           
@@ -550,7 +580,7 @@ export default function Home() {
             <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 md:mb-20 group cursor-default">
               <div className="inline-flex items-center bg-blue-50 border border-blue-200 text-blue-700 px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-[10px] sm:text-sm font-extrabold uppercase tracking-widest mb-4 sm:mb-6 shadow-sm hover:shadow-md hover:border-blue-300 hover:-translate-y-1 transition-all duration-300">
                 <User className="w-3 h-3 sm:w-[18px] sm:h-[18px] mr-1.5 sm:mr-2.5" />
-                Meet Our Dentist
+                Meet Our Experts
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight transition-transform duration-700 group-hover:scale-[1.02]">
                 Experienced, caring, and <br className="hidden md:block" />
@@ -559,15 +589,15 @@ export default function Home() {
               <div className="h-1 sm:h-1.5 w-12 sm:w-16 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto mt-5 sm:mt-8 rounded-full opacity-40 group-hover:w-20 sm:group-hover:w-40 group-hover:opacity-100 transition-all duration-700 ease-out"></div>
             </div>
 
-            {/* Split Layout */}
-            <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+            {/* Split Layout with Carousel Transition Wrapper */}
+            <div key={activeDoctor} className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20 fade-enter">
               
               {/* Left Column: Image */}
               <div className="w-full lg:w-1/2 relative max-w-xs sm:max-w-lg lg:max-w-none mx-auto animate-float-delayed">
                 <div className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-xl sm:shadow-2xl shadow-blue-900/10 border border-slate-100 group aspect-[4/5]">
                   <img 
-                    src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80" 
-                    alt="Dr. Sheema Sapkota" 
+                    src={doctorsList[activeDoctor].image} 
+                    alt={doctorsList[activeDoctor].name} 
                     className="w-full h-full object-cover object-center transition-transform duration-[1.5s] group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/10 to-transparent opacity-90"></div>
@@ -578,8 +608,8 @@ export default function Home() {
                       <Award className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <p className="text-sm sm:text-lg font-extrabold text-slate-900 leading-tight">Dental Surgeon</p>
-                      <p className="text-[10px] sm:text-sm font-semibold text-blue-600">Smile Designing</p>
+                      <p className="text-sm sm:text-lg font-extrabold text-slate-900 leading-tight">{doctorsList[activeDoctor].role}</p>
+                      <p className="text-[10px] sm:text-sm font-semibold text-blue-600">{doctorsList[activeDoctor].specialty}</p>
                     </div>
                   </div>
                 </div>
@@ -590,65 +620,75 @@ export default function Home() {
 
               {/* Right Column: Info */}
               <div className="w-full lg:w-1/2 flex flex-col justify-center">
-                <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-4 tracking-tight text-center lg:text-left">Dr. Sheema Sapkota</h3>
+                
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-4 tracking-tight text-center lg:text-left">
+                  {doctorsList[activeDoctor].name}
+                </h3>
                 
                 <div className="flex items-center justify-center lg:justify-start text-blue-600 font-bold text-sm sm:text-lg md:text-xl mb-5 sm:mb-8">
                   <span className="bg-blue-50 px-4 sm:px-4 py-1.5 sm:py-1.5 rounded-lg border border-blue-100 shadow-sm inline-flex items-center">
-                    BDS, FAD <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-2.5 text-emerald-500" />
+                    {doctorsList[activeDoctor].title} <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-2.5 text-emerald-500" />
                   </span>
                 </div>
                 
-                <p className="text-slate-600 font-medium text-sm sm:text-lg leading-relaxed mb-8 sm:mb-10 text-center lg:text-left px-2 sm:px-0">
-                  "Life Care Dental Clinic is led by Dr. Sheema Sapkota, an experienced dental surgeon dedicated to providing modern, patient-focused care. Specializing in smile designing, she combines advanced techniques with a gentle approach to help patients achieve their perfect, confident smiles."
+                <p className="text-slate-600 font-medium text-sm sm:text-lg leading-relaxed mb-8 sm:mb-10 text-center lg:text-left px-2 sm:px-0 min-h-[140px] md:min-h-[120px]">
+                  {doctorsList[activeDoctor].description}
                 </p>
 
-                {/* Info Cards Grid */}
+                {/* Dynamic Info Cards Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-8 sm:mb-10 px-2 sm:px-0">
-                  
-                  {/* Experience Card */}
-                  <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-100 flex items-center hover:bg-white hover:shadow-lg hover:shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1 group">
-                    <div className="bg-blue-100 text-blue-600 p-3 sm:p-3.5 rounded-xl mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-                      <Clock className="w-5 h-5 sm:w-6 sm:h-6" />
+                  {doctorsList[activeDoctor].stats.map((stat, idx) => (
+                    <div key={idx} className={`bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-100 flex items-center hover:bg-white hover:shadow-lg hover:shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1 group ${stat.colSpan ? 'sm:col-span-2' : ''}`}>
+                      <div className={`bg-${stat.color}-100 text-${stat.color}-600 p-3 sm:p-3.5 rounded-xl mr-4 group-hover:bg-${stat.color}-600 group-hover:text-white transition-colors duration-300`}>
+                        <stat.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${stat.icon === Star ? 'group-hover:rotate-12 transition-transform' : ''}`} />
+                      </div>
+                      <div>
+                        <h5 className="font-extrabold text-slate-900 text-base sm:text-lg leading-tight">{stat.value}</h5>
+                        <p className="font-medium text-slate-500 text-xs sm:text-sm mt-0.5">{stat.label}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h5 className="font-extrabold text-slate-900 text-base sm:text-lg leading-tight">9+ Years</h5>
-                      <p className="font-medium text-slate-500 text-xs sm:text-sm mt-0.5">Experience</p>
-                    </div>
-                  </div>
-                  
-                  {/* Patients Card */}
-                  <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-100 flex items-center hover:bg-white hover:shadow-lg hover:shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1 group">
-                    <div className="bg-emerald-100 text-emerald-600 p-3 sm:p-3.5 rounded-xl mr-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
-                      <Star className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
-                    </div>
-                    <div>
-                      <h5 className="font-extrabold text-slate-900 text-base sm:text-lg leading-tight">5000+</h5>
-                      <p className="font-medium text-slate-500 text-xs sm:text-sm mt-0.5">Happy Patients</p>
-                    </div>
-                  </div>
-                  
-                  {/* Certified Card */}
-                  <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-100 flex items-center hover:bg-white hover:shadow-lg hover:shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1 group sm:col-span-2">
-                    <div className="bg-purple-100 text-purple-600 p-3 sm:p-3.5 rounded-xl mr-4 group-hover:bg-purple-500 group-hover:text-white transition-colors duration-300">
-                      <Award className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
-                    </div>
-                    <div>
-                      <h5 className="font-extrabold text-slate-900 text-base sm:text-lg leading-tight">Certified Dental Specialist</h5>
-                      <p className="font-medium text-slate-500 text-xs sm:text-sm mt-0.5">Government verified expert</p>
-                    </div>
-                  </div>
-
+                  ))}
                 </div>
 
-                <div className="flex justify-center lg:justify-start px-2 sm:px-0">
+                {/* Carousel Controls & Actions */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 px-2 sm:px-0">
+                  
+                  {/* Carousel Nav Arrows */}
+                  <div className="flex items-center space-x-3 order-2 sm:order-1">
+                    <button 
+                      onClick={prevDoctor} 
+                      className="w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 shadow-sm hover:shadow-md active:scale-95"
+                      aria-label="Previous Doctor"
+                    >
+                      <ChevronLeft className="w-6 h-6" />
+                    </button>
+                    <div className="flex space-x-1.5 px-2">
+                      {doctorsList.map((_, idx) => (
+                        <div 
+                          key={idx} 
+                          className={`h-2 rounded-full transition-all duration-300 ${activeDoctor === idx ? 'w-6 bg-blue-600' : 'w-2 bg-slate-300'}`}
+                        />
+                      ))}
+                    </div>
+                    <button 
+                      onClick={nextDoctor} 
+                      className="w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 shadow-sm hover:shadow-md active:scale-95"
+                      aria-label="Next Doctor"
+                    >
+                      <ChevronRight className="w-6 h-6" />
+                    </button>
+                  </div>
+
                   <button 
                     onClick={(e) => scrollToSection(e, 'contact')} 
-                    className="w-full sm:w-fit inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 sm:px-10 py-3.5 sm:py-4 rounded-xl font-bold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 text-sm sm:text-lg min-h-[48px] sm:min-h-[56px]"
+                    className="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 sm:px-10 py-3.5 sm:py-4 rounded-xl font-bold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 text-sm sm:text-lg min-h-[48px] sm:min-h-[56px] order-1 sm:order-2"
                   >
                     <CalendarCheck className="w-5 h-5 sm:w-[22px] sm:h-[22px] mr-2 sm:mr-3" />
                     Book Appointment
                   </button>
+
                 </div>
+
               </div>
 
             </div>
