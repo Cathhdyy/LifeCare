@@ -91,7 +91,7 @@ export default function Developer() {
                 </span>
                 <span className="inline-flex items-center bg-purple-500/10 border border-purple-500/20 text-purple-400 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold">
                   <Globe className="w-4 h-4 mr-2" />
-                  Medhavi Skills University
+                  Full Stack Developer
                 </span>
               </div>
 
