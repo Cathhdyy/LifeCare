@@ -60,8 +60,12 @@ export default function Home() {
   const [activeAccordion, setActiveAccordion] = useState(0); 
   const [activeFaq, setActiveFaq] = useState(null); 
   const [activeDoctor, setActiveDoctor] = useState(0);
-  const [slideDirection, setSlideDirection] = useState('next'); // Tracks slide direction
+  const [slideDirection, setSlideDirection] = useState('next'); 
   
+  // Swipe Handlers State
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -69,7 +73,7 @@ export default function Home() {
     reason: ''
   });
 
-  // Doctors Data Array with Updated Images
+  // Doctors Data Array
   const doctorsList = [
     {
       name: "Dr. Sheema Sapkota",
@@ -235,7 +239,7 @@ export default function Home() {
     { q: "Where exactly are you located in Singtam?", a: "We are located near Singtam Bridge in Dhamala Colony, Singtam, East Sikkim. You can check the map at the bottom of this page for precise directions!" }
   ];
 
-  // Carousel Direction Logic
+  // Carousel Direction & Swipe Logic
   const nextDoctor = () => {
     setSlideDirection('next');
     setActiveDoctor((prev) => (prev + 1) % doctorsList.length);
@@ -246,10 +250,34 @@ export default function Home() {
     setActiveDoctor((prev) => (prev === 0 ? doctorsList.length - 1 : prev - 1));
   };
 
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextDoctor(); // Swiped left -> Go to Next
+    }
+    if (isRightSwipe) {
+      prevDoctor(); // Swiped right -> Go to Prev
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-blue-200 selection:text-blue-900 overflow-x-hidden flex flex-col w-full">
       
-      {/* 🚀 SEO Tag Added Here 🚀 */}
       <SEO 
         title="Best Dentist in Singtam" 
         description="Life Care Dental Clinic is the premier dental care center in Singtam, East Sikkim. Dr. Sheema Sapkota specializes in painless root canals, smile designing, and modern family dentistry."
@@ -283,7 +311,7 @@ export default function Home() {
         .animate-float { animation: float 3s ease-in-out infinite; }
         .animate-float-delayed { animation: float 3s ease-in-out 1.5s infinite; }
         
-        /* 🚀 ENHANCED SLIDE ANIMATIONS 🚀 */
+        /* Slide Animations */
         @keyframes slide-in-next {
           0% { opacity: 0; transform: translateX(150px); }
           100% { opacity: 1; transform: translateX(0); }
@@ -606,7 +634,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Meet Our Dentist Section with Carousel */}
+        {/* Meet Our Dentist Section with Carousel & SWIPE */}
         <section id="dentist" className="py-12 md:py-32 bg-white relative overflow-hidden border-t border-slate-100">
           <div className="absolute top-0 right-0 w-[200px] h-[200px] sm:w-[600px] sm:h-[600px] bg-blue-50/50 rounded-full blur-[40px] sm:blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
           
@@ -625,108 +653,114 @@ export default function Home() {
               <div className="h-1 sm:h-1.5 w-12 sm:w-16 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto mt-5 sm:mt-8 rounded-full opacity-40 group-hover:w-20 sm:group-hover:w-40 group-hover:opacity-100 transition-all duration-700 ease-out"></div>
             </div>
 
-            {/* Split Layout with SLIDING Carousel Transition Wrapper */}
-            <div key={activeDoctor} className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-20 ${slideDirection === 'next' ? 'slide-next' : 'slide-prev'}`}>
-              
-              {/* Left Column: Image */}
-              <div className="w-full lg:w-1/2 relative max-w-xs sm:max-w-lg lg:max-w-none mx-auto animate-float-delayed">
-                <div className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-xl sm:shadow-2xl shadow-blue-900/10 border border-slate-100 group aspect-[4/5]">
-                  <img 
-                    src={doctorsList[activeDoctor].image} 
-                    alt={doctorsList[activeDoctor].name} 
-                    className="w-full h-full object-cover object-center transition-transform duration-[1.5s] group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/10 to-transparent opacity-90"></div>
-                  
-                  {/* Floating Badge */}
-                  <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto md:bottom-8 md:left-8 bg-white/95 backdrop-blur-md p-3 sm:p-4 md:p-5 rounded-2xl shadow-xl flex items-center space-x-3 sm:space-x-4 border border-white/50 transform group-hover:-translate-y-2 transition-transform duration-500">
-                    <div className="bg-blue-100 text-blue-600 p-2.5 sm:p-3 rounded-xl flex-shrink-0 shadow-inner group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-                      <Award className="w-5 h-5 sm:w-6 sm:h-6" />
-                    </div>
-                    <div>
-                      <p className="text-sm sm:text-lg font-extrabold text-slate-900 leading-tight">{doctorsList[activeDoctor].role}</p>
-                      <p className="text-[10px] sm:text-sm font-semibold text-blue-600">{doctorsList[activeDoctor].specialty}</p>
-                    </div>
-                  </div>
-                </div>
+            {/* Split Layout with SWIPE Wrapper */}
+            <div 
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+              className="overflow-hidden w-full relative pb-4" // Padding to not cut off shadows
+            >
+              <div key={activeDoctor} className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-20 ${slideDirection === 'next' ? 'slide-next' : 'slide-prev'}`}>
                 
-                {/* Background decorative elements */}
-                <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 w-24 h-24 sm:w-48 sm:h-48 bg-dots-pattern opacity-40 z-[-1] pointer-events-none"></div>
-              </div>
-
-              {/* Right Column: Info */}
-              <div className="w-full lg:w-1/2 flex flex-col justify-center">
-                
-                <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-4 tracking-tight text-center lg:text-left">
-                  {doctorsList[activeDoctor].name}
-                </h3>
-                
-                <div className="flex items-center justify-center lg:justify-start text-blue-600 font-bold text-sm sm:text-lg md:text-xl mb-5 sm:mb-8">
-                  <span className="bg-blue-50 px-4 sm:px-4 py-1.5 sm:py-1.5 rounded-lg border border-blue-100 shadow-sm inline-flex items-center">
-                    {doctorsList[activeDoctor].title} <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-2.5 text-emerald-500" />
-                  </span>
-                </div>
-                
-                <p className="text-slate-600 font-medium text-sm sm:text-lg leading-relaxed mb-8 sm:mb-10 text-center lg:text-left px-2 sm:px-0 min-h-[140px] md:min-h-[120px]">
-                  {doctorsList[activeDoctor].description}
-                </p>
-
-                {/* Dynamic Info Cards Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-8 sm:mb-10 px-2 sm:px-0">
-                  {doctorsList[activeDoctor].stats.map((stat, idx) => (
-                    <div key={idx} className={`bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-100 flex items-center hover:bg-white hover:shadow-lg hover:shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1 group ${stat.colSpan ? 'sm:col-span-2' : ''}`}>
-                      <div className={`bg-${stat.color}-100 text-${stat.color}-600 p-3 sm:p-3.5 rounded-xl mr-4 group-hover:bg-${stat.color}-600 group-hover:text-white transition-colors duration-300`}>
-                        <stat.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${stat.icon === Star ? 'group-hover:rotate-12 transition-transform' : ''}`} />
+                {/* Left Column: Image */}
+                <div className="w-full lg:w-1/2 relative max-w-xs sm:max-w-lg lg:max-w-none mx-auto animate-float-delayed">
+                  <div className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-xl sm:shadow-2xl shadow-blue-900/10 border border-slate-100 group aspect-[4/5] pointer-events-none"> {/* Prevent image drag on mobile */}
+                    <img 
+                      src={doctorsList[activeDoctor].image} 
+                      alt={doctorsList[activeDoctor].name} 
+                      className="w-full h-full object-cover object-center transition-transform duration-[1.5s] group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/10 to-transparent opacity-90"></div>
+                    
+                    {/* Floating Badge */}
+                    <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto md:bottom-8 md:left-8 bg-white/95 backdrop-blur-md p-3 sm:p-4 md:p-5 rounded-2xl shadow-xl flex items-center space-x-3 sm:space-x-4 border border-white/50 transform group-hover:-translate-y-2 transition-transform duration-500">
+                      <div className="bg-blue-100 text-blue-600 p-2.5 sm:p-3 rounded-xl flex-shrink-0 shadow-inner group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                        <Award className="w-5 h-5 sm:w-6 sm:h-6" />
                       </div>
                       <div>
-                        <h5 className="font-extrabold text-slate-900 text-base sm:text-lg leading-tight">{stat.value}</h5>
-                        <p className="font-medium text-slate-500 text-xs sm:text-sm mt-0.5">{stat.label}</p>
+                        <p className="text-sm sm:text-lg font-extrabold text-slate-900 leading-tight">{doctorsList[activeDoctor].role}</p>
+                        <p className="text-[10px] sm:text-sm font-semibold text-blue-600">{doctorsList[activeDoctor].specialty}</p>
                       </div>
                     </div>
-                  ))}
+                  </div>
+                  
+                  {/* Background decorative elements */}
+                  <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 w-24 h-24 sm:w-48 sm:h-48 bg-dots-pattern opacity-40 z-[-1] pointer-events-none"></div>
                 </div>
 
-                {/* Carousel Controls & Actions */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 px-2 sm:px-0">
+                {/* Right Column: Info */}
+                <div className="w-full lg:w-1/2 flex flex-col justify-center">
                   
-                  {/* Carousel Nav Arrows */}
-                  <div className="flex items-center space-x-3 order-2 sm:order-1">
-                    <button 
-                      onClick={prevDoctor} 
-                      className="w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 shadow-sm hover:shadow-md active:scale-95"
-                      aria-label="Previous Doctor"
-                    >
-                      <ChevronLeft className="w-6 h-6" />
-                    </button>
-                    <div className="flex space-x-1.5 px-2">
-                      {doctorsList.map((_, idx) => (
-                        <div 
-                          key={idx} 
-                          className={`h-2 rounded-full transition-all duration-300 ${activeDoctor === idx ? 'w-6 bg-blue-600' : 'w-2 bg-slate-300'}`}
-                        />
-                      ))}
-                    </div>
-                    <button 
-                      onClick={nextDoctor} 
-                      className="w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 shadow-sm hover:shadow-md active:scale-95"
-                      aria-label="Next Doctor"
-                    >
-                      <ChevronRight className="w-6 h-6" />
-                    </button>
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-4 tracking-tight text-center lg:text-left">
+                    {doctorsList[activeDoctor].name}
+                  </h3>
+                  
+                  <div className="flex items-center justify-center lg:justify-start text-blue-600 font-bold text-sm sm:text-lg md:text-xl mb-5 sm:mb-8">
+                    <span className="bg-blue-50 px-4 sm:px-4 py-1.5 sm:py-1.5 rounded-lg border border-blue-100 shadow-sm inline-flex items-center">
+                      {doctorsList[activeDoctor].title} <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-2.5 text-emerald-500" />
+                    </span>
+                  </div>
+                  
+                  <p className="text-slate-600 font-medium text-sm sm:text-lg leading-relaxed mb-8 sm:mb-10 text-center lg:text-left px-2 sm:px-0 min-h-[140px] md:min-h-[120px]">
+                    {doctorsList[activeDoctor].description}
+                  </p>
+
+                  {/* Dynamic Info Cards Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-8 sm:mb-10 px-2 sm:px-0 pointer-events-none">
+                    {doctorsList[activeDoctor].stats.map((stat, idx) => (
+                      <div key={idx} className={`bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-100 flex items-center hover:bg-white hover:shadow-lg hover:shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1 group ${stat.colSpan ? 'sm:col-span-2' : ''}`}>
+                        <div className={`bg-${stat.color}-100 text-${stat.color}-600 p-3 sm:p-3.5 rounded-xl mr-4 group-hover:bg-${stat.color}-600 group-hover:text-white transition-colors duration-300`}>
+                          <stat.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${stat.icon === Star ? 'group-hover:rotate-12 transition-transform' : ''}`} />
+                        </div>
+                        <div>
+                          <h5 className="font-extrabold text-slate-900 text-base sm:text-lg leading-tight">{stat.value}</h5>
+                          <p className="font-medium text-slate-500 text-xs sm:text-sm mt-0.5">{stat.label}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
 
-                  <button 
-                    onClick={(e) => scrollToSection(e, 'contact')} 
-                    className="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 sm:px-10 py-3.5 sm:py-4 rounded-xl font-bold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 text-sm sm:text-lg min-h-[48px] sm:min-h-[56px] order-1 sm:order-2"
-                  >
-                    <CalendarCheck className="w-5 h-5 sm:w-[22px] sm:h-[22px] mr-2 sm:mr-3" />
-                    Book Appointment
-                  </button>
+                  {/* Carousel Controls & Actions */}
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-6 px-2 sm:px-0">
+                    
+                    {/* Carousel Nav Arrows */}
+                    <div className="flex items-center space-x-3 order-2 sm:order-1">
+                      <button 
+                        onClick={prevDoctor} 
+                        className="w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 shadow-sm hover:shadow-md active:scale-95"
+                        aria-label="Previous Doctor"
+                      >
+                        <ChevronLeft className="w-6 h-6" />
+                      </button>
+                      <div className="flex space-x-1.5 px-2">
+                        {doctorsList.map((_, idx) => (
+                          <div 
+                            key={idx} 
+                            className={`h-2 rounded-full transition-all duration-300 ${activeDoctor === idx ? 'w-6 bg-blue-600' : 'w-2 bg-slate-300'}`}
+                          />
+                        ))}
+                      </div>
+                      <button 
+                        onClick={nextDoctor} 
+                        className="w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 shadow-sm hover:shadow-md active:scale-95"
+                        aria-label="Next Doctor"
+                      >
+                        <ChevronRight className="w-6 h-6" />
+                      </button>
+                    </div>
+
+                    <button 
+                      onClick={(e) => scrollToSection(e, 'contact')} 
+                      className="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 sm:px-10 py-3.5 sm:py-4 rounded-xl font-bold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 text-sm sm:text-lg min-h-[48px] sm:min-h-[56px] order-1 sm:order-2"
+                    >
+                      <CalendarCheck className="w-5 h-5 sm:w-[22px] sm:h-[22px] mr-2 sm:mr-3" />
+                      Book Appointment
+                    </button>
+
+                  </div>
 
                 </div>
-
               </div>
-
             </div>
           </div>
         </section>
