@@ -4,8 +4,6 @@ import {
   Phone, 
   MapPin, 
   Instagram, 
-  Menu, 
-  X, 
   ShieldCheck, 
   Stethoscope, 
   CalendarCheck,
@@ -101,6 +99,18 @@ export default function AboutUs() {
         "Specializes in Orthodontics",
         "Expert in Braces & Clear Aligners",
         "MDS Qualified Specialist"
+      ]
+    },
+    {
+      name: "Dr. Sarasati Sharma",
+      role: "Dental Surgeon",
+      qualifications: "BDS",
+      quote: "Dr. Sarasati Sharma is a dedicated dental professional committed to delivering comprehensive general dentistry. With a focus on preventive care, patient comfort, and education, she ensures that every visit is a positive step toward maintaining your optimal oral health.",
+      image: "https://i.postimg.cc/1t3S4BxW/doc3.png",
+      highlights: [
+        "Specializes in General Dentistry",
+        "Patient-First Care",
+        "BDS Qualified"
       ]
     }
   ];
@@ -303,7 +313,7 @@ export default function AboutUs() {
                      <div className="relative mb-6 sm:mb-8">
                        <Quote className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-8 h-8 sm:w-10 sm:h-10 text-slate-100 -z-10 transform -scale-x-100" />
                        <p className="text-slate-600 font-medium leading-relaxed text-sm sm:text-lg italic relative z-10 min-h-[140px] md:min-h-[120px]">
-                         {doctorsData[activeDoctor].quote}
+                         "{doctorsData[activeDoctor].quote}"
                        </p>
                      </div>
 

@@ -57,6 +57,7 @@ const CustomLogo = ({ className = "w-12 h-12" }) => (
 );
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState('idle');
   const [toastMessage, setToastMessage] = useState('');
   const [activeAccordion, setActiveAccordion] = useState(0); 
@@ -97,6 +98,19 @@ export default function Home() {
         { icon: ShieldCheck, value: "Braces & Aligners", label: "Expertise", color: "emerald" },
         { icon: Award, value: "MDS Qualified", label: "Advanced Dental Degree", color: "purple", colSpan: true }
       ]
+    },
+    {
+      name: "Dr. Sarasati Sharma",
+      title: "BDS",
+      role: "Dental Surgeon",
+      specialty: "General Dentistry",
+      image: "https://i.postimg.cc/1t3S4BxW/doc3.png",
+      description: "\"Dr. Sarasati Sharma is a dedicated dental professional committed to delivering comprehensive general dentistry. With a focus on preventive care, patient comfort, and education, she ensures that every visit is a positive step toward maintaining your optimal oral health.\"",
+      stats: [
+        { icon: ShieldCheck, value: "General Dentistry", label: "Specialty Focus", color: "blue" },
+        { icon: HeartHandshake, value: "Patient-First Care", label: "Expertise", color: "emerald" },
+        { icon: Award, value: "BDS Qualified", label: "Dental Degree", color: "purple", colSpan: true }
+      ]
     }
   ];
 
@@ -134,6 +148,18 @@ export default function Home() {
     }
   }, []);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isMenuOpen]);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -148,6 +174,7 @@ export default function Home() {
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
+    setIsMenuOpen(false);
   };
 
   const handleBookingSubmit = (e) => {
@@ -285,6 +312,85 @@ export default function Home() {
         <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 mr-2 sm:mr-2.5 flex-shrink-0" />
         <span className="font-semibold tracking-wide text-xs sm:text-sm truncate">{toastMessage}</span>
       </div>
+
+      {/* Top Bar - Contact Info (Hidden on Mobile) */}
+      <div className="bg-slate-900 text-slate-300 text-xs md:text-sm py-2.5 px-4 md:px-8 hidden md:flex justify-between items-center z-50 relative">
+        <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
+          <div className="flex space-x-8">
+            <button onClick={handleCallClick} className="flex items-center hover:text-white transition-colors cursor-pointer group min-h-[24px]">
+              <Phone size={14} className="mr-2 text-blue-400 group-hover:text-blue-300" />
+              <span className="font-medium tracking-wide">+91 74788 51252 / +91 62972 58968</span>
+            </button>
+            <div className="flex items-center">
+              <Clock size={14} className="mr-2 text-blue-400" />
+              <span>8:00 AM – 6:00 PM (Closed Wed)</span>
+            </div>
+          </div>
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">
+              <Star size={12} className="text-yellow-400 fill-current mr-1.5" />
+              <span className="font-semibold text-white text-xs">4.5/5 Rating</span>
+            </div>
+            <a href="https://www.instagram.com/lifecaresingtam?igsh=MXd4dDZnYW9wMXNhdw==" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-pink-400 transition-colors p-1" aria-label="Instagram">
+              <Instagram size={16} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <nav className="bg-white/90 backdrop-blur-xl shadow-sm sticky top-0 z-50 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-20 flex justify-between items-center">
+          
+          <div className="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer group" onClick={(e) => scrollToSection(e, 'home')}>
+            <div className="rounded-full shadow-sm group-hover:shadow-md transition-shadow">
+              <CustomLogo className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14" />
+            </div>
+            <div className="flex flex-col justify-center">
+              <h1 className="text-base sm:text-xl md:text-2xl font-extrabold text-slate-900 leading-none tracking-tight">Life Care</h1>
+              <span className="text-[8px] sm:text-[10px] md:text-xs font-bold text-blue-600 tracking-widest uppercase mt-0.5">Dental Clinic</span>
+            </div>
+          </div>
+
+          <div className="hidden lg:flex items-center space-x-8">
+            <button onClick={(e) => scrollToSection(e, 'home')} className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Home</button>
+            <a href="/about" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">About Us</a>
+            <button onClick={(e) => scrollToSection(e, 'dentist')} className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Dentist</button>
+            <a href="/services" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Services</a>
+            <a href="/contact" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors p-2">Contact</a>
+            <button 
+              onClick={(e) => scrollToSection(e, 'contact')} 
+              className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-600/30 hover:-translate-y-0.5 min-h-[44px]"
+            >
+              Book Appointment
+            </button>
+          </div>
+
+          <button 
+            className="lg:hidden text-slate-800 p-2 bg-slate-50 hover:bg-slate-100 active:bg-slate-200 transition-colors rounded-xl flex items-center justify-center min-w-[44px] min-h-[44px]" 
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Nav */}
+        <div className={`lg:hidden fixed top-14 sm:top-20 left-0 w-full h-[calc(100vh-56px)] sm:h-[calc(100vh-80px)] bg-white/95 backdrop-blur-xl shadow-2xl overflow-y-auto transition-all duration-300 origin-top ${isMenuOpen ? 'scale-y-100 opacity-100 visible' : 'scale-y-0 opacity-0 invisible'}`}>
+          <div className="flex flex-col px-5 sm:px-6 py-6 sm:py-8 space-y-1 sm:space-y-2 pb-32">
+            <button onClick={(e) => {scrollToSection(e, 'home'); setIsMenuOpen(false);}} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Home</button>
+            <a href="/about" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">About Us</a>
+            <button onClick={(e) => {scrollToSection(e, 'dentist'); setIsMenuOpen(false);}} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Our Dentist</button>
+            <a href="/services" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">Services & Pricing</a>
+            <a href="/contact" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Contact Us</a>
+            
+            <button onClick={(e) => { handleCallClick(e); setIsMenuOpen(false); }} className="w-full bg-blue-600 text-white px-4 py-3 sm:py-4 rounded-xl font-bold flex justify-center items-center shadow-lg shadow-blue-600/20 mt-4 sm:mt-6 active:scale-95 transition-transform min-h-[48px] sm:min-h-[56px] text-sm sm:text-base">
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-2.5" />
+              Call +91 74788 51252
+            </button>
+          </div>
+        </div>
+      </nav>
 
       {/* Main Content Wrapper */}
       <main className="flex-grow w-full">
@@ -1165,6 +1271,7 @@ export default function Home() {
         </section>
 
       </main>
+
     </div>
   );
 }
