@@ -17,6 +17,7 @@ import {
 
 // 1. Create a Toast Context so any page can call showToast()
 const ToastContext = createContext();
+// eslint-disable-next-line react-refresh/only-export-components
 export const useToast = () => useContext(ToastContext);
 
 // 2. The Custom Logo Component
@@ -63,10 +64,9 @@ export default function Layout() {
     return () => { document.body.style.overflow = 'unset'; };
   }, [isMenuOpen]);
 
-  // Scroll to top and close menu on route change
+  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
-    setIsMenuOpen(false);
   }, [location.pathname]);
 
   const handleCallClick = (e, customNumber = "+917478851252") => {
@@ -163,10 +163,10 @@ export default function Layout() {
           {/* Mobile Nav */}
           <div className={`lg:hidden fixed top-14 sm:top-20 left-0 w-full h-[calc(100vh-56px)] sm:h-[calc(100vh-80px)] bg-white/95 backdrop-blur-xl shadow-2xl overflow-y-auto transition-all duration-300 origin-top ${isMenuOpen ? 'scale-y-100 opacity-100 visible' : 'scale-y-0 opacity-0 invisible'}`}>
             <div className="flex flex-col px-5 sm:px-6 py-6 sm:py-8 space-y-1 sm:space-y-2 pb-32">
-              <Link to="/" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Home</Link>
-              <Link to="/about" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">About Us</Link>
-              <Link to="/services" className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">Services & Pricing</Link>
-              <Link to="/contact" className="w-full text-left py-3 sm:py-4 text-blue-600 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Contact Us</Link>
+              <Link to="/" onClick={() => setIsMenuOpen(false)} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Home</Link>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">About Us</Link>
+              <Link to="/services" onClick={() => setIsMenuOpen(false)} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">Services & Pricing</Link>
+              <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="w-full text-left py-3 sm:py-4 text-blue-600 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Contact Us</Link>
 
               <button onClick={(e) => { handleCallClick(e, '+917478851252'); setIsMenuOpen(false); }} className="w-full bg-blue-600 text-white px-4 py-3 sm:py-4 rounded-xl font-bold flex justify-center items-center shadow-lg shadow-blue-600/20 mt-4 sm:mt-6 active:scale-95 transition-transform min-h-[48px] sm:min-h-[56px] text-sm sm:text-base">
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-2.5" />

@@ -86,7 +86,7 @@ export default function App() {
           elements.forEach(el => observer.observe(el));
 
           return () => elements.forEach(el => observer.unobserve(el));
-        } catch(e) {
+        } catch {
           // Fallback if instantiation fails
           const elements = document.querySelectorAll('.reveal');
           elements.forEach(el => {

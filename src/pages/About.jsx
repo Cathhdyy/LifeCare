@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { 
   Phone, 
@@ -72,7 +72,6 @@ const googleReviewsData = [
 ];
 
 export default function AboutUs() {
-  const [toastMessage, setToastMessage] = useState('');
   const [activeDoctor, setActiveDoctor] = useState(0);
 
   // Doctors Data Array
@@ -82,7 +81,7 @@ export default function AboutUs() {
       role: "Dental Surgeon",
       qualifications: "BDS, FAD",
       quote: "Dentistry should never be a source of anxiety. My passion lies in smile designing—combining art and medical science to craft perfect, confident smiles while ensuring every single procedure is as gentle and painless as possible.",
-      image: "https://i.ibb.co/MDV0S68H/d1.png",
+      image: "/doctors/d1.webp",
       highlights: [
         "Specializes in Smile Designing",
         "Over 9 Years of Clinical Expertise",
@@ -94,7 +93,7 @@ export default function AboutUs() {
       role: "Consultant Orthodontist",
       qualifications: "BDS, MDS",
       quote: "A straight, well-aligned smile is the foundation of oral health and self-confidence. With advanced training in orthodontics, my goal is to provide precise, effective treatments like braces and aligners tailored to each patient.",
-      image: "https://i.ibb.co/7LZzRP1/d2.png",
+      image: "/doctors/d2.webp",
       highlights: [
         "Specializes in Orthodontics",
         "Expert in Braces & Clear Aligners",
@@ -106,7 +105,7 @@ export default function AboutUs() {
       role: "Dental Surgeon",
       qualifications: "BDS",
       quote: "Dr. Sarasati Sharma is a dedicated dental professional committed to delivering comprehensive general dentistry. With a focus on preventive care, patient comfort, and education, she ensures that every visit is a positive step toward maintaining your optimal oral health.",
-      image: "https://i.postimg.cc/1t3S4BxW/doc3.png",
+      image: "/doctors/d3.webp",
       highlights: [
         "Specializes in General Dentistry",
         "Patient-First Care",
@@ -124,34 +123,7 @@ export default function AboutUs() {
     window.open(`https://wa.me/917478851252?text=${encodedMessage}`, '_blank');
   };
 
-  const handleCallClick = (e) => {
-    if (e) e.preventDefault();
-    const phoneNumber = "+917478851252";
-    const successMessage = 'Phone number copied: +91 74788 51252';
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-    if (isMobile) {
-      window.location.href = `tel:${phoneNumber}`;
-    } else {
-      try {
-        const textArea = document.createElement("textarea");
-        textArea.value = phoneNumber;
-        textArea.style.position = "fixed";
-        textArea.style.top = "0";
-        textArea.style.left = "0";
-        textArea.style.opacity = "0";
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        setToastMessage(successMessage);
-        setTimeout(() => setToastMessage(''), 3000);
-      } catch (fallbackErr) {
-        console.error('Fallback copy failed', fallbackErr);
-      }
-    }
-  };
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800 selection:bg-blue-200 selection:text-blue-900 overflow-x-hidden flex flex-col w-full">
@@ -182,11 +154,7 @@ export default function AboutUs() {
         <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8 group-hover:animate-pulse" />
       </a>
 
-      {/* Toast Notification */}
-      <div className={`fixed top-16 sm:top-24 left-1/2 transform -translate-x-1/2 bg-slate-900/95 backdrop-blur-md text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-2xl z-[100] flex items-center transition-all duration-500 ease-in-out border border-slate-700 w-11/12 max-w-sm sm:max-w-md ${toastMessage ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10 pointer-events-none'}`}>
-        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 mr-2 sm:mr-2.5 flex-shrink-0" />
-        <span className="font-semibold tracking-wide text-xs sm:text-sm truncate">{toastMessage}</span>
-      </div>
+
 
       {/* Main Content */}
       <main className="flex-grow w-full">
@@ -615,7 +583,7 @@ export default function AboutUs() {
                 Find Our Clinic
               </a>
               <button 
-                onClick={(e) => { e.preventDefault(); scrollToSection(e, 'contact'); }}
+                onClick={handleBookService}
                 className="w-full sm:w-auto bg-blue-600 border border-blue-500 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-bold hover:bg-blue-700 transition-all flex items-center justify-center text-sm sm:text-base"
               >
                 <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" /> Message Us
