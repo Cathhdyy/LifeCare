@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async'; // 1. Import Provider
-import { Analytics } from "@vercel/analytics/react";
 
 import Layout from './components/Layout'; 
 import Home from './pages/Home'; 
@@ -31,7 +30,6 @@ export default function App() {
             <Route path="/developer" element={<Developer />} />
           </Route>
         </Routes>
-        <Analytics />
       </BrowserRouter>
     </HelmetProvider>
   );
