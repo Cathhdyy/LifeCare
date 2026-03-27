@@ -7,7 +7,6 @@ import Home from './pages/Home';
 import Services from './pages/Services';
 import AboutUs from './pages/About';
 import Contacts from './pages/Contacts'; 
-import BookingDemo from './pages/BookingMockup';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import NotFound from './pages/NotFound';
@@ -23,7 +22,6 @@ export default function App() {
           <Route element={<Layout />}>
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<Contacts />} />
-            <Route path="/booking-demo" element={<BookingDemo />} />
             <Route path="/services" element={<Services />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />

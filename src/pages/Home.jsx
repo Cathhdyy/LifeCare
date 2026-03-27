@@ -61,6 +61,7 @@ export default function Home() {
   const [activeFaq, setActiveFaq] = useState(null); 
   const [activeDoctor, setActiveDoctor] = useState(0);
   const [slideDirection, setSlideDirection] = useState('next'); 
+  const [sliderPosition, setSliderPosition] = useState(50); // Before/After Slider
   
   // Swipe Handlers State
   const [touchStart, setTouchStart] = useState(null);
@@ -766,7 +767,90 @@ export default function Home() {
           </div>
         </section>
 
-        {/* RESTORED INTERACTIVE Services Section - Mobile 2x2 Grid */}
+        {/* SMILE GALLERY - BEFORE & AFTER SLIDER */}
+        <section id="gallery" className="py-20 md:py-32 bg-slate-50 relative overflow-hidden border-t border-slate-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div className="text-center max-w-3xl mx-auto mb-16 reveal opacity-0">
+               <div className="inline-flex items-center bg-blue-50 border border-blue-200 text-blue-700 px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest mb-6 shadow-sm">
+                 <Sparkles className="w-4 h-4 mr-2.5 text-blue-500" /> Clinical Results
+               </div>
+               <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
+                 Witness the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Transformation</span>
+               </h2>
+               <p className="text-lg text-slate-600 font-medium">
+                 Drag the slider handle to see the professional results achieved at Life Care Dental Clinic.
+               </p>
+            </div>
+
+            <div className="max-w-4xl mx-auto reveal opacity-0 delay-100 relative group">
+              {/* Slider Container */}
+              <div className="relative aspect-[16/9] w-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white select-none cursor-ew-resize"
+                   onMouseMove={(e) => {
+                     if (e.buttons === 1) {
+                       const rect = e.currentTarget.getBoundingClientRect();
+                       const x = ((e.clientX - rect.left) / rect.width) * 100;
+                       setSliderPosition(Math.min(Math.max(x, 0), 100));
+                     }
+                   }}
+                   onTouchMove={(e) => {
+                     const rect = e.currentTarget.getBoundingClientRect();
+                     const touch = e.touches[0];
+                     const x = ((touch.clientX - rect.left) / rect.width) * 100;
+                     setSliderPosition(Math.min(Math.max(x, 0), 100));
+                   }}>
+                
+                {/* AFTER IMAGE (Background) */}
+                <div className="absolute inset-0">
+                  <img 
+                    src="/results/after.webp" 
+                    alt="After Dental Scaling" 
+                    className="w-full h-full object-cover grayscale-0"
+                  />
+                  <div className="absolute bottom-6 right-8 bg-blue-600/90 backdrop-blur-md text-white px-5 py-2 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl">After</div>
+                </div>
+
+                {/* BEFORE IMAGE (Foreground Clip) */}
+                <div className="absolute inset-0 z-10" style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}>
+                  <img 
+                    src="/results/before.webp" 
+                    alt="Before Dental Scaling" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-6 left-8 bg-slate-900/80 backdrop-blur-md text-white px-5 py-2 rounded-2xl font-black text-sm uppercase tracking-widest">Before</div>
+                </div>
+
+                {/* Slider Handle */}
+                <div className="absolute top-0 bottom-0 z-20 w-1 bg-white shadow-[0_0_20px_rgba(0,0,0,0.5)] flex items-center justify-center"
+                     style={{ left: `${sliderPosition}%` }}>
+                  <div className="w-12 h-12 bg-white rounded-full shadow-2xl flex items-center justify-center -translate-x-1/2 cursor-ew-resize group-hover:scale-110 transition-transform">
+                    <div className="flex space-x-1">
+                      <ChevronLeft className="w-4 h-4 text-blue-600" />
+                      <ChevronRight className="w-4 h-4 text-blue-600" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Bottom Info */}
+              <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6 bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mr-4">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <p className="text-slate-700 font-bold leading-tight">Professional Clinical Results <br/><span className="text-slate-400 font-medium text-sm">Case: Scaling & Polishing</span></p>
+                </div>
+                <button 
+                  onClick={(e) => scrollToSection(e, 'contact')} 
+                  className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-black hover:bg-blue-700 transition-all flex items-center"
+                >
+                  Book Your Transformation <ArrowRight className="w-5 h-5 ml-2" />
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </section>
         <section id="services" className="py-12 md:py-32 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden border-t border-slate-100">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none">
             <div className="absolute top-0 left-0 w-48 h-48 sm:w-96 sm:h-96 bg-blue-50 rounded-full blur-[50px] sm:blur-[100px]"></div>
