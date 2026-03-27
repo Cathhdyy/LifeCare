@@ -19,7 +19,7 @@ export default function SEO({ title, description, keywords, image }) {
       <meta property="og:image" content={finalImage} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={siteName} />
-      <meta property="og:url" content="https://lifecaredental.online/" />
+      <meta property="og:url" content="https://www.lifecaredental.online/" />
 
       {/* Twitter Card Tags */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -34,8 +34,8 @@ export default function SEO({ title, description, keywords, image }) {
           "@type": "Dentist",
           "name": siteName,
           "image": finalImage,
-          "@id": "https://lifecaredental.online/",
-          "url": "https://lifecaredental.online/",
+          "@id": "https://www.lifecaredental.online/",
+          "url": "https://www.lifecaredental.online/",
           "telephone": "+91 88888 88888",
           "address": {
             "@type": "PostalAddress",
