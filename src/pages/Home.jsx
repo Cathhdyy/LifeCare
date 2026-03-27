@@ -597,7 +597,7 @@ export default function Home() {
 
               {/* Box 5: Vertical Image (Modern Equipment) */}
               <div className="col-span-1 relative rounded-2xl sm:rounded-3xl overflow-hidden group shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 p-4 sm:p-10 flex flex-col justify-end text-left min-h-[160px] sm:min-h-[340px] w-full reveal opacity-0">
-                 <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80" alt="Modern Dental Clinic" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" />
+                 <img src="/inside/inside.webp" alt="Life Care Clinic Internal" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-slate-900/10 transition-opacity duration-500 group-hover:opacity-90"></div>
                  <div className="relative z-10 flex flex-col items-start w-full">
                     <div className="w-8 h-8 sm:w-20 sm:h-20 rounded-lg sm:rounded-2xl bg-emerald-500/20 backdrop-blur-md flex items-center justify-center mb-2 sm:mb-6 border border-emerald-400/30 shadow-lg group-hover:bg-emerald-500/40 group-hover:scale-110 transition-all duration-500">

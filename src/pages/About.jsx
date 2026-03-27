@@ -164,7 +164,7 @@ export default function AboutUs() {
           {/* Image Background spanning right side with Fade */}
           <div className="absolute top-0 right-0 w-full md:w-[65%] h-full z-0 animate-fade-in-up delay-300 opacity-0">
             <img
-              src="./public/inside/state.webp"
+              src="/inside/state.webp"
               alt="Clinic Environment"
               className="w-full h-full object-cover object-center"
             />
