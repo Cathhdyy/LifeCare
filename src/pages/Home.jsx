@@ -1293,7 +1293,7 @@ export default function Home() {
                   </div>
                   
                   <a 
-                    href="https://maps.google.com/?q=Dhamala+Colony,+Singtam,+Sikkim" 
+                    href="https://share.google/33IGHkwhv7lC0w7sy" 
                     target="_blank" 
                     rel="noreferrer"
                     className="w-full bg-slate-900 text-white font-bold py-3.5 sm:py-4 rounded-xl hover:bg-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center text-sm sm:text-base group/btn"
@@ -1309,7 +1309,7 @@ export default function Home() {
                 <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.05)] pointer-events-none z-10"></div>
                 <iframe 
                   width="100%" height="100%" frameBorder="0" style={{ border: 0 }} 
-                  src="https://maps.google.com/maps?q=Singtam,+Sikkim&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1773.804862458784!2d88.49621258839059!3d27.231400429045387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e6a1a199b2f331%3A0xee1b7d9c79bc76ff!2sLife%20care%20clinics%20%26%20pharmacy!5e0!3m2!1sen!2sin!4v1774644428889!5m2!1sen!2sin" 
                   allowFullScreen title="Clinic Location Map"
                   className="absolute inset-0 w-full h-full opacity-90 group-hover:opacity-100 filter saturate-[1.1] transition-all duration-700"
                 ></iframe>
