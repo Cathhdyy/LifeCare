@@ -784,8 +784,8 @@ export default function Home() {
             </div>
 
             <div className="max-w-4xl mx-auto reveal opacity-0 delay-100 relative group">
-              {/* Slider Container */}
-              <div className="relative aspect-[16/9] w-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white select-none cursor-ew-resize"
+              {/* Slider Container - Mobile Adjusted */}
+              <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white select-none cursor-ew-resize"
                    onMouseMove={(e) => {
                      if (e.buttons === 1) {
                        const rect = e.currentTarget.getBoundingClientRect();
@@ -807,7 +807,7 @@ export default function Home() {
                     alt="After Dental Scaling" 
                     className="w-full h-full object-cover grayscale-0"
                   />
-                  <div className="absolute bottom-6 right-8 bg-blue-600/90 backdrop-blur-md text-white px-5 py-2 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl">After</div>
+                  <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 bg-blue-600/90 backdrop-blur-md text-white px-3 py-1.5 sm:px-5 sm:py-2 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-sm uppercase tracking-widest shadow-xl">After</div>
                 </div>
 
                 {/* BEFORE IMAGE (Foreground Clip) */}
@@ -817,16 +817,16 @@ export default function Home() {
                     alt="Before Dental Scaling" 
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute bottom-6 left-8 bg-slate-900/80 backdrop-blur-md text-white px-5 py-2 rounded-2xl font-black text-sm uppercase tracking-widest">Before</div>
+                  <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-8 bg-slate-900/80 backdrop-blur-md text-white px-3 py-1.5 sm:px-5 sm:py-2 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-sm uppercase tracking-widest">Before</div>
                 </div>
 
                 {/* Slider Handle */}
                 <div className="absolute top-0 bottom-0 z-20 w-1 bg-white shadow-[0_0_20px_rgba(0,0,0,0.5)] flex items-center justify-center"
                      style={{ left: `${sliderPosition}%` }}>
-                  <div className="w-12 h-12 bg-white rounded-full shadow-2xl flex items-center justify-center -translate-x-1/2 cursor-ew-resize group-hover:scale-110 transition-transform">
-                    <div className="flex space-x-1">
-                      <ChevronLeft className="w-4 h-4 text-blue-600" />
-                      <ChevronRight className="w-4 h-4 text-blue-600" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full shadow-2xl flex items-center justify-center -translate-x-1/2 cursor-ew-resize group-hover:scale-110 transition-transform ring-4 ring-blue-600/10">
+                    <div className="flex space-x-0.5 sm:space-x-1">
+                      <ChevronLeft className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
+                      <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
                     </div>
                   </div>
                 </div>
