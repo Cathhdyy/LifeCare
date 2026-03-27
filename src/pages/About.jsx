@@ -164,7 +164,7 @@ export default function AboutUs() {
           {/* Image Background spanning right side with Fade */}
           <div className="absolute top-0 right-0 w-full md:w-[65%] h-full z-0 animate-fade-in-up delay-300 opacity-0">
             <img
-              src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=2000&q=80"
+              src="https://i.postimg.cc/K8ZBmckq/Whats-App-Image-2026-03-11-at-8-23-58-PM.jpg"
               alt="Clinic Environment"
               className="w-full h-full object-cover object-center"
             />

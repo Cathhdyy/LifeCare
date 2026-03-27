@@ -282,6 +282,7 @@ export default function Home() {
         title="Best Dentist in Singtam" 
         description="Life Care Dental Clinic is the premier dental care center in Singtam, East Sikkim. Dr. Sheema Sapkota specializes in painless root canals, smile designing, and modern family dentistry."
         keywords="Dentist in Singtam, Dental Clinic East Sikkim, Root Canal Singtam, Dr. Sheema Sapkota, Best Dentist Near Me"
+        image="https://i.postimg.cc/K8ZBmckq/Whats-App-Image-2026-03-11-at-8-23-58-PM.jpg"
       />
 
       {/* Custom Styles for animations */}
