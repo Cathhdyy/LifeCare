@@ -23,7 +23,18 @@ import {
   Clock,
   Navigation,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Eye,
+  Lightbulb,
+  BadgeCheck,
+  Microscope,
+  ChevronDown,
+  Plus,
+  Minus,
+  GraduationCap,
+  Stethoscope as StethoscopeIcon,
+  Handshake,
+  Globe
 } from 'lucide-react';
 
 // Custom Scalable Vector Logo
@@ -71,8 +82,38 @@ const googleReviewsData = [
   }
 ];
 
+const faqData = [
+  {
+    question: "Is dental treatment painful at Life Care Dental Clinic?",
+    answer: "Absolutely not. Painless dentistry is our core promise. We use the latest anaesthesia techniques, micro-needles, and gentle procedures to ensure you feel virtually nothing during treatment. The vast majority of our patients report feeling calm and comfortable throughout."
+  },
+  {
+    question: "What are your clinic timings and days?",
+    answer: "We are open Monday to Saturday, from 9:00 AM to 6:00 PM. Sunday appointments can be arranged on request for emergency cases. We recommend booking in advance via WhatsApp to secure your preferred slot."
+  },
+  {
+    question: "Do you offer treatment for children?",
+    answer: "Yes! We warmly welcome patients of all ages, including young children. Our team is experienced in paediatric dentistry and we take extra care to make the environment fun and non-threatening for kids, making their first dental visits a positive experience."
+  },
+  {
+    question: "What dental services do you offer?",
+    answer: "We offer a comprehensive range of treatments including routine check-ups & cleaning, teeth whitening, fillings, root canal treatment (RCT), dental crowns & bridges, smile designing, orthodontic braces & clear aligners, tooth extractions, and much more — all under one roof."
+  },
+  {
+    question: "How do I book an appointment?",
+    answer: "The easiest way is to send us a message on WhatsApp at +91 74788 51252. You can also call us directly during clinic hours. We typically confirm appointments within a few hours."
+  },
+  {
+    question: "Are your instruments properly sterilized?",
+    answer: "100%, yes. This is non-negotiable for us. We follow strict international sterilisation protocols. All instruments are autoclave-sterilized before every single patient. We use disposable items wherever possible to guarantee the highest standard of safety and hygiene."
+  }
+];
+
 export default function AboutUs() {
   const [activeDoctor, setActiveDoctor] = useState(0);
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const toggleFaq = (idx) => setOpenFaq(openFaq === idx ? null : idx);
 
   // Doctors Data Array
   const doctorsData = [
@@ -230,6 +271,77 @@ export default function AboutUs() {
            </div>
         </section>
 
+        {/* Mission & Vision Split Panel */}
+        <section className="py-16 md:py-28 bg-white border-t border-slate-100 relative overflow-hidden">
+          {/* Background decorative blobs */}
+          <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+          <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-cyan-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <div className="inline-flex items-center justify-center bg-blue-50 border border-blue-100 text-blue-600 font-extrabold px-3 py-1 rounded-md text-[10px] uppercase tracking-widest mb-4">
+                <Lightbulb className="w-3 h-3 mr-1.5" /> Our Purpose
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-4 leading-tight">
+                Driven by <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Mission &amp; Vision</span>
+              </h2>
+              <p className="text-slate-500 text-sm sm:text-lg font-medium leading-relaxed">
+                Every decision we make is guided by a clear purpose — to transform dental healthcare for families across East Sikkim.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
+              {/* Mission Card */}
+              <div className="relative rounded-3xl overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800"></div>
+                <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(circle at 70% 30%, white 1px, transparent 1px)', backgroundSize: '20px 20px'}}></div>
+                <div className="relative z-10 p-8 sm:p-12">
+                  <div className="w-14 h-14 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl flex items-center justify-center mb-6 text-white">
+                    <Target className="w-7 h-7" />
+                  </div>
+                  <span className="text-blue-200 font-bold text-xs uppercase tracking-widest mb-3 block">Our Mission</span>
+                  <h3 className="text-2xl sm:text-3xl font-black text-white mb-4 leading-snug">Making World-Class Dental Care Accessible</h3>
+                  <p className="text-blue-100 font-medium leading-relaxed text-sm sm:text-base">
+                    Our mission is simple: to eliminate the fear, pain, and distance barriers that prevent people from getting the dental care they deserve. We are committed to bringing the gold standard of modern dentistry directly to the heart of Singtam.
+                  </p>
+                  <ul className="mt-6 space-y-3">
+                    {["Affordable, transparent pricing", "Pain-free treatment protocols", "Serving all ages, from children to seniors"].map((item, i) => (
+                      <li key={i} className="flex items-center text-sm text-blue-100 font-medium">
+                        <CheckCircle2 className="w-4 h-4 text-cyan-300 mr-2.5 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Vision Card */}
+              <div className="relative rounded-3xl overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-900 to-slate-800"></div>
+                <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(circle at 30% 70%, #60a5fa 1px, transparent 1px)', backgroundSize: '20px 20px'}}></div>
+                <div className="relative z-10 p-8 sm:p-12">
+                  <div className="w-14 h-14 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl flex items-center justify-center mb-6 text-cyan-400">
+                    <Eye className="w-7 h-7" />
+                  </div>
+                  <span className="text-slate-400 font-bold text-xs uppercase tracking-widest mb-3 block">Our Vision</span>
+                  <h3 className="text-2xl sm:text-3xl font-black text-white mb-4 leading-snug">To Be Sikkim's Most Trusted Dental Clinic</h3>
+                  <p className="text-slate-300 font-medium leading-relaxed text-sm sm:text-base">
+                    We envision a Sikkim where every individual and family has access to expert, compassionate dental care without compromise. We aim to be the region's most-trusted name in oral health — known for integrity, innovation, and exceptional patient outcomes.
+                  </p>
+                  <ul className="mt-6 space-y-3">
+                    {["Continuous learning & skill upgradation", "Investing in the latest technology", "Building lifelong patient relationships"].map((item, i) => (
+                      <li key={i} className="flex items-center text-sm text-slate-300 font-medium">
+                        <CheckCircle2 className="w-4 h-4 text-blue-400 mr-2.5 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Magazine-Style Doctor Profile (Carousel) */}
         <section className="py-12 md:py-24 bg-slate-50 relative border-t border-slate-200 overflow-hidden">
           {/* Background Decor */}
@@ -336,55 +448,152 @@ export default function AboutUs() {
                  </div>
 
                  {/* Right Scrolling Grid */}
-                 <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                 <div className="lg:w-2/3 grid grid-cols-2 gap-3 sm:gap-6 md:gap-8">
                     
                     {/* Card 1 */}
-                    <div className="bg-slate-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-100 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-500 flex flex-col h-full group">
-                       <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white shadow-sm border border-slate-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-                         <Target className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <div className="bg-slate-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-slate-100 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-500 flex flex-col h-full group">
+                       <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white shadow-sm border border-slate-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                         <Target className="w-4 h-4 sm:w-6 sm:h-6" />
                        </div>
-                       <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 sm:mb-3">One Stop Solution</h3>
-                       <p className="text-slate-600 font-medium leading-relaxed text-xs sm:text-sm">
-                         From a simple filling to a complex smile redesign or root canal, we have the expertise to handle all your family's dental needs under one roof.
+                       <h3 className="text-[11px] sm:text-xl font-black text-slate-900 mb-1.5 sm:mb-3 leading-snug">One Stop Solution</h3>
+                       <p className="text-slate-600 font-medium leading-relaxed text-[10px] sm:text-sm">
+                         From a simple filling to a complex smile redesign or root canal, we handle all your dental needs under one roof.
                        </p>
                     </div>
 
                     {/* Card 2 */}
-                    <div className="bg-slate-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-100 hover:border-emerald-200 hover:bg-white hover:shadow-xl hover:shadow-emerald-900/5 transition-all duration-500 flex flex-col h-full group md:translate-y-8">
-                       <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white shadow-sm border border-slate-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
-                         <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <div className="bg-slate-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-slate-100 hover:border-emerald-200 hover:bg-white hover:shadow-xl hover:shadow-emerald-900/5 transition-all duration-500 flex flex-col h-full group">
+                       <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white shadow-sm border border-slate-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-6 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                         <ShieldCheck className="w-4 h-4 sm:w-6 sm:h-6" />
                        </div>
-                       <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 sm:mb-3">Uncompromised Hygiene</h3>
-                       <p className="text-slate-600 font-medium leading-relaxed text-xs sm:text-sm">
-                         Your safety is non-negotiable. We follow strict, international sterilization protocols for every single instrument to ensure a 100% safe environment.
+                       <h3 className="text-[11px] sm:text-xl font-black text-slate-900 mb-1.5 sm:mb-3 leading-snug">Uncompromised Hygiene</h3>
+                       <p className="text-slate-600 font-medium leading-relaxed text-[10px] sm:text-sm">
+                         Strict sterilization protocols for every instrument — 100% safe, every time.
                        </p>
                     </div>
 
                     {/* Card 3 */}
-                    <div className="bg-slate-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-100 hover:border-purple-200 hover:bg-white hover:shadow-xl hover:shadow-purple-900/5 transition-all duration-500 flex flex-col h-full group">
-                       <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white shadow-sm border border-slate-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 text-purple-600 group-hover:bg-purple-500 group-hover:text-white transition-colors duration-300">
-                         <Activity className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <div className="bg-slate-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-slate-100 hover:border-purple-200 hover:bg-white hover:shadow-xl hover:shadow-purple-900/5 transition-all duration-500 flex flex-col h-full group">
+                       <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white shadow-sm border border-slate-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-6 text-purple-600 group-hover:bg-purple-500 group-hover:text-white transition-colors duration-300">
+                         <Activity className="w-4 h-4 sm:w-6 sm:h-6" />
                        </div>
-                       <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 sm:mb-3">Advanced Technology</h3>
-                       <p className="text-slate-600 font-medium leading-relaxed text-xs sm:text-sm">
-                         We utilize state-of-the-art diagnostic tools and modern equipment to ensure treatments are swift, incredibly precise, and virtually painless.
+                       <h3 className="text-[11px] sm:text-xl font-black text-slate-900 mb-1.5 sm:mb-3 leading-snug">Advanced Technology</h3>
+                       <p className="text-slate-600 font-medium leading-relaxed text-[10px] sm:text-sm">
+                         Modern diagnostic tools and equipment for swift, precise, virtually painless treatment.
                        </p>
                     </div>
 
                     {/* Card 4 */}
-                    <div className="bg-slate-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-100 hover:border-pink-200 hover:bg-white hover:shadow-xl hover:shadow-pink-900/5 transition-all duration-500 flex flex-col h-full group md:translate-y-8">
-                       <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white shadow-sm border border-slate-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 text-pink-600 group-hover:bg-pink-500 group-hover:text-white transition-colors duration-300">
-                         <HeartHandshake className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <div className="bg-slate-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-slate-100 hover:border-pink-200 hover:bg-white hover:shadow-xl hover:shadow-pink-900/5 transition-all duration-500 flex flex-col h-full group">
+                       <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white shadow-sm border border-slate-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-6 text-pink-600 group-hover:bg-pink-500 group-hover:text-white transition-colors duration-300">
+                         <HeartHandshake className="w-4 h-4 sm:w-6 sm:h-6" />
                        </div>
-                       <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 sm:mb-3">Patient-First Care</h3>
-                       <p className="text-slate-600 font-medium leading-relaxed text-xs sm:text-sm">
-                         We listen to your concerns, explain all options transparently, and make sure you are completely comfortable before we begin any procedure.
+                       <h3 className="text-[11px] sm:text-xl font-black text-slate-900 mb-1.5 sm:mb-3 leading-snug">Patient-First Care</h3>
+                       <p className="text-slate-600 font-medium leading-relaxed text-[10px] sm:text-sm">
+                         We listen, explain options clearly, and ensure you're comfortable before any procedure.
                        </p>
                     </div>
 
                  </div>
               </div>
            </div>
+        </section>
+
+        {/* Certifications & Trust Badges Section */}
+        <section className="py-16 md:py-24 bg-slate-50 border-t border-slate-200 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <div className="inline-flex items-center justify-center bg-emerald-50 border border-emerald-100 text-emerald-700 font-extrabold px-3 py-1 rounded-md text-[10px] uppercase tracking-widest mb-4">
+                <BadgeCheck className="w-3 h-3 mr-1.5" /> Credentials &amp; Trust
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-4 leading-tight">
+                Why Patients <span className="text-emerald-600">Trust Us</span>
+              </h2>
+              <p className="text-slate-500 text-sm sm:text-lg font-medium leading-relaxed">
+                Our qualifications, certifications, and affiliations are proof of our commitment to safe, ethical, and expert dental care.
+              </p>
+            </div>
+
+            {/* Trust Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 lg:gap-8 mb-10 sm:mb-14">
+              {[
+                {
+                  icon: <GraduationCap className="w-6 h-6" />,
+                  color: "blue",
+                  title: "University-Qualified Doctors",
+                  desc: "All our dentists hold BDS, MDS degrees from accredited dental universities, with advanced post-graduate specialisations."
+                },
+                {
+                  icon: <BadgeCheck className="w-6 h-6" />,
+                  color: "emerald",
+                  title: "Government Registered Clinic",
+                  desc: "Life Care Dental Clinic is fully registered with the government and our lead dentist holds a valid practice license."
+                },
+                {
+                  icon: <Microscope className="w-6 h-6" />,
+                  color: "purple",
+                  title: "ISO-Grade Sterilisation",
+                  desc: "We adhere to international sterilisation standards using autoclave technology, ensuring a completely safe and infection-free environment."
+                },
+                {
+                  icon: <Activity className="w-6 h-6" />,
+                  color: "cyan",
+                  title: "Modern Diagnostic Equipment",
+                  desc: "From digital X-rays to advanced diagnostic tools, we invest in technology that enables precise, reliable diagnosis and effective treatment."
+                },
+                {
+                  icon: <Globe className="w-6 h-6" />,
+                  color: "orange",
+                  title: "Continuously Updated Training",
+                  desc: "Our team participates in national and international dental conferences, workshops, and CME programs to stay at the cutting edge of dentistry."
+                },
+                {
+                  icon: <HeartHandshake className="w-6 h-6" />,
+                  color: "pink",
+                  title: "Ethical & Transparent Practice",
+                  desc: "We believe in honest, transparent communication. We explain costs upfront, discuss all options, and never recommend unnecessary procedures."
+                }
+              ].map((item, idx) => {
+                const colorClasses = {
+                  blue:   { bg: 'bg-blue-50',   icon: 'text-blue-600',   border: 'hover:border-blue-200',   iconHover: 'group-hover:bg-blue-600'   },
+                  emerald:{ bg: 'bg-emerald-50', icon: 'text-emerald-600',border: 'hover:border-emerald-200', iconHover: 'group-hover:bg-emerald-500' },
+                  purple: { bg: 'bg-purple-50',  icon: 'text-purple-600', border: 'hover:border-purple-200',  iconHover: 'group-hover:bg-purple-500'  },
+                  cyan:   { bg: 'bg-cyan-50',    icon: 'text-cyan-600',   border: 'hover:border-cyan-200',    iconHover: 'group-hover:bg-cyan-500'    },
+                  orange: { bg: 'bg-orange-50',  icon: 'text-orange-600', border: 'hover:border-orange-200',  iconHover: 'group-hover:bg-orange-500'  },
+                  pink:   { bg: 'bg-pink-50',    icon: 'text-pink-600',   border: 'hover:border-pink-200',    iconHover: 'group-hover:bg-pink-500'    }
+                }[item.color];
+                return (
+                  <div key={idx} className={`bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 border border-slate-100 ${colorClasses.border} hover:shadow-xl transition-all duration-500 flex flex-col group`}>
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 ${colorClasses.bg} ${colorClasses.icon} rounded-xl flex items-center justify-center mb-3 sm:mb-5 ${colorClasses.iconHover} group-hover:text-white transition-colors duration-300`}>
+                      {item.icon}
+                    </div>
+                    <h3 className="text-[11px] sm:text-base lg:text-lg font-black text-slate-900 mb-1.5 sm:mb-2 leading-snug">{item.title}</h3>
+                    <p className="text-slate-500 font-medium text-[10px] sm:text-sm leading-relaxed flex-grow">{item.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Credibility Banner */}
+            <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl sm:rounded-3xl p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+              <div className="text-center sm:text-left">
+                <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Recognised By</p>
+                <h3 className="text-white text-xl sm:text-2xl font-black">Dental Council of India (DCI)</h3>
+                <p className="text-slate-300 text-sm font-medium mt-1">Our practice and practitioners are registered with the highest dental regulatory body in India.</p>
+              </div>
+              <div className="flex items-center gap-4 flex-shrink-0">
+                <div className="text-center">
+                  <p className="text-3xl sm:text-4xl font-black text-blue-400">9+</p>
+                  <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">Years Active</p>
+                </div>
+                <div className="w-px h-12 bg-slate-700"></div>
+                <div className="text-center">
+                  <p className="text-3xl sm:text-4xl font-black text-emerald-400">5k+</p>
+                  <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">Patients Served</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Clinic Tour Gallery Section - 2x2 Mobile Bento Grid */}
@@ -498,6 +707,61 @@ export default function AboutUs() {
                 Read more reviews on Google
                 <ArrowRight className="w-4 h-4 ml-1.5 sm:ml-2 transform group-hover:translate-x-1 transition-transform" />
               </a>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-16 md:py-32 bg-white relative border-t border-slate-200 overflow-hidden">
+          <div className="absolute top-0 right-0 w-72 h-72 bg-blue-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-12 sm:mb-20">
+              <div className="inline-flex items-center justify-center bg-blue-50 border border-blue-100 text-blue-600 font-extrabold px-3 py-1 rounded-md text-[10px] uppercase tracking-widest mb-4">
+                <MessageCircle className="w-3 h-3 mr-1.5" /> Common Questions
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-4 leading-tight">
+                Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Questions</span>
+              </h2>
+              <p className="text-slate-500 text-sm sm:text-lg font-medium leading-relaxed max-w-2xl mx-auto">
+                Got questions before booking? We have got answers. Here are the things our patients most commonly ask.
+              </p>
+            </div>
+
+            <div className="space-y-3 sm:space-y-4">
+              {faqData.map((faq, idx) => (
+                <div
+                  key={idx}
+                  className={`border rounded-2xl overflow-hidden transition-all duration-300 ${
+                    openFaq === idx
+                      ? 'border-blue-200 shadow-lg shadow-blue-100 bg-blue-50/30'
+                      : 'border-slate-200 bg-white hover:border-blue-200 hover:bg-slate-50'
+                  }`}
+                >
+                  <button
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full flex items-center justify-between text-left px-5 sm:px-7 py-4 sm:py-5 gap-4"
+                  >
+                    <span className={`font-bold text-sm sm:text-base leading-snug transition-colors duration-200 ${
+                      openFaq === idx ? 'text-blue-700' : 'text-slate-900'
+                    }`}>{faq.question}</span>
+                    <span className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      openFaq === idx ? 'bg-blue-600 text-white rotate-0' : 'bg-slate-100 text-slate-500'
+                    }`}>
+                      {openFaq === idx
+                        ? <Minus className="w-3.5 h-3.5" />
+                        : <Plus className="w-3.5 h-3.5" />
+                      }
+                    </span>
+                  </button>
+                  {openFaq === idx && (
+                    <div className="px-5 sm:px-7 pb-5 sm:pb-6 animate-fade-in-up">
+                      <p className="text-slate-600 font-medium text-sm sm:text-base leading-relaxed border-t border-blue-100 pt-4">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </section>
