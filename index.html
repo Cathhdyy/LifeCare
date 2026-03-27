@@ -19,9 +19,42 @@
     <meta property="twitter:title" content="Life Care Dental Clinic | Best Dentist in Singtam" />
     <meta property="twitter:description" content="Expert dental treatments with advanced technology in a comfortable, friendly environment. Book your painless visit today!" />
     <meta property="twitter:image" content="https://i.postimg.cc/K8ZBmckq/Whats-App-Image-2026-03-11-at-8-23-58-PM.jpg" />
+    <!-- JSON-LD Structured Data (Local Business Schema) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Life Care Dental Clinic",
+        "description": "Premier dental care center in Singtam, East Sikkim. Specialists in painless root canals, smile designing, and modern family dentistry.",
+        "url": "https://lifecaredental.online/",
+        "telephone": "+91 88888 88888",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Life Care Dental Clinic",
+          "addressLocality": "Singtam",
+          "addressRegion": "East Sikkim",
+          "postalCode": "737134",
+          "addressCountry": "IN"
+        }
+      }
+    </script>
   </head>
-  <body>
-    <div id="root"></div>
+  <body class="bg-white">
+    <div id="root">
+      <!-- STATIC SEO FALLBACK (Visible to Crawlers) -->
+      <div style="display: none;" aria-hidden="true">
+        <h1>Life Care Dental Clinic - Best Dentist in Singtam</h1>
+        <p>Expert dental treatments by Dr. Sheema Sapkota. Painless RCT, Crowns, Braces, and Smile Design.</p>
+        <ul>
+          <li>Painless Root Canal Treatment</li>
+          <li>Smile Design & Teeth Whitening</li>
+          <li>Orthodontics & Braces</li>
+          <li>Pediatric (Child) Dentistry</li>
+          <li>Emergency Dental Care</li>
+        </ul>
+        <p>Location: Life Care Dental Clinic, Singtam, East Sikkim, 737134</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -26,6 +26,44 @@ export default function SEO({ title, description, keywords, image }) {
       <meta name="twitter:title" content={title ? `${title} | ${siteName}` : siteName} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={finalImage} />
+
+      {/* JSON-LD Structured Data (Local Business Schema) */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Dentist",
+          "name": siteName,
+          "image": finalImage,
+          "@id": "https://lifecaredental.online/",
+          "url": "https://lifecaredental.online/",
+          "telephone": "+91 88888 88888",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Life Care Dental Clinic",
+            "addressLocality": "Your City",
+            "addressRegion": "Your State",
+            "postalCode": "123456",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 0,
+            "longitude": 0
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "10:00",
+              "closes": "21:00"
+            }
+          ],
+          "sameAs": [
+            "https://www.facebook.com/lifecaredental",
+            "https://www.instagram.com/lifecaredental"
+          ]
+        })}
+      </script>
     </Helmet>
   );
 }
