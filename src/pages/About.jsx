@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SEO from '../components/SEO';
 import { 
   Phone, 
@@ -164,6 +164,40 @@ export default function AboutUs() {
     window.open(`https://wa.me/917478851252?text=${encodedMessage}`, '_blank');
   };
 
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof window.IntersectionObserver === 'function') {
+        try {
+          const observer = new window.IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+              entry.target.classList.add('animate-fade-in-up');
+              entry.target.classList.remove('opacity-0');
+              observer.unobserve(entry.target);
+              }
+          });
+          }, { root: null, rootMargin: '0px', threshold: 0.15 });
+
+          const elements = document.querySelectorAll('.reveal');
+          elements.forEach(el => observer.observe(el));
+
+          return () => elements.forEach(el => observer.unobserve(el));
+        } catch {
+          const elements = document.querySelectorAll('.reveal');
+          elements.forEach(el => {
+              el.classList.add('animate-fade-in-up');
+              el.classList.remove('opacity-0');
+          });
+        }
+    } else {
+        const elements = document.querySelectorAll('.reveal');
+        elements.forEach(el => {
+            el.classList.add('animate-fade-in-up');
+            el.classList.remove('opacity-0');
+        });
+    }
+  }, []);
+
 
 
   return (
@@ -277,7 +311,7 @@ export default function AboutUs() {
           <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
           <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-cyan-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 reveal opacity-0">
             <div className="text-center max-w-3xl mx-auto mb-14">
               <div className="inline-flex items-center justify-center bg-blue-50 border border-blue-100 text-blue-600 font-extrabold px-3 py-1 rounded-md text-[10px] uppercase tracking-widest mb-4">
                 <Lightbulb className="w-3 h-3 mr-1.5" /> Our Purpose
@@ -290,7 +324,7 @@ export default function AboutUs() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 reveal opacity-0 delay-100">
               {/* Mission Card */}
               <div className="relative rounded-3xl overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800"></div>
@@ -347,7 +381,7 @@ export default function AboutUs() {
           {/* Background Decor */}
           <div className="absolute inset-y-0 right-0 w-1/3 bg-blue-50/50 hidden lg:block"></div>
           
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 reveal opacity-0">
             
             <div className="flex flex-col lg:flex-row items-center gap-0 lg:gap-10">
               
@@ -429,7 +463,7 @@ export default function AboutUs() {
 
         {/* Sticky Core Values Section */}
         <section className="py-16 md:py-32 bg-white relative border-t border-slate-100">
-           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal opacity-0">
               <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
                  
                  {/* Left Sticky Sidebar */}
@@ -501,7 +535,7 @@ export default function AboutUs() {
 
         {/* Certifications & Trust Badges Section */}
         <section className="py-16 md:py-24 bg-slate-50 border-t border-slate-200 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal opacity-0">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <div className="inline-flex items-center justify-center bg-emerald-50 border border-emerald-100 text-emerald-700 font-extrabold px-3 py-1 rounded-md text-[10px] uppercase tracking-widest mb-4">
                 <BadgeCheck className="w-3 h-3 mr-1.5" /> Credentials &amp; Trust
@@ -598,7 +632,7 @@ export default function AboutUs() {
 
         {/* Clinic Tour Gallery Section - 2x2 Mobile Bento Grid */}
         <section className="py-16 md:py-32 bg-slate-900 text-white relative overflow-hidden">
-           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 reveal opacity-0">
               <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-20">
                 <div className="inline-flex items-center bg-white/10 border border-white/20 text-cyan-300 px-4 py-1.5 rounded-full text-xs font-bold mb-4 sm:mb-6 backdrop-blur-md">
                   <Sparkles className="w-3.5 h-3.5 mr-2" /> Take a Look Inside
@@ -659,7 +693,7 @@ export default function AboutUs() {
 
         {/* Patient Success Stories / Testimonials */}
         <section className="py-16 md:py-32 bg-slate-50 relative border-t border-slate-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 reveal opacity-0">
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-20">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-4 sm:mb-6">
                 Loved by patients in <span className="text-blue-600">Singtam.</span>
@@ -714,7 +748,7 @@ export default function AboutUs() {
         {/* FAQ Section */}
         <section className="py-16 md:py-32 bg-white relative border-t border-slate-200 overflow-hidden">
           <div className="absolute top-0 right-0 w-72 h-72 bg-blue-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 reveal opacity-0">
             <div className="text-center mb-12 sm:mb-20">
               <div className="inline-flex items-center justify-center bg-blue-50 border border-blue-100 text-blue-600 font-extrabold px-3 py-1 rounded-md text-[10px] uppercase tracking-widest mb-4">
                 <MessageCircle className="w-3 h-3 mr-1.5" /> Common Questions
@@ -768,7 +802,7 @@ export default function AboutUs() {
 
         {/* The Patient Journey Section */}
         <section className="py-16 md:py-32 bg-white relative border-t border-slate-200 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 reveal opacity-0">
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-20">
               <div className="inline-flex items-center justify-center bg-blue-50 text-blue-600 font-extrabold px-3 py-1 rounded-md text-[10px] uppercase tracking-widest mb-4 border border-blue-100">
                 <Target className="w-3 h-3 mr-1.5" /> Simple & Transparent
