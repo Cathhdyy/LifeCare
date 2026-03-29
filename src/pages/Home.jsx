@@ -81,7 +81,7 @@ export default function Home() {
       title: "BDS, FAD",
       role: "Dental Surgeon",
       specialty: "Smile Designing",
-      image: "https://i.ibb.co/MDV0S68H/d1.png",
+      image: "/doctors/d1.webp",
       description: "\"Life Care Dental Clinic is led by Dr. Sheema Sapkota, an experienced dental surgeon dedicated to providing modern, patient-focused care. Specializing in smile designing, she combines advanced techniques with a gentle approach to help patients achieve their perfect, confident smiles.\"",
       stats: [
         { icon: Clock, value: "9+ Years", label: "Experience", color: "blue" },
@@ -94,7 +94,7 @@ export default function Home() {
       title: "BDS, MDS",
       role: "Consultant Orthodontist",
       specialty: "Orthodontics",
-      image: "https://i.ibb.co/7LZzRP1/d2.png",
+      image: "/doctors/d2.webp",
       description: "\"Dr. Shekar Chettri brings specialized orthodontic expertise to Life Care Dental Clinic. With advanced training in diagnosing and correcting misaligned teeth and jaws, he is committed to providing top-tier treatments like braces and aligners to help you achieve a perfectly straight, functional smile.\"",
       stats: [
         { icon: Activity, value: "Orthodontics", label: "Specialty Focus", color: "blue" },
@@ -107,7 +107,7 @@ export default function Home() {
       title: "BDS",
       role: "Dental Surgeon",
       specialty: "General Dentistry",
-      image: "https://i.postimg.cc/1t3S4BxW/doc3.png",
+      image: "/doctors/d3.webp",
       description: "\"Dr. Sarasati Sharma is a dedicated dental professional committed to delivering comprehensive general dentistry. With a focus on preventive care, patient comfort, and education, she ensures that every visit is a positive step toward maintaining your optimal oral health.\"",
       stats: [
         { icon: ShieldCheck, value: "General Dentistry", label: "Specialty Focus", color: "blue" },
@@ -363,6 +363,9 @@ export default function Home() {
               src="https://i.postimg.cc/K8ZBmckq/Whats-App-Image-2026-03-11-at-8-23-58-PM.jpg"
               alt="Modern Dental Clinic"
               className="w-full h-full object-cover object-center"
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
             />
             {/* The precise fade where text starts (Left side of the image fading into transparency to the right) */}
             <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent sm:via-white/40 hidden md:block"></div>
@@ -597,7 +600,13 @@ export default function Home() {
 
               {/* Box 5: Vertical Image (Modern Equipment) */}
               <div className="col-span-1 relative rounded-2xl sm:rounded-3xl overflow-hidden group shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 p-4 sm:p-10 flex flex-col justify-end text-left min-h-[160px] sm:min-h-[340px] w-full reveal opacity-0">
-                 <img src="/inside/inside.webp" alt="Life Care Clinic Internal" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" />
+                 <img 
+                    src="/inside/inside.webp" 
+                    alt="Life Care Clinic Internal" 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" 
+                    loading="lazy"
+                    decoding="async"
+                 />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/60 to-slate-900/10 transition-opacity duration-500 group-hover:opacity-90"></div>
                  <div className="relative z-10 flex flex-col items-start w-full">
                     <div className="w-8 h-8 sm:w-20 sm:h-20 rounded-lg sm:rounded-2xl bg-emerald-500/20 backdrop-blur-md flex items-center justify-center mb-2 sm:mb-6 border border-emerald-400/30 shadow-lg group-hover:bg-emerald-500/40 group-hover:scale-110 transition-all duration-500">
@@ -671,6 +680,8 @@ export default function Home() {
                       src={doctorsList[activeDoctor].image} 
                       alt={doctorsList[activeDoctor].name} 
                       className="w-full h-full object-cover object-center transition-transform duration-[1.5s] group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/10 to-transparent opacity-90"></div>
                     
@@ -802,20 +813,24 @@ export default function Home() {
                 
                 {/* AFTER IMAGE (Background) */}
                 <div className="absolute inset-0">
-                  <img 
+                   <img 
                     src="/results/after.webp" 
                     alt="After Dental Scaling" 
                     className="w-full h-full object-cover grayscale-0"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-8 bg-blue-600/90 backdrop-blur-md text-white px-3 py-1.5 sm:px-5 sm:py-2 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-sm uppercase tracking-widest shadow-xl">After</div>
                 </div>
 
                 {/* BEFORE IMAGE (Foreground Clip) */}
                 <div className="absolute inset-0 z-10" style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}>
-                  <img 
+                   <img 
                     src="/results/before.webp" 
                     alt="Before Dental Scaling" 
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-8 bg-slate-900/80 backdrop-blur-md text-white px-3 py-1.5 sm:px-5 sm:py-2 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-sm uppercase tracking-widest">Before</div>
                 </div>

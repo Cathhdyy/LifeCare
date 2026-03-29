@@ -242,6 +242,9 @@ export default function AboutUs() {
               src="/inside/state.webp"
               alt="Clinic Environment"
               className="w-full h-full object-cover object-center"
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
             />
             {/* The precise fade where text starts (Left side of the image fading into transparency to the right) */}
             <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent sm:via-white/40 hidden md:block"></div>
@@ -393,6 +396,8 @@ export default function AboutUs() {
                     src={doctorsData[activeDoctor].image} 
                     alt={doctorsData[activeDoctor].name} 
                     className="w-full h-full object-cover object-top animate-fade-in-up"
+                    loading="lazy"
+                    decoding="async"
                   />
                   {/* Subtle Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent mix-blend-multiply"></div>

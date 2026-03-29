@@ -370,7 +370,7 @@ export default function Services() {
         
         {/* Services Hero Header */}
         <section className="relative pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden bg-slate-900 text-white">
-          <div className="absolute inset-0 bg-[url('https://i.postimg.cc/K8ZBmckq/Whats-App-Image-2026-03-11-at-8-23-58-PM.jpg')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
+          <div className="absolute inset-0 bg-[url('https://i.postimg.cc/K8ZBmckq/Whats-App-Image-2026-03-11-at-8-23-58-PM.jpg')] opacity-10 bg-cover bg-center mix-blend-overlay" loading="eager" fetchPriority="high"></div>
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full blur-[100px] opacity-30"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500 rounded-full blur-[100px] opacity-30"></div>
           

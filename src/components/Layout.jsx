@@ -142,6 +142,7 @@ export default function Layout() {
               <Link to="/" className={`text-sm font-bold transition-colors p-2 ${location.pathname === '/' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-slate-600 hover:text-blue-600'}`}>Home</Link>
               <Link to="/about" className={`text-sm font-bold transition-colors p-2 ${location.pathname === '/about' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-slate-600 hover:text-blue-600'}`}>About Us</Link>
               <Link to="/services" className={`text-sm font-bold transition-colors p-2 ${location.pathname === '/services' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-slate-600 hover:text-blue-600'}`}>Services</Link>
+              <Link to="/blog" className={`text-sm font-bold transition-colors p-2 ${location.pathname === '/blog' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-slate-600 hover:text-blue-600'}`}>Blog</Link>
               <Link to="/contact" className={`text-sm font-bold transition-colors p-2 ${location.pathname === '/contact' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-slate-600 hover:text-blue-600'}`}>Contact</Link>
               <Link
                 to="/contact"
@@ -166,6 +167,7 @@ export default function Layout() {
               <Link to="/" onClick={() => setIsMenuOpen(false)} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2">Home</Link>
               <Link to="/about" onClick={() => setIsMenuOpen(false)} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">About Us</Link>
               <Link to="/services" onClick={() => setIsMenuOpen(false)} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">Services & Pricing</Link>
+              <Link to="/blog" onClick={() => setIsMenuOpen(false)} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">Our Blog</Link>
               <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="w-full text-left py-3 sm:py-4 text-slate-800 font-extrabold text-lg sm:text-xl border-b border-slate-100 active:bg-slate-50 rounded-lg px-2 block">Contact Us</Link>
 
               <button onClick={(e) => { handleCallClick(e, '+917478851252'); setIsMenuOpen(false); }} className="w-full bg-blue-600 text-white px-4 py-3 sm:py-4 rounded-xl font-bold flex justify-center items-center shadow-lg shadow-blue-600/20 mt-4 sm:mt-6 active:scale-95 transition-transform min-h-[48px] sm:min-h-[56px] text-sm sm:text-base">
@@ -254,6 +256,11 @@ export default function Layout() {
                   <li>
                     <Link to="/" className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
                       <ArrowRight className="w-3.5 h-3.5 mr-2 text-blue-500" /> Meet The Dentist
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/blog" className="text-slate-400 hover:text-white hover:translate-x-1 transition-all flex items-center text-sm font-medium">
+                      <ArrowRight className="w-3.5 h-3.5 mr-2 text-blue-500" /> Clinic Blog
                     </Link>
                   </li>
                   <li>
