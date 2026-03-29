@@ -121,6 +121,8 @@ export default function AboutUs() {
       name: "Dr. Sheema Sapkota",
       role: "Dental Surgeon",
       qualifications: "BDS, FAD",
+      rating: 4.9,
+      reviewCount: "140+",
       quote: "Dentistry should never be a source of anxiety. My passion lies in smile designing—combining art and medical science to craft perfect, confident smiles while ensuring every single procedure is as gentle and painless as possible.",
       image: "/doctors/d1.webp",
       highlights: [
@@ -133,6 +135,8 @@ export default function AboutUs() {
       name: "Dr. Shekar Chettri",
       role: "Consultant Orthodontist",
       qualifications: "BDS, MDS",
+      rating: 4.8,
+      reviewCount: "110+",
       quote: "A straight, well-aligned smile is the foundation of oral health and self-confidence. With advanced training in orthodontics, my goal is to provide precise, effective treatments like braces and aligners tailored to each patient.",
       image: "/doctors/d2.webp",
       highlights: [
@@ -145,6 +149,8 @@ export default function AboutUs() {
       name: "Dr. Sarasati Sharma",
       role: "Dental Surgeon",
       qualifications: "BDS",
+      rating: 4.8,
+      reviewCount: "120+",
       quote: "Dr. Sarasati Sharma is a dedicated dental professional committed to delivering comprehensive general dentistry. With a focus on preventive care, patient comfort, and education, she ensures that every visit is a positive step toward maintaining your optimal oral health.",
       image: "/doctors/d3.webp",
       highlights: [
@@ -424,10 +430,16 @@ export default function AboutUs() {
                    </div>
                    
                    <div key={`info-${activeDoctor}`} className="animate-fade-in-up">
-                     <h2 className="text-2xl sm:text-4xl font-black text-slate-900 mb-2">{doctorsData[activeDoctor].name}</h2>
-                     <p className="text-blue-600 font-extrabold text-[11px] sm:text-sm uppercase tracking-widest mb-6 flex flex-wrap items-center">
-                       {doctorsData[activeDoctor].role} <span className="mx-2 text-slate-300">•</span> {doctorsData[activeDoctor].qualifications}
-                     </p>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-2">
+                        <h2 className="text-2xl sm:text-4xl font-black text-slate-900">{doctorsData[activeDoctor].name}</h2>
+                        <div className="flex items-center bg-amber-50 text-amber-600 px-2.5 py-1 rounded-full text-xs font-bold border border-amber-100 shadow-sm w-fit">
+                          <Star className="w-3.5 h-3.5 fill-current mr-1" />
+                          {doctorsData[activeDoctor].rating} <span className="opacity-60 font-medium ml-1">({doctorsData[activeDoctor].reviewCount})</span>
+                        </div>
+                      </div>
+                      <p className="text-blue-600 font-extrabold text-[11px] sm:text-sm uppercase tracking-widest mb-6 flex flex-wrap items-center">
+                        {doctorsData[activeDoctor].role} <span className="mx-2 text-slate-300">•</span> {doctorsData[activeDoctor].qualifications}
+                      </p>
 
                      <div className="relative mb-6 sm:mb-8">
                        <Quote className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-8 h-8 sm:w-10 sm:h-10 text-slate-100 -z-10 transform -scale-x-100" />

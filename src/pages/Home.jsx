@@ -82,7 +82,9 @@ export default function Home() {
       role: "Dental Surgeon",
       specialty: "Smile Designing",
       image: "/doctors/d1.webp",
-      description: "\"Life Care Dental Clinic is led by Dr. Sheema Sapkota, an experienced dental surgeon dedicated to providing modern, patient-focused care. Specializing in smile designing, she combines advanced techniques with a gentle approach to help patients achieve their perfect, confident smiles.\"",
+      rating: 4.9,
+      reviewCount: "140+",
+      description: "\"Dr. Sheema Sapkota, the visionary leader of Life Care Dental Clinic, is a highly skilled dental surgeon with a profound dedication to aesthetic excellence. With over 9 years of clinical experience, she specializes in advanced smile designing, where she harmonizes medical precision with artistic vision. Dr. Sapkota is renowned for her gentle chairside manner, ensuring that even the most complex procedures like FAD-certified cosmetic enhancements are entirely stress-free for her patients.\"",
       stats: [
         { icon: Clock, value: "9+ Years", label: "Experience", color: "blue" },
         { icon: Star, value: "5000+", label: "Happy Patients", color: "emerald" },
@@ -95,7 +97,9 @@ export default function Home() {
       role: "Consultant Orthodontist",
       specialty: "Orthodontics",
       image: "/doctors/d2.webp",
-      description: "\"Dr. Shekar Chettri brings specialized orthodontic expertise to Life Care Dental Clinic. With advanced training in diagnosing and correcting misaligned teeth and jaws, he is committed to providing top-tier treatments like braces and aligners to help you achieve a perfectly straight, functional smile.\"",
+      rating: 4.8,
+      reviewCount: "110+",
+      description: "\"Dr. Shekar Chettri brings a wealth of specialized knowledge as our Consultant Orthodontist. Holding an MDS in Orthodontics, he focuses on the intricate correction of dental and facial irregularities. Whether through traditional braces or modern clear aligners, Dr. Chettri is committed to restoring both function and appearance for his patients. His evidence-based approach and attention to detail ensure that every patient achieves a perfectly aligned, healthy smile that lasts a lifetime.\"",
       stats: [
         { icon: Activity, value: "Orthodontics", label: "Specialty Focus", color: "blue" },
         { icon: ShieldCheck, value: "Braces & Aligners", label: "Expertise", color: "emerald" },
@@ -108,7 +112,9 @@ export default function Home() {
       role: "Dental Surgeon",
       specialty: "General Dentistry",
       image: "/doctors/d3.webp",
-      description: "\"Dr. Sarasati Sharma is a dedicated dental professional committed to delivering comprehensive general dentistry. With a focus on preventive care, patient comfort, and education, she ensures that every visit is a positive step toward maintaining your optimal oral health.\"",
+      rating: 4.8,
+      reviewCount: "120+",
+      description: "\"Dr. Sarasati Sharma is the backbone of our general dentistry practice, known for her comprehensive and preventive-focused approach. With a BDS degree and a passion for community health, she believes that oral education is the key to lifelong wellness. Dr. Sharma specializes in painless restorative treatments and routine maintenance, always taking the time to listen to her patients' concerns and providing a comforting environment for patients of all ages.\"",
       stats: [
         { icon: ShieldCheck, value: "General Dentistry", label: "Specialty Focus", color: "blue" },
         { icon: HeartHandshake, value: "Patient-First Care", label: "Expertise", color: "emerald" },
@@ -237,7 +243,10 @@ export default function Home() {
     { q: "Do I need to book an appointment beforehand?", a: "While walk-ins are definitely welcome, we highly recommend booking an appointment to guarantee zero waiting time so you can be seen right away." },
     { q: "Are your treatments painful?", a: "Not at all! We use the latest technology and local anesthesia to ensure that most procedures, including root canals and extractions, are virtually painless." },
     { q: "Do you offer treatments for children?", a: "Yes, we specialize in pediatric dentistry and create a gentle, fun environment so kids don't develop a fear of the dentist." },
-    { q: "Where exactly are you located in Singtam?", a: "We are located near Singtam Bridge in Dhamala Colony, Singtam, East Sikkim. You can check the map at the bottom of this page for precise directions!" }
+    { q: "Where exactly are you located in Singtam?", a: "We are located near Singtam Bridge in Dhamala Colony, Singtam, East Sikkim. You can check the map at the bottom of this page for precise directions!" },
+    { q: "What measures do you take for sterilization and safety?", a: "At Life Care, patient safety is our highest priority. We follow international protocols for sterilization, using advanced autoclaves and clinical-grade disinfectants for all equipment. Every instrument is sealed and sterilized before use, and our staff adheres to strict hygiene standards to ensure a completely safe and germ-free clinical environment." },
+    { q: "Do you offer emergency dental services?", a: "Yes, we understand that dental pain or trauma can occur at any time. We provide priority emergency care for cases such as severe toothaches, broken teeth, or sudden swelling. If you have a dental emergency in Singtam, please contact us immediately, and we will do our best to accommodate you on the same day for urgent relief." },
+    { q: "What should I expect during my first consultation?", a: "Your first visit at Life Care is focused on a thorough assessment of your oral health. This includes a detailed clinical examination, digital X-rays if necessary, and a focused discussion about your dental history and goals. We believe in transparency; therefore, we provide a clear treatment plan with all options and costs explained upfront, ensuring you are fully informed before any procedure begins." }
   ];
 
   // Carousel Direction & Swipe Logic
@@ -281,7 +290,7 @@ export default function Home() {
       
       <SEO 
         title="Best Dentist in Singtam" 
-        description="Life Care Dental Clinic is the premier dental care center in Singtam, East Sikkim. Dr. Sheema Sapkota specializes in painless root canals, smile designing, and modern family dentistry."
+        description="Experience painless dental care at Life Care Dental Clinic, Singtam. Dr. Sheema Sapkota offers root canals, smile design & family dentistry. Book your visit today!"
         keywords="Dentist in Singtam, Dental Clinic East Sikkim, Root Canal Singtam, Dr. Sheema Sapkota, Best Dentist Near Me"
         image="https://i.postimg.cc/K8ZBmckq/Whats-App-Image-2026-03-11-at-8-23-58-PM.jpg"
       />
@@ -704,9 +713,15 @@ export default function Home() {
                 {/* Right Column: Info */}
                 <div className="w-full lg:w-1/2 flex flex-col justify-center">
                   
-                  <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-4 tracking-tight text-center lg:text-left">
-                    {doctorsList[activeDoctor].name}
-                  </h3>
+                  <div className="flex flex-col lg:flex-row lg:items-center gap-4 mb-3 sm:mb-4">
+                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight text-center lg:text-left">
+                      {doctorsList[activeDoctor].name}
+                    </h3>
+                    <div className="flex items-center justify-center lg:justify-start bg-amber-50 text-amber-600 px-3 py-1 rounded-full text-sm font-bold border border-amber-100 shadow-sm w-fit mx-auto lg:mx-0">
+                      <Star className="w-4 h-4 fill-current mr-1.5" />
+                      {doctorsList[activeDoctor].rating} <span className="opacity-60 font-medium ml-1.5">({doctorsList[activeDoctor].reviewCount}+ reviews)</span>
+                    </div>
+                  </div>
                   
                   <div className="flex items-center justify-center lg:justify-start text-blue-600 font-bold text-sm sm:text-lg md:text-xl mb-5 sm:mb-8">
                     <span className="bg-blue-50 px-4 sm:px-4 py-1.5 sm:py-1.5 rounded-lg border border-blue-100 shadow-sm inline-flex items-center">
